@@ -56,6 +56,7 @@ test.describe("DE smart site integration", () => {
         await commanderHomeObj.clickEntityMNG();
         await commanderEntityObj.searchForSmartSite();
         //test//
+        //test2//
     })
 })
 
