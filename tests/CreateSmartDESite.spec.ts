@@ -55,7 +55,7 @@ test.describe("DE smart site integration", () => {
         await commaderQuickAccObj.openPortal();
         await commanderHomeObj.clickEntityMNG();
         await commanderEntityObj.searchForSmartSite();
-
+        //test//
     })
 })
 
