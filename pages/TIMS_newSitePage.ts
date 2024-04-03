@@ -25,8 +25,8 @@ export default class TIMSnewSitePage {
     this.YesSmartSiteOption = page.getByRole('option', { name: 'Yes' });
     this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
     this.DEcompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
-    this.latitude = page.getByLabel('*Lat (TDb)');
-    this.longitude = page.getByLabel('*Long (TDb)');
+    this.latitude = page.getByLabel('*Lat');
+    this.longitude = page.getByLabel('*Long');
     this.saveBtn = page.locator('.slds-button.slds-button_brand');
   }
 
@@ -43,4 +43,6 @@ export default class TIMSnewSitePage {
     await this.longitude.fill("2.2");
     await this.saveBtn.click();
   }
+
+  
 }
