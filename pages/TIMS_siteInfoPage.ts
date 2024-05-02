@@ -32,7 +32,7 @@ export default class TIMSsiteInfoPage {
     this.saveBtn_Details = page.locator('form').filter({ hasText: 'VF Customer Sharing' }).locator('button[name="update"]');
     this.territoryField = page.locator('lightning-output-field').filter({ hasText: 'Territory' }).locator('lightning-formatted-lookup');
     this.territorySearch = page.getByPlaceholder('Search Territories...');
-    this.territoryOption = page.getByLabel('Recent Territories').locator('span').nth(2);
+    this.territoryOption = page.locator('span').filter({hasText: 'New Test'}).nth(1);
     this.saveBtn_Address = page.locator('form').filter({ hasText: 'AddressAddressCountryCountry' }).locator('button[name="update"]');
     this.TIMSsiteCode = page.locator('lightning-formatted-text').filter({ hasText: 'DE-TIMS-' });
   }
@@ -47,7 +47,8 @@ export default class TIMSsiteInfoPage {
     await this.DEwindZoneOption.click();
     await this.saveBtn_Details.click();
     await this.territoryField.dblclick();
-    await this.territorySearch.click();
+    await this.territorySearch.fill("New Test");
+    // await this.territorySearch.click();
     await this.territoryOption.click();
     await this.saveBtn_Address.click();
   }
