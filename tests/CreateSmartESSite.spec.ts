@@ -15,11 +15,11 @@ const userLoginData = JSON.parse(fs.readFileSync('E2E-testData/userLoginData.jso
 let TIMSsiteCodeText: string | null ;
 // let TIMSsiteCodeText: string | null = null;
 
-test.describe("DE smart site integration", () => {
+test.describe("ES smart site integration", () => {
 
     let loginObj: TIMSloginPage;
     let homeObj: TIMShomePage;
-    let DEsiteObj: newSitePage;
+    let ESsiteObj: newSitePage;
     let siteInfoObj: TIMSsiteInfoPage;
 
     let commanderLoginObj: CommanderLoginPage;
@@ -31,7 +31,7 @@ test.describe("DE smart site integration", () => {
     test.beforeEach(async ({ page }) => {
         loginObj = new TIMSloginPage(page);
         homeObj = new TIMShomePage(page);
-        DEsiteObj = new newSitePage(page);
+        ESsiteObj = new newSitePage(page);
         siteInfoObj = new TIMSsiteInfoPage(page);
 
         commanderLoginObj = new CommanderLoginPage(page);
@@ -41,32 +41,31 @@ test.describe("DE smart site integration", () => {
           
     });
 
-    test('create smart DE site in TIMS', async ({ page }) => {
+    test('create smart ES site in TIMS', async ({ page }) => {
         await loginObj.navigateToURL(userLoginData.timsFullURL);
         await loginObj.login(userLoginData.timsUsername, userLoginData.timsPassword);
         await homeObj.createNewSite();
-        await DEsiteObj.createSmartDESite();
-        await expect(siteInfoObj.DETIMSsiteCode).toBeVisible({ timeout: 60000 });
+        await ESsiteObj.createSmartESSite();
+        await expect(siteInfoObj.ESTIMSsiteCode).toBeVisible({ timeout: 60000 });
         
  //////////////
-        TIMSsiteCodeText = await siteInfoObj.DETIMSsiteCode.textContent();
+        TIMSsiteCodeText = await siteInfoObj.ESTIMSsiteCode.textContent();
         console.log("###### Site Code: " + TIMSsiteCodeText)
 ////////////////
 
-        await siteInfoObj.updateDESmartSite();
+        await siteInfoObj.updateESSmartSite();
         
     })
 
    
 
-    test("Find DE site in commander", async ({ page }) => {
+    test("Find ES site in commander", async ({ page }) => {
         await commanderLoginObj.navigateToURL(userLoginData.commanderURL);
         await commanderLoginObj.login(userLoginData.commanderUernameTxt, userLoginData.commanderPasswordTxt);
         await commaderQuickAccObj.openPortal();
         await commanderHomeObj.clickEntityMNG();
         await commanderEntityObj.searchForSmartSite();
 
-
     })
-})
+ })
 
