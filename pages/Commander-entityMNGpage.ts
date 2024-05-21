@@ -19,7 +19,8 @@ export default class CommanderEntityMNGPage {
 
     constructor(page: Page , timsSiteCodeText: string | null) {
         this.page = page;
-        this.searchTxt = page.getByRole('textbox');
+       // this.searchTxt = page.getByRole('textbox');
+        this.searchTxt= page.locator('xpath=//input[@class="dx-texteditor-input"] [@role="textbox"]');
         this.searchBtn = page.getByLabel('fa fa-search');
         this.searchResult = page.locator('tree-search-item div').first();
         this.propertySearchBox = page.getByRole('textbox', { name: 'Filter cell' }).first();
@@ -32,27 +33,9 @@ export default class CommanderEntityMNGPage {
     async searchForSmartSite() {  
         await this.searchTxt.fill(this.timsSiteCodeText ?? '');
         await this.searchBtn.click();
-        // await expect(this.searchResult).toBeVisible();
-        
-
-        if (await this.searchResult.isVisible()) {
-            console.log("Found Smart Site");
-            await expect(this.searchResult).toBeVisible({timeout:20000});
-            
-        } else {
-
-            while (true) {
-                if (await this.searchResult.isVisible()) {
-                    break;
-                } else {
-                    await this.searchBtn.click();
-                }
-        }
-
-        
-
-
-        await expect(this.searchResult).toBeVisible({timeout:20000});
+        await expect(this.searchResult).toBeVisible();
+        await this.searchResult.click();
+        // await expect(this.propertySearchBox).toBeVisible({timeout:20000});
         // await this.propertySearchBox.fill("TIMS site code");
         // console.log("xxxxxxxx " + await this.siteTIMScode.textContent() + " xxxxxxxx");
 
