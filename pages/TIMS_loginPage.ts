@@ -14,7 +14,7 @@ export default class TIMSloginPage {
         this.usernameTxt = page.locator("#username").filter();
         this.passwordTxt = page.locator("#password");
         this.loginBtn = page.locator("#Login");
-        this.closeBtn = page.locator('[name="j_id0:j_id62:j_id63"]');
+        this.closeBtn = page.locator('[name="j_id0:j_id50:j_id51"]');
 
     }
 
