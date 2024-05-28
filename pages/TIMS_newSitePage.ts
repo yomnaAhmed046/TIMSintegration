@@ -7,9 +7,11 @@ export default class TIMSnewSitePage {
   readonly marketList: Locator;
   readonly DEmarketOption: Locator;
   readonly IEmarketOption: Locator;
+  readonly IEmarketOption: Locator;
   readonly smartSiteList: Locator;
   readonly YesSmartSiteOption: Locator;
   readonly companyCodeTXT: Locator;
+  readonly IEcompanyCodeOption: Locator;
   readonly IEcompanyCodeOption: Locator;
   readonly DEcompanyCodeOption: Locator;
   readonly latitude: Locator;
@@ -39,6 +41,7 @@ export default class TIMSnewSitePage {
     this.smartSiteList = page.getByRole('combobox', { name: 'Smart Site' });
     this.YesSmartSiteOption = page.getByRole('option', { name: 'Yes' });
     this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
+    this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
     this.DEcompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
     this.latitude = page.getByLabel('*Lat');
     this.longitude = page.getByLabel('*Long');

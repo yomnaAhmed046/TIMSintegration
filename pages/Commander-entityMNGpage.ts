@@ -31,8 +31,9 @@ export default class CommanderEntityMNGPage {
     }
 
     async searchForSmartSite() {  
-        await this.searchTxt.fill(this.timsSiteCodeText ?? '');
-        await this.searchBtn.click();
+       await this.searchTxt.fill(this.timsSiteCodeText ?? '');
+       // await this.searchBtn.click();
+       await this.page.keyboard.press('Enter');
         await expect(this.searchResult).toBeVisible();
         await this.searchResult.click();
         // await expect(this.propertySearchBox).toBeVisible({timeout:20000});
