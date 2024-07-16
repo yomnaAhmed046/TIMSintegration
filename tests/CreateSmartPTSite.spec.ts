@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import TIMSloginPage from '../pages/TIMS_loginPage';
 import TIMShomePage from '../pages/TIMS_homePage';
-import newIESitePage from '../pages/TIMS_newSitePage';
+import newPTSitePage from '../pages/TIMS_newSitePage';
 import TIMSsiteInfoPage from '../pages/TIMS_siteInfoPage';
 import CommanderLoginPage from '../pages/Commander-loginPage';
 import CommanderQuickAccessPage from '../pages/Commander_QuickAccessPage';
@@ -15,11 +15,11 @@ const userLoginData = JSON.parse(fs.readFileSync('E2E-testData/userLoginData.jso
 let TIMSsiteCodeText: string | null ;
 // let TIMSsiteCodeText: string | null = null;
 
-test.describe("IE smart site integration", () => {
+test.describe("PT smart site integration", () => {
 
     let loginObj: TIMSloginPage;
     let homeObj: TIMShomePage;
-    let IEsiteObj: newIESitePage;
+    let PTsiteObj: newPTSitePage;
     let siteInfoObj: TIMSsiteInfoPage;
 
     let commanderLoginObj: CommanderLoginPage;
@@ -31,7 +31,7 @@ test.describe("IE smart site integration", () => {
     test.beforeEach(async ({ page }) => {
         loginObj = new TIMSloginPage(page);
         homeObj = new TIMShomePage(page);
-        IEsiteObj = new newIESitePage(page);
+        PTsiteObj = new newPTSitePage(page);
         siteInfoObj = new TIMSsiteInfoPage(page);
 
         commanderLoginObj = new CommanderLoginPage(page);
@@ -41,25 +41,25 @@ test.describe("IE smart site integration", () => {
           
     });
 
-    test('create smart IE site in TIMS', async ({ page }) => {
+    test('create smart PT site in TIMS', async ({ page }) => {
         await loginObj.navigateToURL(userLoginData.timsFullURL);
         await loginObj.login(userLoginData.timsUsername, userLoginData.timsPassword);
         await homeObj.createNewSite();
-        await IEsiteObj.createSmartIESite();
-       await expect(siteInfoObj.IETIMSsiteCode).toBeVisible({ timeout: 60000 });
+        await PTsiteObj.createSmartPTSite();
+       await expect(siteInfoObj.PTTIMSsiteCode).toBeVisible({ timeout: 60000 });
         
  //////////////
-        TIMSsiteCodeText = await siteInfoObj.IETIMSsiteCode.textContent();
+        TIMSsiteCodeText = await siteInfoObj.PTTIMSsiteCode.textContent();
        console.log("###### Site Code: " + TIMSsiteCodeText)
 ////////////////
 
-       await siteInfoObj.updateIESmartSite();
+       await siteInfoObj.updatePTSmartSite();
         
     })
 
    
 
-    test("Find IE site in commander", async ({ page }) => {
+    test("Find PT site in commander", async ({ page }) => {
         await commanderLoginObj.navigateToURL(userLoginData.commanderURL);
         await commanderLoginObj.login(userLoginData.commanderUernameTxt, userLoginData.commanderPasswordTxt);
         await commaderQuickAccObj.openPortal();

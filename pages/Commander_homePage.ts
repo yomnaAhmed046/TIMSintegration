@@ -10,10 +10,12 @@ export default class CommanderHomePage {
         this.page = page;
        // this.entityManagment = page.getByRole('link', { name: ' Entity management' });
        this.entityManagment=page.locator('xpath=//a[@id="entity-manager"]');
+       
     }
 
     async clickEntityMNG() {
         await this.entityManagment.click();
+
     }
 
 }

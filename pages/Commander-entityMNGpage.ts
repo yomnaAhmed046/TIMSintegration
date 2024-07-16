@@ -19,8 +19,8 @@ export default class CommanderEntityMNGPage {
 
     constructor(page: Page , timsSiteCodeText: string | null) {
         this.page = page;
-       // this.searchTxt = page.getByRole('textbox');
-        this.searchTxt= page.locator('xpath=//input[@class="dx-texteditor-input"] [@role="textbox"]');
+      //  this.searchTxt = page.getByRole('textbox');
+        this.searchTxt= page.locator('xpath=//*[@class="dx-texteditor-input"][@role="textbox"]');
         this.searchBtn = page.getByLabel('fa fa-search');
         this.searchResult = page.locator('tree-search-item div').first();
         this.propertySearchBox = page.getByRole('textbox', { name: 'Filter cell' }).first();
@@ -32,8 +32,10 @@ export default class CommanderEntityMNGPage {
 
     async searchForSmartSite() {  
        await this.searchTxt.fill(this.timsSiteCodeText ?? '');
-       // await this.searchBtn.click();
-       await this.page.keyboard.press('Enter');
+      // await this.searchTxt.fill("123");
+
+        await this.searchBtn.click();
+      // await this.page.keyboard.press('Enter');
         await expect(this.searchResult).toBeVisible();
         await this.searchResult.click();
         // await expect(this.propertySearchBox).toBeVisible({timeout:20000});
@@ -41,4 +43,4 @@ export default class CommanderEntityMNGPage {
         // console.log("xxxxxxxx " + await this.siteTIMScode.textContent() + " xxxxxxxx");
 
     }
-}}
+}

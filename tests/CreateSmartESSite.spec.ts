@@ -53,7 +53,7 @@ test.describe("ES smart site integration", () => {
         console.log("###### Site Code: " + TIMSsiteCodeText)
 ////////////////
 
-        await siteInfoObj.updateESSmartSite();
+       // await siteInfoObj.updateESSmartSite();
         
     })
 

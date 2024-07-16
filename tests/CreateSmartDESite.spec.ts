@@ -55,7 +55,7 @@ test.describe("DE smart site integration", () => {
 
         await siteInfoObj.updateDESmartSite();
         
-    })
+    });
 
    
 
@@ -68,5 +68,5 @@ test.describe("DE smart site integration", () => {
 
 
     })
-})
 
+})

@@ -14,6 +14,7 @@ export default class CommanderLoginPage {
         this.commanderUernameTxt = page.locator("#Username");
         this.commanderPasswordTxt = page.locator("#Password");
         this.commanderLoginBtn = page.locator("#btnSubmitLoginForm");
+        //this.commanderLoginBtn= page.locator('xpath=//button[@id="btnSubmitLoginForm"]');
         this.showPass = page.locator(".fa-eye-slash");
 
     }
@@ -29,6 +30,7 @@ export default class CommanderLoginPage {
     async login(commanderUernameTxt, commanderPasswordTxt) {
         await this.commanderUernameTxt.fill(commanderUernameTxt);
         await this.commanderPasswordTxt.fill(commanderPasswordTxt);
+        await this.page.keyboard.press('Enter');
         // await this.showPass.click()
         await this.commanderLoginBtn.click();
         
