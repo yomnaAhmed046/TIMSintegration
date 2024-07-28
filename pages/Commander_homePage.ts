@@ -8,7 +8,6 @@ export default class CommanderHomePage {
 
     constructor(page: Page) {
         this.page = page;
-       // this.entityManagment = page.getByRole('link', { name: ' Entity management' });
        this.entityManagment=page.locator('xpath=//a[@id="entity-manager"]');
     }
 
