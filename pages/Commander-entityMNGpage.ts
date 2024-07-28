@@ -10,16 +10,12 @@ export default class CommanderEntityMNGPage {
     readonly searchResult: Locator;
     readonly propertySearchBox: Locator;
 
-    
-    public readonly timsSiteCodeText: string | null;
 
-    constructor(page: Page , timsSiteCodeText: string | null) {
+    constructor(page: Page) {
         this.page = page;
         this.searchTxt= page.locator('xpath=//input[@class="dx-texteditor-input"] [@role="textbox"]');
         this.searchBtn = page.getByLabel('fa fa-search');
         this.searchResult = page.locator('tree-search-item div').first();
-        this.timsSiteCodeText = timsSiteCodeText; // Store TIMSsiteCodeText
-
 
     }
 
