@@ -10,6 +10,7 @@ import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
 import fs from 'fs';
 
 
+
 const userLoginData = JSON.parse(fs.readFileSync('E2E-testData/userLoginData.json', 'utf8'));
 
 let TIMSsiteCodeText: string | null ;
@@ -39,17 +40,17 @@ test.describe("IE smart site integration", () => {
         commanderHomeObj = new CommanderHomePage(page);
         commanderEntityObj = new CommanderEntityMNGPage(page , TIMSsiteCodeText); //check siteInfoObj if needed or not
           
-    });
+    })
 
     test('create smart IE site in TIMS', async ({ page }) => {
         await loginObj.navigateToURL(userLoginData.timsFullURL);
         await loginObj.login(userLoginData.timsUsername, userLoginData.timsPassword);
         await homeObj.createNewSite();
         await IEsiteObj.createSmartIESite();
-       await expect(siteInfoObj.TIMSsiteCode).toBeVisible({ timeout: 60000 });
+       await expect(siteInfoObj.IETIMSsiteCode).toBeVisible({ timeout: 60000 });
         
  //////////////
-        TIMSsiteCodeText = await siteInfoObj.TIMSsiteCode.textContent();
+        TIMSsiteCodeText = await siteInfoObj.IETIMSsiteCode.textContent();
        console.log("###### Site Code: " + TIMSsiteCodeText)
 ////////////////
 
@@ -65,9 +66,6 @@ test.describe("IE smart site integration", () => {
         await commaderQuickAccObj.openPortal();
         await commanderHomeObj.clickEntityMNG();
        await commanderEntityObj.searchForSmartSite();
-
-    //new branch
-    console.log("test")
     })
 })
 

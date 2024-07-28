@@ -9,10 +9,10 @@ export default class TIMShomePage {
 
     constructor(page: Page) {
         this.page = page;
-        this.sitesTab = page.getByRole('button', { name: 'Sites List' })
-        this.newSiteButton = page.getByRole('menuitem', { name: 'New Site' })
+        this.sitesTab = page.getByRole('button', { name: 'Sites List' });
+        this.newSiteButton = page.getByRole('menuitem', { name: 'New Site' });
     }
-
+    
     async createNewSite() {
         await this.sitesTab.click();
         await this.newSiteButton.click();

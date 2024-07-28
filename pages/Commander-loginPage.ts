@@ -29,7 +29,7 @@ export default class CommanderLoginPage {
     async login(commanderUernameTxt, commanderPasswordTxt) {
         await this.commanderUernameTxt.fill(commanderUernameTxt);
         await this.commanderPasswordTxt.fill(commanderPasswordTxt);
-        // await this.showPass.click()
+        await this.showPass.click()
         await this.commanderLoginBtn.click();
         
     }
