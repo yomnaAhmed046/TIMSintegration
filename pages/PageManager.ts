@@ -34,7 +34,7 @@ export class PageManager{
         this.commanderLoginObj = new CommanderLoginPage(this.page);
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
         this.commanderHomeObj = new CommanderHomePage(this.page);
-        this.commanderEntityObj = new CommanderEntityMNGPage(this.page , TIMSsiteCodeText);
+        this.commanderEntityObj = new CommanderEntityMNGPage(this.page);
 
     }
 

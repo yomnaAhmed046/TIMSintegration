@@ -13,30 +13,22 @@ export default class CommanderEntityMNGPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.searchTxt= page.locator('xpath=//input[@class="dx-texteditor-input"] [@role="textbox"]');
+        this.searchTxt = page.locator('xpath=//input[@class="dx-texteditor-input"] [@role="textbox"]');
         this.searchBtn = page.getByLabel('fa fa-search');
         this.searchResult = page.locator('tree-search-item div').first();
-
     }
 
-    async searchForSmartSite(timsSiteCode: string) {  
+    async searchForSmartSite(timsSiteCode: string) {
         await this.searchTxt.fill(timsSiteCode);
         await this.searchBtn.click();
 
         if (await this.searchResult.isVisible()) {
             console.log("Found Smart Site");
-            await expect(this.searchResult).toBeVisible({timeout:20000});
-            
+            await expect(this.searchResult).toBeVisible({ timeout: 20000 });
         } else {
-
-            while (true) {
-                if (await this.searchResult.isVisible()) {
-                    break;
-                } else {
-                    await this.searchBtn.click();
-                }
+            while (!(await this.searchResult.isVisible())) {
+                await this.searchBtn.click();
+            }
         }
-        await expect(this.searchResult).toBeVisible({timeout:20000});
     }
-}
 }

@@ -4,7 +4,7 @@ import { Page, Locator } from 'playwright';
 export default class CommanderQuickAccessPage {
     readonly page: Page;
     readonly portal: Locator;
-  
+
 
     constructor(page: Page) {
         this.page = page;
@@ -12,7 +12,7 @@ export default class CommanderQuickAccessPage {
     }
 
     async openPortal() {
-        await this.portal.click(); 
+        await this.portal.click();
     }
 
 }

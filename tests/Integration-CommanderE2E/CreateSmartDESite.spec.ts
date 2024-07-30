@@ -2,11 +2,8 @@ import { test, expect } from '@playwright/test'
 import { PageManager } from '../../pages/PageManager';
 import fs from 'fs';
 
-
-const userLoginData = JSON.parse(fs.readFileSync('TestData-TIMS/userLoginData.json', 'utf8'));
-
-
-let TIMSsiteCodeText: string | null ;
+const timsLoginData = JSON.parse(fs.readFileSync('TestData/TIMS/userLogin.json', 'utf8'));
+const CommanderLoginData = JSON.parse(fs.readFileSync('TestData/Commander/userLogin.json', 'utf8'));
 let pm;
 
 test.describe("DE smart site integration", () => {
@@ -15,20 +12,18 @@ test.describe("DE smart site integration", () => {
         pm = new PageManager(page);
     });
     
-
     test('create smart DE site in TIMS', async ({ page }) => {
-        await pm.loginTIMS().navigateToURL(userLoginData.timsFullURL);
-        await pm.loginTIMS().login(userLoginData.timsUsername, userLoginData.timsPassword);
+        await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
+        await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         await pm.homePageTIMS().createNewSite();
         await pm.newsiteTIMS().createSmartDESite();
         const TIMSsiteCodeText = await pm.siteInfoTIMS().getTIMSCode();
         console.log("###### Site Code: " + TIMSsiteCodeText)
         await pm.siteInfoTIMS().updateDESmartSite(); 
-        await pm.loginCommander().navigateToURL(userLoginData.commanderURL); 
-        await pm.loginCommander().login(userLoginData.commanderUernameTxt, userLoginData.commanderPasswordTxt);
+        await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL); 
+        await pm.loginCommander().login(await CommanderLoginData.commanderUernameTxt, await CommanderLoginData.commanderPasswordTxt);
         await pm.quickAccessCommander().openPortal();
         await pm.homePageCommander().clickEntityMNG();
         await pm.entityMNGCommander().searchForSmartSite(TIMSsiteCodeText);
     })
 })
-

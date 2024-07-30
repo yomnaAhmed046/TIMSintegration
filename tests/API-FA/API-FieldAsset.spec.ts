@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test'
 import fs from 'fs';
 
 
-const dcMeterData = JSON.parse(fs.readFileSync('API-testData/DC_Meter.json', 'utf8'));
-const RaptorData = JSON.parse(fs.readFileSync('API-testData/Raptor.json', 'utf8'));
+const dcMeterData = JSON.parse(fs.readFileSync('TestData/API-FA/DC_Meter.json', 'utf8'));
+const RaptorData = JSON.parse(fs.readFileSync('TestData/API-FA/Raptor.json', 'utf8'));
 
 
 test.describe('Create Field Assets', () => {
