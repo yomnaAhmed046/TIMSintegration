@@ -15,7 +15,6 @@ export default class TIMSloginPage extends BasePage{
         this.passwordTxt = page.locator("#password");
         this.loginBtn = page.locator("#Login");
         this.closeBtn = page.locator('[name="j_id0:j_id50:j_id51"]');
-
     }
 
     async navigateToURL(timsFullURL) {
@@ -27,11 +26,10 @@ export default class TIMSloginPage extends BasePage{
     }
 
     async login(timsUsername, timsPassword) {
-        await this.type(this.usernameTxt, timsUsername);
-        await this.type(this.passwordTxt, timsPassword);
-        await this.clickElement(this.loginBtn);
-        await this.clickElement(this.closeBtn);
-        
+        await this.usernameTxt.fill(timsUsername);
+        await this.passwordTxt.fill(timsPassword);
+        await this.loginBtn.click();
+        await this.closeBtn.click();        
     }
 
 }

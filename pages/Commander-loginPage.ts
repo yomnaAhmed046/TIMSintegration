@@ -15,7 +15,6 @@ export default class CommanderLoginPage {
         this.commanderPasswordTxt = page.locator("#Password");
         this.commanderLoginBtn = page.locator("#btnSubmitLoginForm");
         this.showPass = page.locator(".fa-eye-slash");
-
     }
 
     async navigateToURL(commanderURL) {
@@ -31,7 +30,6 @@ export default class CommanderLoginPage {
         await this.commanderPasswordTxt.fill(commanderPasswordTxt);
         await this.showPass.click()
         await this.commanderLoginBtn.click();
-        
     }
 
 }
