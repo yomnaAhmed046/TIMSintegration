@@ -1,8 +1,7 @@
 import {test, expect} from '@playwright/test'
-import fs from 'fs';
 import { PageManager } from '../../pages/PageManager';
+import timsLoginData from '../../TestData/TIMS/userLogin.json'
 
-const timsLoginData = JSON.parse(fs.readFileSync('TestData/TIMS/userLogin.json', 'utf8'));
 let pm;
 
 test.describe("Login in TIMS", () => {

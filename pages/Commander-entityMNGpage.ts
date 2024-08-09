@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { Page, Locator } from 'playwright';
-import TIMSsiteInfoPage from './TIMS_siteInfoPage'
-import TIMSnewSitePage from './TIMS_newSitePage';
+import TIMSsiteInfoPage from './TIMSSitePage'
+//import TIMSnewSitePage from './TIMS_newSitePage';
 
 export default class CommanderEntityMNGPage {
     readonly page: Page;
