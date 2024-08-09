@@ -1,13 +1,16 @@
 import { Page, expect } from "@playwright/test";
-
+//TIMS Imports
+import  Actions  from '../pages/Actions';
 import TIMSloginPage from "../pages/TIMS_loginPage";
-import TIMShomePage from '../pages/TIMS_homePage';
-import newSitePage from '../pages/TIMS_newSitePage';
-import TIMSsiteInfoPage from '../pages/TIMS_siteInfoPage';
+import TIMSApplicationPage from './TIMSApplicationPage.ts';
+import TIMSSitePage from './TIMSSitePage.ts';
+import TIMSProjectPage from '../pages/TIMSProjectPage.ts'
+//Integration Imports
 import CommanderLoginPage from '../pages/Commander-loginPage';
 import CommanderQuickAccessPage from '../pages/Commander_QuickAccessPage';
 import CommanderHomePage from '../pages/Commander_homePage';
 import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
+
 
 let TIMSsiteCodeText: string | null ;
 
@@ -15,9 +18,10 @@ export class PageManager{
 
     private readonly page: Page;
     private readonly loginObj: TIMSloginPage;
-    private readonly homeObj: TIMShomePage;
-    private readonly siteObj: newSitePage;
-    private readonly siteInfoObj: TIMSsiteInfoPage;
+    private readonly actionobj: Actions;
+    private readonly siteObj: TIMSSitePage;
+    private readonly appObj: TIMSApplicationPage;
+    private readonly projectObj: TIMSProjectPage;
 
     private readonly commanderLoginObj: CommanderLoginPage;
     private readonly commaderQuickAccObj: CommanderQuickAccessPage;
@@ -27,9 +31,10 @@ export class PageManager{
     constructor(page: Page){
         this.page = page;
         this.loginObj = new TIMSloginPage(this.page);
-        this.homeObj = new TIMShomePage(this.page);
-        this.siteObj = new newSitePage(this.page);
-        this.siteInfoObj = new TIMSsiteInfoPage(this.page);
+        this.actionobj = new Actions(this.page);
+        this.siteObj = new TIMSSitePage(this.page);
+        this.appObj = new TIMSApplicationPage(this.page);
+        this.projectObj = new TIMSProjectPage(this.page);
 
         this.commanderLoginObj = new CommanderLoginPage(this.page);
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
@@ -38,28 +43,39 @@ export class PageManager{
 
     }
 
+    actionsTIMS(){
+        return this.actionobj;
+    }
+
+    appTIMS(){
+        return this.appObj;
+    }
+
     loginTIMS(){
-        return this.loginObj
+        return this.loginObj;
     }
-    homePageTIMS(){
-        return this.homeObj
+
+    siteTIMS(){
+        return this.siteObj;
     }
-    newsiteTIMS(){
-        return this.siteObj
-    }
-    siteInfoTIMS(){
-        return this.siteInfoObj
-    }
+
+    projectTIMS(){
+        return this.projectObj;
+        }
+
     loginCommander(){
-        return this.commanderLoginObj
+        return this.commanderLoginObj;
     }
+    
     quickAccessCommander(){
-        return this.commaderQuickAccObj
+        return this.commaderQuickAccObj;
     }
+
     homePageCommander(){
-        return this.commanderHomeObj
+        return this.commanderHomeObj;
     }
+
     entityMNGCommander(){
-        return this.commanderEntityObj
+        return this.commanderEntityObj;
     }
 }

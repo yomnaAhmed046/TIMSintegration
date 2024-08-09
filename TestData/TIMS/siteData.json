@@ -1,0 +1,12 @@
+{
+    "siteName": "test",
+    "companyCode": "DE91",
+    "lat": "1.5",
+    "long": "2.5",
+    "timsSiteCode": "DE-TIMS-100104",
+    "updatedSiteName": "updatedSiteName",
+    "updatedLat": "10.5",
+    "updatedLong": "20.5",
+    "customerAccount":"Vodafone - DE",
+    "scopeOfWork" : "Test"
+}
