@@ -14,7 +14,7 @@ test.describe("The Objects Created from Site", () => {
 
     test ('@Regression The User can create New Site successfully', async ({ page }) => {
         await pm.siteTIMS().createNewSite();
-        await pm.siteTIMS().createNormalSite(timsSiteData.siteName, timsSiteData.companyCode, timsSiteData.lat, timsSiteData.long);
+        await pm.siteTIMS().createNormalSite(timsSiteData.siteName, timsSiteData.DEcompanyCode, timsSiteData.lat, timsSiteData.long);
         await expect(page.locator('.toastTitle')).toContainText("Record Created", { timeout: 10000 });
         const TIMSsiteCode = await pm.siteTIMS().getTIMSCode();
         console.log("###### Site Code: " + TIMSsiteCode)

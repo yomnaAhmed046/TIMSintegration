@@ -1,4 +1,5 @@
 import { Page, Locator } from 'playwright';
+import { step } from '../utils/StepDecorator';
 
 
 export default class CommanderLoginPage {
@@ -17,7 +18,8 @@ export default class CommanderLoginPage {
         this.showPass = page.locator(".fa-eye-slash");
     }
 
-    async navigateToURL(commanderURL) {
+    @step("Navigate to Commander")
+    async navigateToURL(commanderURL): Promise <void> {
         await this.page.goto(commanderURL)
     }
 
@@ -25,7 +27,8 @@ export default class CommanderLoginPage {
         return await this.page.title();
     }
 
-    async login(commanderUernameTxt, commanderPasswordTxt) {
+    @step("Login to Commander")
+    async login(commanderUernameTxt, commanderPasswordTxt): Promise <void> {
         await this.commanderUernameTxt.fill(commanderUernameTxt);
         await this.commanderPasswordTxt.fill(commanderPasswordTxt);
         await this.showPass.click()

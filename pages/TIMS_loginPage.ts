@@ -1,5 +1,5 @@
 import { Page, Locator } from 'playwright';
-
+import { step } from '../utils/StepDecorator';
 
 export default class TIMSloginPage{
     readonly page: Page;
@@ -16,16 +16,13 @@ export default class TIMSloginPage{
         this.loginBtn = page.locator("#Login");
         this.closeBtn = page.locator('[name="j_id0:j_id50:j_id51"]');
     }
-
-    async navigateToURL(timsFullURL: string) {
+    @step("Navigate to TIMS URL")
+    async navigateToURL(timsFullURL: string): Promise<void> {
         await this.page.goto(timsFullURL);
     }
 
-    async getTitle() {
-        return await this.page.title();
-    }
-
-    async login(timsUsername: string , timsPassword: string) {
+    @step("Login to TIMS")
+    async login(timsUsername: string , timsPassword: string):Promise<void> {
         await this.usernameTxt.fill(timsUsername);
         await this.passwordTxt.fill(timsPassword);
         await this.loginBtn.click();
