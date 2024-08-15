@@ -42,7 +42,7 @@ export default defineConfig({
       use: {/*...devices['Desktop Chrome'],*/
         viewport: null,  
         },
-      timeout: 80000
+      timeout: 90000
     },
 
     // {

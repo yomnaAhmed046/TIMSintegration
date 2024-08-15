@@ -12,8 +12,6 @@ import CommanderHomePage from '../pages/Commander_homePage';
 import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
 
 
-let TIMSsiteCodeText: string | null ;
-
 export class PageManager{
 
     private readonly page: Page;

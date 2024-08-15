@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { Page, Locator } from 'playwright';
-import TIMSsiteInfoPage from './TIMSSitePage'
-//import TIMSnewSitePage from './TIMS_newSitePage';
+import { step } from '../utils/StepDecorator';
 
 export default class CommanderEntityMNGPage {
     readonly page: Page;
@@ -10,7 +9,6 @@ export default class CommanderEntityMNGPage {
     readonly searchResult: Locator;
     readonly propertySearchBox: Locator;
 
-
     constructor(page: Page) {
         this.page = page;
         this.searchTxt = page.locator('xpath=//input[@class="dx-texteditor-input"] [@role="textbox"]');
@@ -18,7 +16,8 @@ export default class CommanderEntityMNGPage {
         this.searchResult = page.locator('tree-search-item div').first();
     }
 
-    async searchForSmartSite(timsSiteCode: string) {
+    @step("Search for the smart site in Commander")
+    async searchForSmartSite(timsSiteCode: string) : Promise<void>{
         await this.searchTxt.fill(timsSiteCode);
         await this.searchBtn.click();
 
@@ -29,6 +28,7 @@ export default class CommanderEntityMNGPage {
             while (!(await this.searchResult.isVisible())) {
                 await this.searchBtn.click();
             }
+            console.log("Found Smart Site " + timsSiteCode + " in Commander");
         }
     }
 }
