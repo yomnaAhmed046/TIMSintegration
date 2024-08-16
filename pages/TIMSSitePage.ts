@@ -6,50 +6,56 @@ import {step} from '../utils/StepDecorator';
 export default class TIMSsiteInfoPage {
   readonly page: Page;
   readonly action: Actions;
+
+  //Header Elements
   readonly sitesTab: Locator;
   readonly newSiteButton: Locator;
+
+  //Create site elements
+  readonly siteNameTxt: Locator;
+  readonly marketList: Locator;
+  readonly smartSiteList: Locator;
+  readonly YesSmartSiteOption: Locator;
+  readonly lat: Locator;
+  readonly long: Locator;
+  readonly saveBtn: Locator;
+  readonly Region: Locator;
+  readonly Country: Locator;
+  
+  //Update site elements
   readonly siteStatusEditBtn: Locator;
   readonly siteStatusList: Locator;
   readonly siteStatusOption: Locator;
   readonly criticalSiteList: Locator;
   readonly criticalSiteYes: Locator;
   readonly windZoneList: Locator;
-  readonly DEwindZoneOption: Locator;
   readonly saveBtn_Details: Locator;
-  readonly territoryField: Locator;
-  readonly territorySearch: Locator;
-  readonly territoryOption: Locator;
   readonly saveBtn_Address: Locator;
   readonly TIMSsiteCode: Locator;
-  readonly ESwindZoneOption: Locator;
-  readonly windValidation: Locator;
+  //----------------------------------
   readonly searchBoxforTIMSCode: Locator;
   readonly siteRecord: Locator;
   readonly createnewAppButton: Locator;
   readonly projectTab: Locator;
-  //---------------------------------------------
-  readonly siteNameTxt: Locator;
-  readonly marketList: Locator;
+  
+  //DE 
   readonly DEmarketOption: Locator;
-  readonly IEmarketOption: Locator;
-  readonly smartSiteList: Locator;
-  readonly YesSmartSiteOption: Locator;
-  readonly companyCodeTXT: Locator;
-  readonly IEcompanyCodeOption: Locator;
-  readonly DEcompanyCodeOption: Locator;
-  readonly lat: Locator;
-  readonly long: Locator;
-  readonly saveBtn: Locator;
-  readonly Region: Locator;
-  readonly Country: Locator;
+  readonly DEwindZoneOption: Locator;
+  readonly territoryField: Locator;
+  readonly territorySearch: Locator;
+  readonly territoryOption: Locator;
+
   // ES
   readonly ESmarketOption: Locator;
-  readonly EScompanyCodeOption: Locator;
   readonly ESRegion: Locator;
   readonly ESCountry: Locator;
+  readonly ESwindZoneOption: Locator;
+
   //IE
+  readonly IEmarketOption: Locator;
   readonly countryComboBox: Locator;
   readonly countryComboxBoxChoice: Locator;
+  readonly IEwindZoneOption: Locator;
   readonly countyTxtBox: Locator;
 
   constructor(page: Page) {
@@ -63,55 +69,54 @@ export default class TIMSsiteInfoPage {
     this.criticalSiteList = page.locator('[name="Critical_Site__c"]');
     this.criticalSiteYes = page.locator('span').filter({ hasText: 'Yes' }).first();
     this.windZoneList = page.getByText('*Wind Zone', { exact: true });
-    this.DEwindZoneOption = page.locator('span').filter({ hasText: '1' }).nth(1);
     this.saveBtn_Details = page.locator('form').filter({ hasText: 'VF Customer Sharing MarketVF' }).locator('button[name="update"]');
-    this.territoryField = page.locator('lightning-output-field').filter({ hasText: 'Territory' }).locator('lightning-formatted-lookup');
-    this.territorySearch = page.getByPlaceholder('Search Territories...');
-    this.territoryOption = page.locator('span').filter({ hasText: 'New Test' }).nth(4);
     this.saveBtn_Address = page.locator('form').filter({ hasText: 'AddressAddressCountryCountry' }).locator('button[name="update"]');
     this.siteRecord = page.getByRole('link', { name: 'DE-TIMS-100104' });
     this.searchBoxforTIMSCode = page.locator(`[name='Site-search-input']`);
     this.TIMSsiteCode = page.locator('lightning-formatted-text').filter({ hasText: '-TIMS-' });
     this.createnewAppButton = page.locator('records-highlights-details-item').filter({ hasText: 'Start New ApplicationCreate' }).getByRole('link');
     this.projectTab = page.getByRole('tab', { name: 'Projects' });
-    // ES 
-    this.ESwindZoneOption = page.getByTitle('A', { exact: true });
     //------------------------------------------------
     this.siteNameTxt = page.locator('[name="Site_Name__c"]');
     this.marketList = page.getByRole('combobox', { name: 'Market' });
-    this.DEmarketOption = page.getByRole('option', { name: 'DE', exact: true }).locator('span').nth(1);
+    this.Country = page.getByRole('combobox', { name: 'Country' });
     this.smartSiteList = page.getByRole('combobox', { name: 'Smart Site' });
     this.YesSmartSiteOption = page.getByRole('option', { name: 'Yes' });
-    this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
-    this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
-    this.DEcompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
     this.lat = page.getByLabel('*Lat');
     this.long = page.getByLabel('*Long');
     this.Region = page.getByRole('combobox', { name: 'Region (TDb)' });
     this.saveBtn = page.locator('.slds-button.slds-button_brand');
+    //DE
+    this.DEmarketOption = page.getByRole('option', { name: 'DE', exact: true }).locator('span').nth(1);
+    this.DEwindZoneOption = page.locator('span').filter({ hasText: '1' }).nth(1);
+    this.territoryField = page.locator('lightning-output-field').filter({ hasText: 'Territory' }).locator('lightning-formatted-lookup');
+    this.territorySearch = page.getByPlaceholder('Search Territories...');
+    this.territoryOption = page.locator('span').filter({ hasText: 'New Test' }).nth(4);
+
     // ES 
     this.ESmarketOption = page.getByRole('option', { name: 'ES', exact: true }).locator('span').nth(1);
-    this.EScompanyCodeOption = page.getByRole('option', { name: 'ES91 ES91' }).locator('span').nth(2);
-    this.Country = page.getByRole('combobox', { name: 'Country' });
     this.ESCountry = page.getByRole('option', { name: 'ES', exact: true }).locator('span').nth(1);
     this.ESRegion = page.getByRole('option', { name: 'R1' }).locator('span').nth(1);
+    this.ESwindZoneOption = page.getByTitle('A', { exact: true });
+
 
     //IE
     this.IEmarketOption = page.locator('xpath=//*[@title="IE"]');
-    this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
     this.countryComboBox = page.locator('[name="Country__c"]');
     this.countryComboxBoxChoice = page.getByTitle("IE").locator('nth=1');
+    this.IEwindZoneOption = page.getByTitle('1', { exact: true });
     this.countyTxtBox = page.locator('[name="sitetracker__County__c"]');
   }
 
   //Function to get the tims code
-  @step("Get TIMS Site Code")
+  @step("Store TIMS site Code")
   async getTIMSCode(): Promise<string> {
     const timsCode = await this.TIMSsiteCode.innerText();
     return timsCode;
   }
-  @step("Open Site Page then Click on New Button")
-  async createNewSite() {
+
+  @step("Create new site")
+  async createNewSite():Promise<void> {
     await this.sitesTab.click();
     await this.newSiteButton.click();
   }
@@ -122,25 +127,21 @@ export default class TIMSsiteInfoPage {
     await this.searchBoxforTIMSCode.press('Enter');
     await this.siteRecord.click();
   }
-  
-  @step("Create DE Smart Site")
-  async createSmartDESite() {
-    await this.siteNameTxt.fill("xx");
-    await this.marketList.click();
-    await this.DEmarketOption.click();
+
+  @step("Create Smart DE site in TIMS")
+  async createSmartDESite(siteName: string, DECompanyCode: string, lat: string, long: string) :Promise<void>{
+    await this.siteNameTxt.fill(siteName);
     await this.smartSiteList.click();
     await this.YesSmartSiteOption.click();
-    await this.companyCodeTXT.click();
-    await this.companyCodeTXT.fill("DE91");
-    await this.DEcompanyCodeOption.click();
-    await this.lat.fill("1.1");
-    await this.long.fill("2.2");
+    await this.action.enterDECompanyCode(DECompanyCode);
+    await this.lat.fill(lat);
+    await this.long.fill(long);
     await this.saveBtn.click();
   }
-  
-  @step("Create ES Smart Site")
-  async createSmartESSite() {
-    await this.siteNameTxt.fill("ES");
+
+  @step("Create Smart ES site in TIMS")
+  async createSmartESSite(siteName: string, EScompanyCode: string, lat: string, long: string) :Promise<void>{
+    await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.ESmarketOption.click();
     await this.smartSiteList.click();
@@ -149,42 +150,40 @@ export default class TIMSsiteInfoPage {
     await this.ESCountry.click();
     await this.Region.click();
     await this.ESRegion.click();
-    await this.companyCodeTXT.click();
-    await this.companyCodeTXT.fill("ES91");
-    await this.EScompanyCodeOption.click();
-    await this.lat.fill("1.1");
-    await this.long.fill("2.2");
+    await this.action.enterESCompanyCode(EScompanyCode);
+    await this.lat.fill(lat);
+    await this.long.fill(long);
     await this.saveBtn.click();
   }
-  @step("Create IE Smart Site")
-  async createSmartIESite() {
-    await this.siteNameTxt.fill("xx");
+
+  @step("Create Smart IE site in TIMS")
+  async createSmartIESite(siteName: string, IEcompanyCode: string, lat: string, long: string, county: string):Promise<void> {
+    await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.IEmarketOption.click();
     await this.smartSiteList.click();
     await this.YesSmartSiteOption.click();
-    await this.companyCodeTXT.click();
-    await this.companyCodeTXT.fill("IE91");
-    await this.IEcompanyCodeOption.click();
+    await this.action.enterIECompanyCode(IEcompanyCode)
     await this.countryComboBox.click();
     await this.page.keyboard.type('I');
     await this.page.keyboard.press('Enter');
     //await this.countryComboxBoxChoice.click();
-    await this.countyTxtBox.fill("county test");
-    await this.lat.fill("1.1");
-    await this.long.fill("2.2");
+    await this.countyTxtBox.fill(county);
+    await this.lat.fill(lat);
+    await this.long.fill(long);
     await this.saveBtn.click();
   }
   @step("Create DE Normal Site")
   async createNormalSite(siteName: string, companyCode: string, lat: string, long: string) {
     await this.siteNameTxt.fill(siteName);
-    await this.action.enterCompanyCode(companyCode);
+    await this.action.enterDECompanyCode(companyCode);
     await this.lat.fill(lat);
     await this.long.fill(long);
     await this.action.saveRecord();
 }
-@step("Update DE Smart Site")
-  async updateDESmartSite() {
+
+  @step("Update Smart DE site in TIMS")
+  async updateDESmartSite(territory: string) :Promise<void> {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
     await this.siteStatusOption.click();
@@ -195,7 +194,7 @@ export default class TIMSsiteInfoPage {
     await this.TIMSsiteCode.click();
     await this.saveBtn_Details.click();
     await this.territoryField.dblclick();
-    await this.territorySearch.fill("New Test");
+    await this.territorySearch.fill(territory);
     await this.territorySearch.click();
     await expect(this.territoryOption).toBeVisible();
     await this.territoryOption.click();
@@ -203,7 +202,7 @@ export default class TIMSsiteInfoPage {
     await this.page.waitForTimeout(6000);
   }
 
-  @step("Update ES Smart Site")
+  @step("Update Smart ES site in TIMS")
   async updateESSmartSite() {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
@@ -215,7 +214,8 @@ export default class TIMSsiteInfoPage {
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
   }
-  @step("Update IE Smart Site")
+
+  @step("Update Smart IE site in TIMS")
   async updateIESmartSite() {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
@@ -223,12 +223,8 @@ export default class TIMSsiteInfoPage {
     await this.criticalSiteList.click();
     await this.criticalSiteYes.click();
     await this.windZoneList.click();
-    await this.DEwindZoneOption.click();
+    await this.IEwindZoneOption.click();
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
-    // await this.territoryField.dblclick();
-    //await this.territorySearch.click();
-    // await this.territoryOption.click();
-    //await this.saveBtn_Address.click();
   }
 }

@@ -25,6 +25,8 @@ export default class Actions {
     readonly siteConfigRequiredValue: Locator;
     readonly companyCodeTXT: Locator;
     readonly DECompanyCodeOption: Locator;
+    readonly EScompanyCodeOption: Locator
+    readonly IEcompanyCodeOption: Locator;
     readonly TIMSCode: Locator;
 
     constructor(page: Page) {
@@ -54,7 +56,10 @@ export default class Actions {
         this.siteConfigRequiredValue = page.getByText('Standard', { exact: true });
         this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
         this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
+        this.EScompanyCodeOption = page.getByRole('option', { name: 'ES91 ES91' }).locator('span').nth(2);
+        this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
     }
+
 
     async getText(locator: Locator, text: string) {
         return await this.page.innerText(text);
@@ -64,10 +69,22 @@ export default class Actions {
         await this.newButton.click();
     }
 
-    async enterCompanyCode(companyCode: string) {
+    async enterDECompanyCode(DEcompanyCode: string) {
         await this.companyCodeTXT.click();
-        await this.companyCodeTXT.fill(companyCode);
+        await this.companyCodeTXT.fill(DEcompanyCode);
         await this.DECompanyCodeOption.click();
+    }
+
+    async enterESCompanyCode(EScompanyCode: string) {
+        await this.companyCodeTXT.click();
+        await this.companyCodeTXT.fill(EScompanyCode);
+        await this.EScompanyCodeOption.click();
+    }
+
+    async enterIECompanyCode(IEcompanyCode: string) {
+        await this.companyCodeTXT.click();
+        await this.companyCodeTXT.fill(IEcompanyCode);
+        await this.IEcompanyCodeOption.click();
     }
 
     async clickOnElement(element: Locator) {

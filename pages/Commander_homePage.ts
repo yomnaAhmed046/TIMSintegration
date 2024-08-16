@@ -1,4 +1,5 @@
 import { Page, Locator } from 'playwright';
+import { step } from '../utils/StepDecorator';
 
 
 export default class CommanderHomePage {
@@ -11,7 +12,8 @@ export default class CommanderHomePage {
         this.entityManagment = page.locator('xpath=//a[@id="entity-manager"]');
     }
 
-    async clickEntityMNG() {
+    @step("Select Entity Managment form the Menu in Commander")
+    async clickEntityMNG(): Promise <void> {
         await this.entityManagment.click();
     }
 }
