@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
 import { Page, Locator } from 'playwright';
-import  Actions from '../pages/Actions';
+import  Actions from '../utils/Actions';
+import {step} from '../utils/StepDecorator';
 
 export default class TIMSsiteInfoPage {
   readonly page: Page;
@@ -104,22 +105,25 @@ export default class TIMSsiteInfoPage {
   }
 
   //Function to get the tims code
+  @step("Get TIMS Site Code")
   async getTIMSCode(): Promise<string> {
     const timsCode = await this.TIMSsiteCode.innerText();
     return timsCode;
   }
-
+  @step("Open Site Page then Click on New Button")
   async createNewSite() {
     await this.sitesTab.click();
     await this.newSiteButton.click();
   }
-
+  
+  @step("Open Site Page and Select Record")
   async openSite(timsSiteCode: string) {
     await this.searchBoxforTIMSCode.fill(timsSiteCode);
     await this.searchBoxforTIMSCode.press('Enter');
     await this.siteRecord.click();
   }
-
+  
+  @step("Create DE Smart Site")
   async createSmartDESite() {
     await this.siteNameTxt.fill("xx");
     await this.marketList.click();
@@ -133,7 +137,8 @@ export default class TIMSsiteInfoPage {
     await this.long.fill("2.2");
     await this.saveBtn.click();
   }
-
+  
+  @step("Create ES Smart Site")
   async createSmartESSite() {
     await this.siteNameTxt.fill("ES");
     await this.marketList.click();
@@ -151,7 +156,7 @@ export default class TIMSsiteInfoPage {
     await this.long.fill("2.2");
     await this.saveBtn.click();
   }
-
+  @step("Create IE Smart Site")
   async createSmartIESite() {
     await this.siteNameTxt.fill("xx");
     await this.marketList.click();
@@ -170,7 +175,7 @@ export default class TIMSsiteInfoPage {
     await this.long.fill("2.2");
     await this.saveBtn.click();
   }
-
+  @step("Create DE Normal Site")
   async createNormalSite(siteName: string, companyCode: string, lat: string, long: string) {
     await this.siteNameTxt.fill(siteName);
     await this.action.enterCompanyCode(companyCode);
@@ -178,7 +183,7 @@ export default class TIMSsiteInfoPage {
     await this.long.fill(long);
     await this.action.saveRecord();
 }
-
+@step("Update DE Smart Site")
   async updateDESmartSite() {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
@@ -198,6 +203,7 @@ export default class TIMSsiteInfoPage {
     await this.page.waitForTimeout(6000);
   }
 
+  @step("Update ES Smart Site")
   async updateESSmartSite() {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
@@ -209,7 +215,7 @@ export default class TIMSsiteInfoPage {
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
   }
-
+  @step("Update IE Smart Site")
   async updateIESmartSite() {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();

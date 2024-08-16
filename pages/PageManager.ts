@@ -1,6 +1,5 @@
 import { Page, expect } from "@playwright/test";
 //TIMS Imports
-import  Actions  from '../pages/Actions';
 import TIMSloginPage from "../pages/TIMS_loginPage";
 import TIMSApplicationPage from './TIMSApplicationPage.ts';
 import TIMSSitePage from './TIMSSitePage.ts';
@@ -18,7 +17,7 @@ export class PageManager{
 
     private readonly page: Page;
     private readonly loginObj: TIMSloginPage;
-    private readonly actionobj: Actions;
+    //private readonly actionobj: Actions;
     private readonly siteObj: TIMSSitePage;
     private readonly appObj: TIMSApplicationPage;
     private readonly projectObj: TIMSProjectPage;
@@ -31,7 +30,7 @@ export class PageManager{
     constructor(page: Page){
         this.page = page;
         this.loginObj = new TIMSloginPage(this.page);
-        this.actionobj = new Actions(this.page);
+        //this.actionobj = new Actions(this.page);
         this.siteObj = new TIMSSitePage(this.page);
         this.appObj = new TIMSApplicationPage(this.page);
         this.projectObj = new TIMSProjectPage(this.page);
@@ -43,9 +42,9 @@ export class PageManager{
 
     }
 
-    actionsTIMS(){
-        return this.actionobj;
-    }
+    // actionsTIMS(){
+    //     return this.actionobj;
+    // }
 
     appTIMS(){
         return this.appObj;

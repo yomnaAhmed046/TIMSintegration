@@ -1,5 +1,6 @@
 import { Page, Locator } from 'playwright';
-import Actions from './Actions';
+import Actions from '../utils/Actions';
+import {step} from '../utils/StepDecorator'
 
 export default class TIMSApplicationPage {
     readonly page: Page;
@@ -26,6 +27,12 @@ export default class TIMSApplicationPage {
     readonly searchBoxforApp: Locator;
     readonly appRecord: Locator;
 
+    //Locators for Submit for Approval
+    readonly submitForApprovalBtn: Locator;
+    readonly submitBtn: Locator;
+    readonly workflowTab: Locator;
+    readonly externalApproveBtn: Locator;
+    readonly internalApproveBtn: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -50,16 +57,23 @@ export default class TIMSApplicationPage {
         this.removalDate = page.getByLabel('*Removal date');
 
         // Locators for Submit the Application
-        this.searchBoxforApp = page.locator(`[name='Application-search-input']`);
-        this.appRecord = page.getByRole('link', { name: 'A153454' });
-
+        //this.searchBoxforApp = page.locator(`[name='Application-search-input']`);
+        //this.appRecord = page.getByRole('link', { name: 'A153454' });
+        this.submitForApprovalBtn = page.getByText('Submit for Approval');
+        this.submitBtn = page.getByRole('button', { name: 'Submit' });
+        this.workflowTab = page.locator('a').filter({ hasText: 'Workflow' });
+        this.externalApproveBtn = page.locator('a').filter({ hasText: /^Approve$/ })
+        this.internalApproveBtn = page.getByLabel('Approve Application').getByRole('button', { name: 'Approve' });
+        
     }
-
+    
+    @step("Open Appliaction Page")
     async openApplicationPage() {
         await this.applicationTab.click();
         this.actionObj.createNewObject();
     }
-
+    
+    @step("Select Application tybe to be created")
     async selectAppType(appType: string) {
         switch (appType) {
             case "modifyExistingSite":
@@ -85,13 +99,15 @@ export default class TIMSApplicationPage {
                 console.log("Unknown Application Selection.");
         }
     }
-
+    
+    @step("Create Modify Existing Site Application")
     async createModifyExistingSiteApp(customer: string, scopeOfWork: string) {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.actionObj.saveRecord();
     }
-
+    
+    @step("Create New BTS Application")
     async createNewBTSApp(customer: string, scopeOfWork: string, lat: string, long: string, radius: string) {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
@@ -103,13 +119,15 @@ export default class TIMSApplicationPage {
         await this.actionObj.saveRecord();
     }
 
+    @step("Create New Colocation Application")
     async createNewColocationSiteApp(customer: string, scopeOfWork: string) {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.actionObj.enterSiteConfig();
         await this.actionObj.saveRecord();
     }
-
+    
+    @step("Create Site Exit by Customer Application")
     async createSiteExitbyCustomerApp(customer: string, scopeOfWork: string, removalDate: string) {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
@@ -118,8 +136,25 @@ export default class TIMSApplicationPage {
         await this.actionObj.saveRecord();
     }
 
+    @step("Submit the Application for Approval")
+    async submitForApproval() {
+        await this.submitForApprovalBtn.click();
+        await this.page.pause();
+        await this.submitBtn.click();
+        await this.page.pause();
+    }
 
+    @step("Open the Workflow Tab")
+    async openWorkflowTab() {
+        //await this.actionObj.opemMoreTabs();
+        //await this.page.pause();
+        await this.workflowTab.click();
+        await this.page.pause();
+    }
 
-
-
+    @step("Approve the Application")
+    async approveApplication() {
+        await this.externalApproveBtn.click();
+        await this.internalApproveBtn.click();
+    }
 }

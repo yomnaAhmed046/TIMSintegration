@@ -1,5 +1,6 @@
 import { Page, Locator } from 'playwright';
-import Actions from './Actions';
+import Actions from '../utils/Actions';
+import {step} from '../utils/StepDecorator';
 
 export default class TIMSApplicationPage {
     readonly page: Page;
@@ -14,12 +15,12 @@ export default class TIMSApplicationPage {
         this.projectTemplate = page.getByPlaceholder('Search Project Templates...');
         this.projectTemplateValue = page.getByRole('option', { name: 'New BTS Site', exact: true });
     }
-
+    @step("Open Project Page")
     async openProjectPage() {
         await this.projectPage.click();
         this.actionObj.createNewObject();
     }
-
+    @step("User Create new Project")@step("User Create new Project")
     async createProject(tamplateProject: string) {
         await this.projectTemplate.fill(tamplateProject);
         await this.projectTemplate.click();

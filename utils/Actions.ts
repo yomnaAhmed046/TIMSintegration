@@ -33,7 +33,9 @@ export default class Actions {
         this.newButton = page.getByRole('button', { name: 'New' });
         this.saveButton = page.getByRole('button', { name: 'Save', exact: true });
         this.nextButton = page.getByRole('button', { name: 'Next' });
-        this.moreTabs = page.locator('ul').filter({ hasText: 'DetailsProjectsRental' }).getByRole('button');
+        //this.moreTabs = page.locator('ul').filter({ hasText: 'DetailsProjectsRental' }).getByRole('button');
+        //this.moreTabs = page.getByText('MoreTabs');
+        this.moreTabs = page.locator('forcegenerated-flexipageregion_application_record_page_main_application__c__view_js').getByText('MoreTabs');
         this.files = page.getByRole('menuitem', { name: 'Files' });
         this.upload = page.getByTitle('Upload');
         this.uploadFiles = page.getByText('Upload Files', { exact: true });
@@ -43,7 +45,10 @@ export default class Actions {
         this.appsSearchbox = page.getByPlaceholder('Search apps and items...');
         this.searchSite = page.getByPlaceholder('Search Sites...');
         this.customerAccount = page.getByLabel('*Customer Account');
-        this.customerValue = page.getByRole('option', { name: 'DE - Vodafone', exact: true });
+        //this.customerValue = page.getByRole('option', { name: 'Vodafone - DE', exact: true });
+        //this.customerValue = page.getByText('Vodafone - DE', { exact: true });
+        //this.customerValue = page.getByRole('option', { name: 'Vodafone - DE' });
+        this.customerValue= page.getByRole('option', { name: 'Vodafone - DE 67677674' });
         this.scopeOfWork = page.getByLabel('*Scope of Work');
         this.siteConfigRequired = page.getByRole('combobox', { name: 'Site Config Required (' })
         this.siteConfigRequiredValue = page.getByText('Standard', { exact: true });
@@ -105,6 +110,10 @@ export default class Actions {
         await this.siteConfigRequiredValue.click();
     }
 
+    async opemMoreTabs() {
+        await this.moreTabs.click();
+    }
+    
     async uploadFile() {
         await this.moreTabs.click();
         await this.files.click();
