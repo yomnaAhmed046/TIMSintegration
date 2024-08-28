@@ -6,27 +6,51 @@ import * as timsSiteData from '../../TestData/TIMS/siteData.json'
 
 let pm;
 
-test.describe("ES smart site integration", () => {
+export async function runCreateSmartESSiteTest({ page }) {
+    pm = new PageManager(page);
+
+    await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
+    await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
+    await pm.siteTIMS().createNewSite();
+    await pm.siteTIMS().createSmartESSite(timsSiteData.siteName, timsSiteData.EScompanyCode, timsSiteData.lat, timsSiteData.long);
+    const TIMSsiteCode = await pm.siteTIMS().getTIMSCode();
+    console.log("###### Site Code: " + TIMSsiteCode + " #########");
+    await pm.siteTIMS().updateESSmartSite();
+
+    // await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL);
+    // await pm.loginCommander().login(CommanderLoginData.commanderUernameTxt, CommanderLoginData.commanderPasswordTxt);
+    // await pm.quickAccessCommander().openPortal();
+    // await pm.homePageCommander().clickEntityMNG();
+    // await pm.entityMNGCommander().searchForSmartSite(TIMSsiteCode);
+
+    return TIMSsiteCode;
+}
+
+ test.describe("ES smart site integration", () => {
     test.beforeEach(async ({ page }) => {
         pm = new PageManager(page);
  
     });
 
     test('create smart ES site in TIMS', async ({ page }) => {
-        //Create smart site in TIMS
-        await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
-        await pm.siteTIMS().createNewSite();
-        await pm.siteTIMS().createSmartESSite(timsSiteData.siteName, timsSiteData.EScompanyCode, timsSiteData.lat, timsSiteData.long);
-        const TIMSsiteCode = await pm.siteTIMS().getTIMSCode();
-        console.log("###### Site Code: " + TIMSsiteCode + " #########")
-        await pm.siteTIMS().updateESSmartSite();
+        await runCreateSmartESSiteTest({ page });
+    });
 
-        //Check for smart site in Commander
-        await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL);
-        await pm.loginCommander().login(CommanderLoginData.commanderUernameTxt, CommanderLoginData.commanderPasswordTxt);
-        await pm.quickAccessCommander().openPortal();
-        await pm.homePageCommander().clickEntityMNG();
-        await pm.entityMNGCommander().searchForSmartSite(TIMSsiteCode);
-    })
+    // test('create smart ES site in TIMS', async ({ page }) => {
+    //     // //Create smart site in TIMS
+    //     // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
+    //     // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
+    //     // await pm.siteTIMS().createNewSite();
+    //     // await pm.siteTIMS().createSmartESSite(timsSiteData.siteName, timsSiteData.EScompanyCode, timsSiteData.lat, timsSiteData.long);
+    //     // const TIMSsiteCode = await pm.siteTIMS().getTIMSCode();
+    //     // console.log("###### Site Code: " + TIMSsiteCode + " #########")
+    //     // await pm.siteTIMS().updateESSmartSite();
+
+    //     // //Check for smart site in Commander
+    //     // await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL);
+    //     // await pm.loginCommander().login(CommanderLoginData.commanderUernameTxt, CommanderLoginData.commanderPasswordTxt);
+    //     // await pm.quickAccessCommander().openPortal();
+    //     // await pm.homePageCommander().clickEntityMNG();
+    //     // await pm.entityMNGCommander().searchForSmartSite(TIMSsiteCode);
+    // })
  })
