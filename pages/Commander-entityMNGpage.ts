@@ -23,7 +23,7 @@ export default class CommanderEntityMNGPage {
 
         if (await this.searchResult.isVisible()) {
             console.log("Found Smart Site");
-            await expect(this.searchResult).toBeVisible({ timeout: 20000 });
+            await expect(this.searchResult).toBeVisible({ timeout: 40000 });
         } else {
             while (!(await this.searchResult.isVisible())) {
                 await this.searchBtn.click();

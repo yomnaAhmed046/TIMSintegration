@@ -3,6 +3,8 @@
     "DEcompanyCode": "DE91",
     "EScompanyCode": "ES91",
     "IEcompanyCode": "IE91",
+    "HUcompanyCode": "HU91",
+    "PTcompanyCode":"PT91",
     "lat": "1.5",
     "long": "2.5",
     "territory": "New Test",
