@@ -11,6 +11,8 @@ import CommanderQuickAccessPage from '../pages/Commander_QuickAccessPage';
 import CommanderHomePage from '../pages/Commander_homePage';
 import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
 
+import V5LandingPage from '../pages/V5-landingPage.ts'
+
 
 export class PageManager{
 
@@ -26,6 +28,8 @@ export class PageManager{
     private readonly commanderHomeObj: CommanderHomePage;
     private readonly commanderEntityObj: CommanderEntityMNGPage;
 
+    private readonly v5LandingObj: V5LandingPage;
+
     constructor(page: Page){
         this.page = page;
         this.loginObj = new TIMSloginPage(this.page);
@@ -38,6 +42,8 @@ export class PageManager{
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
         this.commanderHomeObj = new CommanderHomePage(this.page);
         this.commanderEntityObj = new CommanderEntityMNGPage(this.page);
+
+        this.v5LandingObj = new V5LandingPage(this.page);
 
     }
 
@@ -75,5 +81,9 @@ export class PageManager{
 
     entityMNGCommander(){
         return this.commanderEntityObj;
+    }
+
+    v5LandingPage(){
+        return this.v5LandingObj;
     }
 }

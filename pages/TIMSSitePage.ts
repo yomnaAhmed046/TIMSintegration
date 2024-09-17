@@ -139,7 +139,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Create Smart ES site in TIMS")
-  async createSmartESSite(siteName: string, EScompanyCode: string, lat: string, long: string) :Promise<void>{
+  async createSmartESSite(siteName: string, /*EScompanyCode:string,*/ lat: string, long: string) :Promise<void>{
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.ESmarketOption.click();
@@ -149,7 +149,7 @@ export default class TIMSsiteInfoPage {
     await this.ESCountry.click();
     await this.Region.click();
     await this.ESRegion.click();
-    await this.action.enterESCompanyCode(EScompanyCode);
+    // await this.action.enterESCompanyCode(EScompanyCode);
     await this.lat.fill(lat);
     await this.long.fill(long);
     await this.saveBtn.click();
