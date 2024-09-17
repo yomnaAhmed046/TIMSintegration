@@ -1,5 +1,5 @@
 import { Page, Locator } from 'playwright';
-import * as XLSX from 'xlsx';
+//import * as XLSX from 'xlsx';
 import * as fs from 'fs';
 
 export default class Actions {
@@ -27,6 +27,8 @@ export default class Actions {
     readonly DECompanyCodeOption: Locator;
     readonly EScompanyCodeOption: Locator
     readonly IEcompanyCodeOption: Locator;
+    readonly HUcompanyCodeOption: Locator;
+    readonly PTcompanyCodeOption: Locator;
     readonly TIMSCode: Locator;
 
     constructor(page: Page) {
@@ -53,6 +55,11 @@ export default class Actions {
         this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
         this.EScompanyCodeOption = page.getByRole('option', { name: 'ES91 ES91' }).locator('span').nth(2);
         this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
+        this.HUcompanyCodeOption = page.getByRole('option', { name: 'HU91 HU91' }).locator('span').nth(2);
+        this.PTcompanyCodeOption = page.getByRole('option', { name: 'PT91 PT91' }).locator('span').nth(2);
+
+
+
     }
 
 
@@ -81,6 +88,17 @@ export default class Actions {
         await this.companyCodeTXT.fill(IEcompanyCode);
         await this.IEcompanyCodeOption.click();
     }
+    async enterHUCompanyCode(HUcompanyCode: string) {
+        await this.companyCodeTXT.click();
+        await this.companyCodeTXT.fill(HUcompanyCode);
+        await this.HUcompanyCodeOption.click();
+    }
+    async enterPTCompanyCode(PTcompanyCode: string) {
+        await this.companyCodeTXT.click();
+        await this.companyCodeTXT.fill(PTcompanyCode);
+        await this.PTcompanyCodeOption.click();
+    }
+
 
     async clickOnElement(element: Locator) {
         await element.click();
