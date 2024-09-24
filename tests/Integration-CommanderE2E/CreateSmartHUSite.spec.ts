@@ -12,7 +12,7 @@ test.describe("HU smart site integration", () => {
         pm = new PageManager(page);
     });
     
-    test('create smart HU site in TIMS', async ({ page }) => {
+    test('@smoke create smart HU site in TIMS', async ({ page }) => {
         //Create HU smart site in TIMS
         await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
         await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);

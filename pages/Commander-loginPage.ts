@@ -1,4 +1,5 @@
 import { Page, Locator } from 'playwright';
+import { expect } from '@playwright/test';
 import { step } from '../utils/StepDecorator';
 
 
@@ -31,7 +32,12 @@ export default class CommanderLoginPage {
     async login(commanderUernameTxt, commanderPasswordTxt): Promise <void> {
         await this.commanderUernameTxt.fill(commanderUernameTxt);
         await this.commanderPasswordTxt.fill(commanderPasswordTxt);
-        await this.showPass.click()
+        await this.commanderUernameTxt.waitFor({ state: 'attached' });
+        await this.commanderPasswordTxt.waitFor({ state: 'attached' });
+
+        await expect(this.commanderUernameTxt).toHaveValue(commanderUernameTxt);
+        await expect(this.commanderPasswordTxt).toHaveValue(commanderPasswordTxt);
+        // await this.showPass.click()
         await this.commanderLoginBtn.click();
     }
 
