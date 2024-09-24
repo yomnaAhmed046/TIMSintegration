@@ -7,11 +7,24 @@ export default class V5LandingPage {
     readonly page: Page;
     readonly timsSearchBox: Locator;
     readonly searchBtn: Locator;
+    readonly ellipsisMenu:Locator;
+    readonly approveSite:Locator;
+    readonly activeState: Locator;
+    readonly openSite: Locator;
+    readonly staticInformationTab: Locator;
+    readonly siteTab: Locator;
+
 
     constructor(page: Page) {
         this.page = page
         this.timsSearchBox = page.getByPlaceholder('Enter TIMS code');
-        this.searchBtn = page.getByRole('button', { name: 'Search' })
+        this.searchBtn = page.getByRole('button', { name: 'Search' });
+        this.ellipsisMenu = page.locator('.h-max > .p-4 > div > div')
+        this.approveSite = page.locator("xpath=//*[contains(text(),'Approve for Rollout')]");
+        this.activeState = page.getByText('Active').nth(2);
+        this.openSite =  page.locator('.px-4 > .w-full > .px-4');
+        this.staticInformationTab = page.getByRole('button', { name: 'Static Information' });
+        this.siteTab = page.getByText('Site', { exact: true });
     }
 
     @step("Search for the smart site in V5 site configurator")
@@ -43,5 +56,12 @@ export default class V5LandingPage {
         //     }
         //     console.log("Found Smart Site " + timsSiteCode + " in Commander V5");
         // }
+        await SiteCode.click();
+        await this.ellipsisMenu.click();
+        await this.approveSite.click();
+        await expect(this.activeState).toHaveText('Active', {timeout:30000});
+        await this.openSite.click();
+        await this.staticInformationTab.click();
+        await this.siteTab.click();
     }
 }
