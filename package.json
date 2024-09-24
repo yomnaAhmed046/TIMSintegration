@@ -12,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.45.3",
+    "@playwright/test": "^1.47.1",
     "@types/node": "^20.11.19",
-    "@types/xlsx": "^0.0.35"
+    "@types/xlsx": "^0.0.35",
+    "allure-commandline": "^2.30.0",
+    "allure-playwright": "^3.0.0"
   },
   "dependencies": {
     "exceljs": "^4.4.0",

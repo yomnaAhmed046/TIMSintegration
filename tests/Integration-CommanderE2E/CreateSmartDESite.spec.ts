@@ -12,7 +12,7 @@ test.describe("DE smart site integration", () => {
         pm = new PageManager(page);
     });
     
-    test('create smart DE site in TIMS', async ({ page }) => {
+    test('@smoke create smart DE site in TIMS', async ({ page }) => {
         //Create smart site in TIMS
         await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
         await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);

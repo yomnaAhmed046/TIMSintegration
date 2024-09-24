@@ -168,7 +168,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Create Smart ES site in TIMS")
-  async createSmartESSite(siteName: string, EScompanyCode: string, lat: string, long: string) :Promise<void>{
+  async createSmartESSite(siteName: string, EScompanyCode:string, lat: string, long: string) :Promise<void>{
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.ESmarketOption.click();
@@ -274,7 +274,7 @@ export default class TIMSsiteInfoPage {
   async updateESSmartSite() {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
-    await this.siteStatusOption.click();
+    await this.siteStatusOption.click({ timeout: 900 });
     await this.criticalSiteList.click();
     await this.criticalSiteYes.click();
     await this.windZoneList.click();

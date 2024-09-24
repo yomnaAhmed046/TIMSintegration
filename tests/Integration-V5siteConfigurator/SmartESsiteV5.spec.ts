@@ -6,27 +6,27 @@ import * as timsSiteData from '../../TestData/TIMS/siteData.json'
 
 let pm;
 
-test.describe("HU smart site integration", () => {
+test.describe("ES smart site integration with V5", async () => {
 
     test.beforeEach(async ({ page }) => {
         pm = new PageManager(page);
-    });
-    
-    test('@smoke create smart HU site in TIMS', async ({ page }) => {
-        //Create HU smart site in TIMS
+    })
+
+    test("Create smart site in TIMS and search in V5", async ({ page }) => {
+        //Create smart site in TIMS
         await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
         await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         await pm.siteTIMS().createNewSite();
-        await pm.siteTIMS().createSmartHUSite(timsSiteData.siteName, timsSiteData.HUcompanyCode, timsSiteData.lat, timsSiteData.long);
+        await pm.siteTIMS().createSmartESSite(timsSiteData.siteName,  /*timsSiteData.EScompanyCode,*/timsSiteData.lat, timsSiteData.long);
         const TIMSsiteCodeText = await pm.siteTIMS().getTIMSCode();
-        console.log("###### Site Code: " + TIMSsiteCodeText);
-        await pm.siteTIMS().updateHUSmartSite(timsSiteData.territory);
-        
-        //Check for smart site in Commander
-        await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL); 
+        console.log("###### Site Code in TIMS: " + TIMSsiteCodeText);
+        // await pm.siteTIMS().updateESSmartSite();
+
+        //Check for smart site in V5
+        await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL);
         await pm.loginCommander().login(await CommanderLoginData.commanderUernameTxt, await CommanderLoginData.commanderPasswordTxt);
-        await pm.quickAccessCommander().openPortal();
-        await pm.homePageCommander().clickEntityMNG();
-        await pm.entityMNGCommander().searchForSmartSite(TIMSsiteCodeText);
+        await pm.quickAccessCommander().openSiteConfigurator();
+        await pm.v5LandingPage().searchForSmartSite(TIMSsiteCodeText);
+
     })
 })

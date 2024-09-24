@@ -12,7 +12,7 @@ test.describe("ES smart site integration", () => {
  
     });
 
-    test('create smart ES site in TIMS', async ({ page }) => {
+    test('@smoke create smart ES site in TIMS', async ({ page }) => {
         //Create smart site in TIMS
         await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
         await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
