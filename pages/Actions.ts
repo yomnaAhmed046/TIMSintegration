@@ -1,5 +1,5 @@
 import { Page, Locator } from 'playwright';
-//import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx';
 import * as fs from 'fs';
 
 export default class Actions {

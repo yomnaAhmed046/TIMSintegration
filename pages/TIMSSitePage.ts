@@ -106,7 +106,7 @@ export default class TIMSsiteInfoPage {
    // this.DEwindZoneOption = page.locator('span').filter({ hasText: '1' }).nth(1);
    this.DEwindZoneComboBox= page.locator('xpath=//button[@name="Wind_Zone__c"]');
    this.DEwindZoneOption = page.getByTitle('0', { exact: true });
-    this.territoryField = page.locator('lightning-output-field').filter({ hasText: 'Territory' }).locator('lightning-formatted-lookup');
+    this.territoryField = page.locator('lightning-output-field').filter({ hasText: 'Territory (TDb)Territory (TDb' }).locator('lightning-formatted-lookup');
     this.territorySearch = page.getByPlaceholder('Search Territories...');
     this.territoryOption = page.locator('span').filter({ hasText: 'New Test' }).nth(4);
 
@@ -257,7 +257,6 @@ export default class TIMSsiteInfoPage {
     console.log("wind list 2 selected");
     await this.DEwindZoneOption.click();
     console.log("wind option selected");
-    await this.TIMSsiteCode.click();
     await this.saveBtn_Details.click();
     console.log("save btn 1 done");
     await this.territoryField.dblclick();
