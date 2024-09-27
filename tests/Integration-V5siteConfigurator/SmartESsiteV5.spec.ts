@@ -22,6 +22,9 @@ test.describe("ES smart site integration with V5", async () => {
         console.log("###### Site Code in TIMS: " + TIMSsiteCodeText);
         await pm.siteTIMS().updateESSmartSite();
 
+        const siteStatus = await pm.siteTIMS().getSiteStatusValue();
+        console.log("XXXXXX Site Status in TIMS: " + siteStatus);
+
         //Check for smart site in V5
         await pm.loginCommander().navigateToURL(CommanderLoginData.commanderURL);
         await pm.loginCommander().login(await CommanderLoginData.commanderUernameTxt, await CommanderLoginData.commanderPasswordTxt);

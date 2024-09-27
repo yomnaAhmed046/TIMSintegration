@@ -26,6 +26,7 @@ export default class TIMSsiteInfoPage {
   readonly siteStatusEditBtn: Locator;
   readonly siteStatusList: Locator;
   readonly siteStatusOption: Locator;
+  readonly submittedSiteStatus: Locator;
   readonly criticalSiteList: Locator;
   readonly criticalSiteYes: Locator;
   readonly windZoneList: Locator;
@@ -77,9 +78,10 @@ export default class TIMSsiteInfoPage {
     this.action = new Actions(page);
     this.sitesTab = page.getByRole('button', { name: 'Sites List' });
     this.newSiteButton = page.getByRole('menuitem', { name: 'New Site' });
-   this.siteStatusEditBtn = page.locator('div:nth-child(5) > .slds-grid > button').first();
+    this.siteStatusEditBtn = page.locator('div:nth-child(5) > .slds-grid > button').first();
     this.siteStatusList = page.locator('[name="sitetracker__Site_Status__c"]');
     this.siteStatusOption = page.locator('span').filter({ hasText: 'Pipeline' }).first();
+    this.submittedSiteStatus = page.locator('lightning-output-field').filter({ hasText: 'Site Status (TDb)Site Status' }).locator('lightning-formatted-text');
     this.criticalSiteList = page.locator('[name="Critical_Site__c"]');
     this.criticalSiteYes = page.locator('span').filter({ hasText: 'Yes' }).first();
     //this.windZoneList = page.getByText('*Wind Zone', { exact: true });
@@ -142,6 +144,12 @@ export default class TIMSsiteInfoPage {
   async getTIMSCode(): Promise<string> {
     const timsCode = await this.TIMSsiteCode.innerText();
     return timsCode;
+  }
+
+  @step("Store submitted site status value")
+  async getSiteStatusValue(): Promise<string> {
+    const siteStatusValue = await this.submittedSiteStatus.innerText();
+    return siteStatusValue;
   }
 
   @step("Create new site")
@@ -328,7 +336,7 @@ export default class TIMSsiteInfoPage {
     console.log("critical site done");
     await this.windZoneList.click();
     await this.PTwindZoneOption.click();
-    console.log("critical site done");
+    console.log("wind zone done");
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
   }
