@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
-import { Page, Locator } from 'playwright';
-import  Actions from '../utils/Actions';
-import {step} from '../utils/StepDecorator';
+import { Page, Locator, FrameLocator } from 'playwright';
+import Actions from '../utils/Actions';
+import { step } from '../utils/StepDecorator';
 
 export default class TIMSsiteInfoPage {
   readonly page: Page;
@@ -21,7 +21,12 @@ export default class TIMSsiteInfoPage {
   readonly saveBtn: Locator;
   readonly Region: Locator;
   readonly Country: Locator;
-  
+
+  //Locators for Leases
+  readonly select: Locator;
+  readonly frame: FrameLocator;
+  readonly createNewButton: Locator;
+
   //Update site elements
   readonly siteStatusEditBtn: Locator;
   readonly siteStatusList: Locator;
@@ -37,13 +42,16 @@ export default class TIMSsiteInfoPage {
   readonly siteRecord: Locator;
   readonly createnewAppButton: Locator;
   readonly projectTab: Locator;
-  
+  readonly candidateTab: Locator;
+  readonly leaseTab: Locator;
+
   //DE 
   readonly DEmarketOption: Locator;
   readonly DEwindZoneOption: Locator;
   readonly territoryField: Locator;
   readonly territorySearch: Locator;
   readonly territoryOption: Locator;
+  readonly timsSiteCodeRecord: string;
 
   // ES
   readonly ESmarketOption: Locator;
@@ -71,11 +79,20 @@ export default class TIMSsiteInfoPage {
     this.windZoneList = page.getByText('*Wind Zone', { exact: true });
     this.saveBtn_Details = page.locator('form').filter({ hasText: 'VF Customer Sharing MarketVF' }).locator('button[name="update"]');
     this.saveBtn_Address = page.locator('form').filter({ hasText: 'AddressAddressCountryCountry' }).locator('button[name="update"]');
-    this.siteRecord = page.getByRole('link', { name: 'DE-TIMS-100104' });
-    this.searchBoxforTIMSCode = page.locator(`[name='Site-search-input']`);
+    //need to pass it as variable to be dynamic record
+    //this.siteRecord = page.getByRole('link', { name: `${this.timsSiteCodeRecord}`});
+    //this.searchBoxforTIMSCode = page.locator(`[name='Site-search-input']`);
+    this.searchBoxforTIMSCode = page.getByPlaceholder('Search this list...');
     this.TIMSsiteCode = page.locator('lightning-formatted-text').filter({ hasText: '-TIMS-' });
     this.createnewAppButton = page.locator('records-highlights-details-item').filter({ hasText: 'Start New ApplicationCreate' }).getByRole('link');
     this.projectTab = page.getByRole('tab', { name: 'Projects' });
+    this.candidateTab = page.getByRole('tab', { name: 'Candidates' });
+    this.leaseTab = page.getByRole('tab', { name: 'Leases' });
+
+    //Locators for Leases
+    this.frame = page.frameLocator('//iframe[contains(@name,"vfFrameId")]').nth(2);
+    this.select = this.frame.getByLabel('*Lease Type');
+    this.createNewButton = this.frame.getByRole('button', { name: 'Create New' });
     //------------------------------------------------
     this.siteNameTxt = page.locator('[name="Site_Name__c"]');
     this.marketList = page.getByRole('combobox', { name: 'Market' });
@@ -116,20 +133,21 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Create new site")
-  async createNewSite():Promise<void> {
+  async createNewSite(): Promise<void> {
     await this.sitesTab.click();
     await this.newSiteButton.click();
   }
-  
+
   @step("Open Site Page and Select Record")
-  async openSite(timsSiteCode: string) {
-    await this.searchBoxforTIMSCode.fill(timsSiteCode);
+  async openSite(timsSiteCodeRecord: string): Promise<void> {
+    await this.searchBoxforTIMSCode.fill(timsSiteCodeRecord);
     await this.searchBoxforTIMSCode.press('Enter');
-    await this.siteRecord.click();
+    await this.page.getByRole('link', { name: timsSiteCodeRecord }).click();
+    //this.siteRecord.click();
   }
 
   @step("Create Smart DE site in TIMS")
-  async createSmartDESite(siteName: string, DECompanyCode: string, lat: string, long: string) :Promise<void>{
+  async createSmartDESite(siteName: string, DECompanyCode: string, lat: string, long: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.smartSiteList.click();
     await this.YesSmartSiteOption.click();
@@ -140,7 +158,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Create Smart ES site in TIMS")
-  async createSmartESSite(siteName: string, EScompanyCode: string, lat: string, long: string) :Promise<void>{
+  async createSmartESSite(siteName: string, EScompanyCode: string, lat: string, long: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.ESmarketOption.click();
@@ -157,7 +175,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Create Smart IE site in TIMS")
-  async createSmartIESite(siteName: string, IEcompanyCode: string, lat: string, long: string, county: string):Promise<void> {
+  async createSmartIESite(siteName: string, IEcompanyCode: string, lat: string, long: string, county: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.IEmarketOption.click();
@@ -174,16 +192,16 @@ export default class TIMSsiteInfoPage {
     await this.saveBtn.click();
   }
   @step("Create DE Normal Site")
-  async createNormalSite(siteName: string, companyCode: string, lat: string, long: string) {
+  async createNormalSite(siteName: string, companyCode: string, lat: string, long: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.action.enterDECompanyCode(companyCode);
     await this.lat.fill(lat);
     await this.long.fill(long);
     await this.action.saveRecord();
-}
+  }
 
   @step("Update Smart DE site in TIMS")
-  async updateDESmartSite(territory: string) :Promise<void> {
+  async updateDESmartSite(territory: string): Promise<void> {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
     await this.siteStatusOption.click();
@@ -203,7 +221,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Update Smart ES site in TIMS")
-  async updateESSmartSite() {
+  async updateESSmartSite(): Promise<void> {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
     await this.siteStatusOption.click();
@@ -216,7 +234,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Update Smart IE site in TIMS")
-  async updateIESmartSite() {
+  async updateIESmartSite(): Promise<void> {
     await this.siteStatusEditBtn.dblclick();
     await this.siteStatusList.click();
     await this.siteStatusOption.click({ timeout: 900 });
@@ -227,4 +245,35 @@ export default class TIMSsiteInfoPage {
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
   }
+
+  @step("Create New LeaseIn from Site")
+  async createNewLeaseInfromSite(): Promise<void> {
+    await this.select.selectOption('Lease_In');
+    await this.createNewButton.click();
+  }
+
+  @step("Create New Lease Out Anchor Tenant from Site")
+  async createNewLeaseOutAnchorTenantFromSite(): Promise<void> {
+    await this.select.selectOption('Lease-Out Anchor Tenant');
+    await this.createNewButton.click();
+  }
+
+  @step("Create New Lease Out Third Party Tenant from Site")
+  async createNewLeaseOutThirdPartyTenantFromSite(): Promise<void> {
+    await this.select.selectOption('Lease-Out 3rd Party Tenant');
+    await this.createNewButton.click();
+  }
+
+  @step("Create New GLBO from Site")
+  async createNewGLBOFromSite(): Promise<void> {
+    await this.select.selectOption('GLBO');
+    await this.createNewButton.click();
+  }
+
+  @step("Upload File from Site")
+  async uploadFilefromSite(timsSiteCodeInput: string): Promise<void> {
+    await this.openSite(timsSiteCodeInput);
+    await this.action.uploadFile();
+  }
+
 }

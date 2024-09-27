@@ -10,7 +10,7 @@ dotenv.config(); // Load environment variables from .env file
 let pm;
 let action;
 
-test.describe("DE Create new Projects", () => {
+test.describe("DE Create new Candidate", () => {
     test.beforeEach(async ({ page, baseURL }) => {
         pm = new PageManager(page);
         action = new Action(page);
@@ -27,13 +27,14 @@ test.describe("DE Create new Projects", () => {
         await pm.loginTIMS().login(username, password);
     });
 
-    test('@Regression-The User can create new Project successfully', async ({ page }) => {
-        await pm.projectTIMS().openProjectPage();
-        await pm.projectTIMS().createProject(timsProjectData.projectTamplate);
+    test('@Regression-The User can create new Candidate successfully', async ({ page }) => {
+        await pm.cadidateObj.openCandidatePage();
+        await pm.cadidateObj.openNewCandidate();
+        await pm.cadidateObj.createCandidate();
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 90000 });
-        const projectID = await action.getCodeValue();
-        console.log("###### Project ID: " + projectID);
-        await action.addRecordtoExcel(projectID, 2);
+        const candidateID = await action.getCodeValue();
+        console.log("###### Candidate ID: " + candidateID);
+        await action.addRecordtoExcel(candidateID, 5);
     })
 
 })

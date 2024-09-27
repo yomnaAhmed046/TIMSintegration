@@ -3,15 +3,18 @@ import { Page, expect } from "@playwright/test";
 import TIMSloginPage from "../pages/TIMS_loginPage";
 import TIMSApplicationPage from './TIMSApplicationPage.ts';
 import TIMSSitePage from './TIMSSitePage.ts';
-import TIMSProjectPage from '../pages/TIMSProjectPage.ts'
+import TIMSProjectPage from '../pages/TIMSProjectPage.ts';
+import TIMSRequestPage from '../pages/TIMSRequestPage.ts';
+import TIMSLeasePage from '../pages/TIMSLeasePage.ts';
+import TIMSCandidatePage  from "../pages/TIMSCandidatePage.ts";
+
 //Integration Imports
 import CommanderLoginPage from '../pages/Commander-loginPage';
 import CommanderQuickAccessPage from '../pages/Commander_QuickAccessPage';
 import CommanderHomePage from '../pages/Commander_homePage';
 import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
 
-
-export class PageManager{
+export class PageManager {
 
     private readonly page: Page;
     private readonly loginObj: TIMSloginPage;
@@ -19,60 +22,77 @@ export class PageManager{
     private readonly siteObj: TIMSSitePage;
     private readonly appObj: TIMSApplicationPage;
     private readonly projectObj: TIMSProjectPage;
+    private readonly requestObj: TIMSRequestPage;
+    private readonly leaseObj: TIMSLeasePage;
+    private readonly cadidateObj: TIMSCandidatePage;
 
     private readonly commanderLoginObj: CommanderLoginPage;
     private readonly commaderQuickAccObj: CommanderQuickAccessPage;
     private readonly commanderHomeObj: CommanderHomePage;
     private readonly commanderEntityObj: CommanderEntityMNGPage;
 
-    constructor(page: Page){
+    constructor(page: Page) {
         this.page = page;
         this.loginObj = new TIMSloginPage(this.page);
         //this.actionobj = new Actions(this.page);
         this.siteObj = new TIMSSitePage(this.page);
         this.appObj = new TIMSApplicationPage(this.page);
         this.projectObj = new TIMSProjectPage(this.page);
+        this.requestObj = new TIMSRequestPage(this.page);
+        this.leaseObj = new TIMSLeasePage(this.page);
+        this.cadidateObj = new TIMSCandidatePage(this.page);
 
         this.commanderLoginObj = new CommanderLoginPage(this.page);
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
         this.commanderHomeObj = new CommanderHomePage(this.page);
         this.commanderEntityObj = new CommanderEntityMNGPage(this.page);
-
     }
 
     // actionsTIMS(){
     //     return this.actionobj;
     // }
 
-    appTIMS(){
+    appTIMS() {
         return this.appObj;
     }
 
-    loginTIMS(){
+    loginTIMS() {
         return this.loginObj;
     }
 
-    siteTIMS(){
+    siteTIMS() {
         return this.siteObj;
     }
 
-    projectTIMS(){
+    projectTIMS() {
         return this.projectObj;
-        }
+    }
 
-    loginCommander(){
+    requestTIMS() {
+        return this.requestObj;
+    }
+
+    leaseTIMS() {
+        return this.leaseObj;
+    }
+
+    candidateTIMS() {
+        return this.cadidateObj;
+    }
+
+    loginCommander() {
         return this.commanderLoginObj;
     }
-    
-    quickAccessCommander(){
+
+    quickAccessCommander() {
         return this.commaderQuickAccObj;
     }
 
-    homePageCommander(){
+    homePageCommander() {
         return this.commanderHomeObj;
     }
 
-    entityMNGCommander(){
+    entityMNGCommander() {
         return this.commanderEntityObj;
     }
 }
