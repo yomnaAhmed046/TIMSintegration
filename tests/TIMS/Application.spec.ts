@@ -15,6 +15,7 @@ test.describe.serial("Create Modify Existing Site Applications then Submit and A
 
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
+        await page.setViewportSize({ width: 1920, height: 1080 });
         pm = new PageManager(page);
         action = new Action(page);
 
@@ -64,6 +65,7 @@ test.describe.serial("Create Modify Existing Site Applications then Submit and A
 test.describe.serial("Creat New BTS Application then Submit and Approve Successfully", () => {
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
+        await page.setViewportSize({ width: 1920, height: 1080 });
         pm = new PageManager(page);
         action = new Action(page);
     })
@@ -102,9 +104,10 @@ test.describe.serial("Creat New BTS Application then Submit and Approve Successf
 test.describe.serial("Creat the New Co-location Site Application then Submit and Approve Successfully", () => {
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
+        await page.setViewportSize({ width: 1920, height: 1080 });
         pm = new PageManager(page);
         action = new Action(page);
-        page.context().clearCookies()
+        //page.context().clearCookies()
     })
 
     test("@Regression-01.Login to TIMS successfully", async ({ baseURL }) => {
@@ -118,7 +121,7 @@ test.describe.serial("Creat the New Co-location Site Application then Submit and
         }
         await pm.loginTIMS().navigateToURL(`${baseURL}`);
         await pm.loginTIMS().login(username, password);
-        page.context().clearCookies();
+        //page.context().clearCookies();
     });
 
     test('@Regression-02.The User can create New Co-location Site Application successfully', async ({ }) => {
@@ -132,24 +135,25 @@ test.describe.serial("Creat the New Co-location Site Application then Submit and
         const appID = await action.getCodeValue();
         console.log("the New Co-location Site Application ID: " + appID);
         await action.addRecordtoExcel(appID, 1);
-        page.context().clearCookies();
+        //page.context().clearCookies();
     })
 
     test('@Regression-03.The User Submit the New Co-location Site Application for Approval successfully', async ({ }) => {
         await pm.appTIMS().submitForApproval();
-        page.context().clearCookies();
+        //page.context().clearCookies();
     })
 
     test('@Regression-04.The User Approve the the New Co-location Site Application successfully', async ({ }) => {
         await pm.appTIMS().openWorkflowTab();
         await pm.appTIMS().approveApplication();
-        page.context().clearCookies();
+        //page.context().clearCookies();
     })
 })
 
 test.describe.serial("Creat Site Exit by Customer Application then Submit and Approve Successfully", () => {
     test.beforeAll(async ({ browser }) => {
         page = await browser.newPage();
+        await page.setViewportSize({ width: 1920, height: 1080 });
         pm = new PageManager(page);
         action = new Action(page);
     })

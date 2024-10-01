@@ -9,7 +9,7 @@ dotenv.config(); // Load environment variables from .env file
 let pm;
 let action;
 
-test.describe("DE Create new Projects", () => {
+test.describe("DE Create new Leases", () => {
      test.beforeEach(async ({ page, baseURL }) => {
           pm = new PageManager(page);
           action = new Action(page);

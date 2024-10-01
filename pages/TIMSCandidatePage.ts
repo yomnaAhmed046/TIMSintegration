@@ -22,7 +22,8 @@ export default class TIMSCandidatePage {
         this.otherOperatorsOption = page.getByRole('option', { name: 'No', exact: true }).locator('span').nth(1);
         this.country = page.getByRole('combobox', { name: 'Country' });
         this.countryOption = page.getByRole('option', { name: 'DE' }).locator('span').nth(1);
-        this.streetAddres = page.getByLabel('*Street Address', { exact: true })
+        this.streetAddres = page.getByLabel('*Street Address', { exact: true });
+        //this.streetAddres = page.getByLabel('Street Address', { exact: true });
     }
 
     async openCandidatePage() {

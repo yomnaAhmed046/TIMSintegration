@@ -163,7 +163,7 @@ export default class TIMSRequestPage {
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
         await this.actionObj.enterScopeOfWork(scopeOfWork);
-        await this.page.pause();
+        //await this.page.pause();
         await this.enterSiteDecommissioningData();
         await this.actionObj.saveRecord();
         //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};

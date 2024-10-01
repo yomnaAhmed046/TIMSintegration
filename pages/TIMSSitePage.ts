@@ -44,6 +44,7 @@ export default class TIMSsiteInfoPage {
   readonly projectTab: Locator;
   readonly candidateTab: Locator;
   readonly leaseTab: Locator;
+  readonly requestTab: Locator;
 
   //DE 
   readonly DEmarketOption: Locator;
@@ -103,6 +104,7 @@ export default class TIMSsiteInfoPage {
     this.projectTab = page.getByRole('tab', { name: 'Projects' });
     this.candidateTab = page.getByRole('tab', { name: 'Candidates' });
     this.leaseTab = page.getByRole('tab', { name: 'Leases' });
+    this.requestTab = page.getByRole('tab', { name: 'Requests' });
 
     //Locators for Leases
     this.frame = page.frameLocator('//iframe[contains(@name,"vfFrameId")]').nth(2);

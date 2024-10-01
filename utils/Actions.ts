@@ -44,7 +44,8 @@ export default class Actions {
         //this.moreTabs = page.getByText('MoreTabs');
         //this.moreTabs = page.locator('forcegenerated-flexipageregion_application_record_page_main_application__c__view_js').getByText('MoreTabs');
         this.files = page.getByRole('menuitem', { name: 'Files' });
-        this.upload = page.getByTitle('Upload');
+        //this.upload = page.getByTitle('Upload');
+        this.upload = page.getByText('Upload');
         this.uploadFiles = page.getByText('Upload Files', { exact: true });
         this.done = page.getByText('Done');
         this.done2 = page.getByRole('button', { name: 'Done' });
@@ -66,7 +67,8 @@ export default class Actions {
         this.siteConfigRequiredValue = page.getByText('Standard', { exact: true });
         //this.siteConfigRequiredValue = page.getByRole('option', { name: 'Standard', exact: true }).locator('span').nth(1)
         this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
-        this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
+        //this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
+        this.DECompanyCodeOption= page.getByText('DE91', { exact: true });
         this.EScompanyCodeOption = page.getByRole('option', { name: 'ES91 ES91' }).locator('span').nth(2);
         this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
         this.HUcompanyCodeOption = page.getByRole('option', { name: 'HU91 HU91' }).locator('span').nth(2);
@@ -130,12 +132,9 @@ export default class Actions {
 
     @step("search and Open the Object")
     async searchOpenObject(objectName: string):Promise<void>{
-        await this.appLuncher.click({ timeout: 90000 });
-        console.log("appluncher opened");
-        await this.appsSearchbox.fill(objectName,{ timeout: 90000 });
-        console.log("write candidate");
-        await this.page.getByRole('option', { name: `${objectName}`, exact: true }).click({ timeout: 90000 });
-        console.log("click on candidate");
+        await this.appLuncher.click({ timeout: 150000 });
+        await this.appsSearchbox.fill(objectName,{ timeout: 150000 });
+        await this.page.getByRole('option', { name: `${objectName}`, exact: true }).click({ timeout: 150000 });
         //await expect(this.page.getByRole('button', { name: 'Sort by: Request ID' })).toBeVisible();
     }
 
