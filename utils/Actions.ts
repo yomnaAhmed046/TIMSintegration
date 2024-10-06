@@ -1,9 +1,12 @@
 import { Page, Locator } from 'playwright';
 import * as XLSX from 'xlsx';
 import * as fs from 'fs';
-import {step} from '../utils/StepDecorator'
+import { step } from '../utils/StepDecorator'
 import { expect } from 'playwright/test';
 import { TIMEOUT } from 'dns';
+
+let element;
+let element1;
 
 export default class Actions {
     readonly page: Page;
@@ -55,7 +58,7 @@ export default class Actions {
         this.searchSite = page.getByRole('combobox', { name: 'TIMS Site Code' })
         this.customerAccount = page.getByLabel('*Customer Account');
         this.customerValue = page.getByRole('option', { name: 'Vodafone - DE', exact: true });
-        
+
         //this.customerValue = page.getByText('Vodafone - DE', { exact: true });
         //this.customerValue = page.getByRole('option', { name: 'Vodafone - DE' });
         //this.customerValue = page.getByRole('option', { name: 'Vodafone - DE' });
@@ -66,7 +69,8 @@ export default class Actions {
         this.siteConfigRequiredValue = page.getByText('Standard', { exact: true });
         //this.siteConfigRequiredValue = page.getByRole('option', { name: 'Standard', exact: true }).locator('span').nth(1)
         this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
-        this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
+        //this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
+        this.DECompanyCodeOption = page.getByText('DE91', { exact: true });
         this.EScompanyCodeOption = page.getByRole('option', { name: 'ES91 ES91' }).locator('span').nth(2);
         this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
         this.HUcompanyCodeOption = page.getByRole('option', { name: 'HU91 HU91' }).locator('span').nth(2);
@@ -77,31 +81,31 @@ export default class Actions {
     }
 
     @step("Get the Created Code")
-    async getText(locator: Locator, text: string) :Promise<string>{
+    async getText(locator: Locator, text: string): Promise<string> {
         return await this.page.innerText(text);
     }
-    
+
     @step("Create New Object")
-    async createNewObject():Promise<void> {
+    async createNewObject(): Promise<void> {
         await this.newButton.click();
     }
-    
+
     @step("Enter DE Company Code")
-    async enterDECompanyCode(DEcompanyCode: string):Promise<void>{
+    async enterDECompanyCode(DEcompanyCode: string): Promise<void> {
         await this.companyCodeTXT.click();
         await this.companyCodeTXT.fill(DEcompanyCode);
         await this.DECompanyCodeOption.click();
     }
-    
+
     @step("Enter ES Company Code")
-    async enterESCompanyCode(EScompanyCode: string):Promise<void> {
+    async enterESCompanyCode(EScompanyCode: string): Promise<void> {
         await this.companyCodeTXT.click();
         await this.companyCodeTXT.fill(EScompanyCode);
         await this.EScompanyCodeOption.click();
     }
-    
+
     @step("Enter IE Company Code")
-    async enterIECompanyCode(IEcompanyCode: string) :Promise<void>{
+    async enterIECompanyCode(IEcompanyCode: string): Promise<void> {
         await this.companyCodeTXT.click();
         await this.companyCodeTXT.fill(IEcompanyCode);
         await this.IEcompanyCodeOption.click();
@@ -119,58 +123,67 @@ export default class Actions {
 
 
     @step("Save The Record")
-    async saveRecord() :Promise<void>{
+    async saveRecord(): Promise<void> {
         await this.saveButton.click();
     }
-    
+
     @step("Go to the Next")
-    async gotoNext() :Promise<void>{
+    async gotoNext(): Promise<void> {
         await this.nextButton.click();
     }
 
     @step("search and Open the Object")
-    async searchOpenObject(objectName: string):Promise<void>{
-        await this.appLuncher.click({ timeout: 90000 });
-        console.log("appluncher opened");
-        await this.appsSearchbox.fill(objectName,{ timeout: 90000 });
-        console.log("write candidate");
-        await this.page.getByRole('option', { name: `${objectName}`, exact: true }).click({ timeout: 90000 });
-        console.log("click on candidate");
-        //await expect(this.page.getByRole('button', { name: 'Sort by: Request ID' })).toBeVisible();
+    async searchOpenObject(objectName: string): Promise<void> {
+        await this.appLuncher.click();
+        await this.appsSearchbox.waitFor({ state: 'visible' });
+        this.appsSearchbox.fill(objectName);
+        element = this.page.getByRole('option', { name: `${objectName}`, exact: true }) //.click({ timeout: 150000 });
+        await element.waitFor({ state: 'visible' }, { TIMEOUT: 15000 });
+        //await element.click({ TIMEOUT: 15000 });
+        await Promise.all([
+            this.page.waitForNavigation({ timeout: 15000 }), // Wait for navigation
+            element.click() // Click the element that triggers navigation
+        ]);
+        const object = this.page
+            .getByLabel(`Recently Viewed|${objectName}|`) // Use backticks for dynamic variable
+            .locator('lst-breadcrumbs')
+            .getByText(objectName); // Use backticks for dynamic variable
+
+        await object.waitFor({ state: 'visible' }); // or 'attached', 'detached', etc.
     }
 
     @step("Enter TIMS Site Code")
-    async enterTIMSSiteCode(timsSiteCode: string):Promise<void>{
+    async enterTIMSSiteCode(timsSiteCode: string): Promise<void> {
         await this.searchSite.fill(timsSiteCode);
         await this.searchSite.click();
         await this.page.getByRole('option', { name: `${timsSiteCode}`, exact: true }).click();
     }
-    
+
     @step("Enter the Scope of Work")
-    async enterScopeOfWork(scopeText: string):Promise<void> {
+    async enterScopeOfWork(scopeText: string): Promise<void> {
         await this.scopeOfWork.fill(scopeText);
     }
-    
+
     @step("Enter The Customer Account")
-    async enterCustomerAccount(customerAccount: string):Promise<void> {
+    async enterCustomerAccount(customerAccount: string): Promise<void> {
         await this.customerAccount.fill(customerAccount);
         await this.customerAccount.click();
         await this.customerValue.click();
     }
-    
+
     @step("Enter The Site Config")
-    async enterSiteConfig():Promise<void>{
+    async enterSiteConfig(): Promise<void> {
         await this.siteConfigRequired.click();
         await this.siteConfigRequiredValue.click();
     }
-    
+
     @step("Open the More Option Tab")
-    async opemMoreTabs() :Promise<void>{
+    async opemMoreTabs(): Promise<void> {
         await this.moreTabs.click();
     }
 
     @step("Upload File")
-    async uploadFile() :Promise<void>{
+    async uploadFile(): Promise<void> {
         await this.moreTabs.click();
         await this.files.click();
         await this.upload.click();
@@ -185,9 +198,9 @@ export default class Actions {
         //await expect(this.page.getByLabel('Pending')).toBeVisible();
         await this.done2.click();
     }
-    
+
     @step("Add the Created Records to the Excel Sheet")
-    async addRecordtoExcel(recordID: string, index: number):Promise<void>{
+    async addRecordtoExcel(recordID: string, index: number): Promise<void> {
         const results: any[] = [];
         try {
             const resultObj = { result: recordID };
@@ -199,7 +212,7 @@ export default class Actions {
     }
 
     @step("Prepare the File Data")
-    async prepareFileData(sheetname: string, title: string, value: string):Promise<void> {
+    async prepareFileData(sheetname: string, title: string, value: string): Promise<void> {
         const worksheetData = [
             [title],
             [value],
@@ -209,9 +222,9 @@ export default class Actions {
         XLSX.utils.book_append_sheet(workbook, worksheet, sheetname);
         XLSX.writeFile(workbook, 'createdRecords.xlsx');
     }
-    
+
     @step("Get the Created Code Value")
-    async getCodeValue():Promise<string|undefined> {
+    async getCodeValue(): Promise<string | undefined> {
         await this.page.waitForSelector('lightning-formatted-text[slot="primaryField"][lwc-f6gbo863ml-host]');
         const recordIDSelector = await this.page.$('lightning-formatted-text[slot="primaryField"][lwc-f6gbo863ml-host]');
         const recordID = await recordIDSelector?.innerText();
@@ -219,7 +232,7 @@ export default class Actions {
     }
 
     @step("Push Values to the Excel sheet")
-    async pushValues(value: string) :Promise<any[]>{
+    async pushValues(value: string): Promise<any[]> {
         const results: any[] = [];
         try {
             const resultObj = { result: value };
@@ -228,10 +241,10 @@ export default class Actions {
             results.push({ testName: 'example test', result: 'Failed', error: error.message });
         }
         return results;
-    }  
+    }
 
     @step("Test Write to Excel Sheet")
-    async testWritetoExcel(results: any[], filePath: string, index: number) :Promise<void>{
+    async testWritetoExcel(results: any[], filePath: string, index: number): Promise<void> {
         try {
             if (!Array.isArray(results)) {
                 throw new TypeError('The provided results are not an array');
@@ -255,7 +268,7 @@ export default class Actions {
             console.error("Error writing to Excel:", error.message);
         }
     }
-    
+
     @step("Read Data from Excel Sheet")
     async readExcelFile(filePath: string, sheetName: string): Promise<string[]> {
         const workbook = XLSX.readFile(filePath);
@@ -263,7 +276,7 @@ export default class Actions {
         const data = XLSX.utils.sheet_to_json(sheet, { header: 1 }) as string[][]; // Type assertion
         // Return the last record
         if (data.length > 0) {
-            const lastRecord =  data[data.length - 1];
+            const lastRecord = data[data.length - 1];
             console.log("last reocr = " + lastRecord);
             return lastRecord;
         } else {

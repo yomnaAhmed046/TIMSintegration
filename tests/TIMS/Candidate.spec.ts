@@ -31,7 +31,7 @@ test.describe("DE Create new Candidate", () => {
         await pm.cadidateObj.openCandidatePage();
         await pm.cadidateObj.openNewCandidate();
         await pm.cadidateObj.createCandidate();
-        await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 90000 });
+        await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
         const candidateID = await action.getCodeValue();
         console.log("###### Candidate ID: " + candidateID);
         await action.addRecordtoExcel(candidateID, 5);

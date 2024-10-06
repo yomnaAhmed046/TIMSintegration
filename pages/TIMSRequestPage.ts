@@ -1,10 +1,14 @@
-import { Page, Locator } from 'playwright';
+import { Page, Locator} from 'playwright';
+import { expect } from '@playwright/test'
 import Actions from '../utils/Actions';
 import { step } from '../utils/StepDecorator';
 
 export default class TIMSRequestPage {
     readonly page: Page;
     readonly actionObj: Actions;
+    readonly requestPage: Locator;
+    readonly submitRequest: Locator;
+    readonly submit: Locator;
     readonly removeUnusedEquipment: Locator;
     readonly equipmentRelocation: Locator;
     readonly higherPosition: Locator;
@@ -27,6 +31,9 @@ export default class TIMSRequestPage {
     constructor(page: Page) {
         this.page = page;
         this.actionObj = new Actions(page);
+        this.requestPage = page.getByRole('link', { name: 'Requests', exact: true});
+        this.submitRequest = page.getByText('Submit Request');
+        this.submit = page.getByRole('button', { name: 'Submit' });
         this.removeUnusedEquipment = page.locator('label').filter({ hasText: 'Remove Unused Equipment' }).locator('span').first();
         this.equipmentRelocation = page.locator('label').filter({ hasText: 'Equipment Relocation (PIM)' }).locator('span').first();
         this.higherPosition = page.locator('label').filter({ hasText: 'Higher Position' }).locator('span').first();
@@ -48,7 +55,7 @@ export default class TIMSRequestPage {
     }
 
     @step("Open Request Page")
-    async openRequestPage() {
+    async openRequestPage() :Promise<void> {
         console.log("1");
         await this.page.waitForLoadState('networkidle');
         console.log("2");
@@ -63,11 +70,13 @@ export default class TIMSRequestPage {
     //     console.log("5");
     //  }
 
-    async enterTIMSSiteCode(timsSiteCode: string) {
+    @step("enter enter TIMS Site Code")
+    async enterTIMSSiteCode(timsSiteCode: string) :Promise<void> {
         await this.actionObj.enterTIMSSiteCode(timsSiteCode);
     }
 
-    async enterSiteDecommissioningData() {
+    @step("enter Site Decommissioning Data")
+    async enterSiteDecommissioningData():Promise<void>  {
         console.log("6");
         await this.forcedDecommissioning.click();
         await this.page.getByRole('option', { name: 'Yes' }).locator('span').nth(1).click();
@@ -75,8 +84,9 @@ export default class TIMSRequestPage {
         await this.removalDateActiveEquipment.fill("28.05.2024");
         await this.removalDatePassiveEquipment.fill("28.05.2024");
     }
-
-    async selectRequestType(requestType: string) {
+ 
+    @step("Select Reques type")
+    async selectRequestType(requestType: string):Promise<void>  {
         console.log("8");
         switch (requestType) {
 
@@ -115,9 +125,8 @@ export default class TIMSRequestPage {
         }
     }
 
-
-    async createRemoveUnusedEquipmentRequest(customerAccount: string) {
-        console.log("7");
+    @step("create Remove Unused Equipment Request")
+    async createRemoveUnusedEquipmentRequest(customerAccount: string):Promise<void>  {
         await this.actionObj.enterCustomerAccount(customerAccount)
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
@@ -127,60 +136,62 @@ export default class TIMSRequestPage {
         await this.page.getByRole('option', { name: 'Yes' }).locator('span').nth(1).click()
         await this.removalDate.click();
         await this.page.getByRole('button', { name: '23' }).click();
-        await this.actionObj.saveRecord();
-        //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};
+        // this.actionObj.saveRecord();
     }
 
-    async createEquipmentRelocationRequest(customerAccount: string) {
+    @step("create Equipment Relocation Request ")
+    async createEquipmentRelocationRequest(customerAccount: string):Promise<void>  {
         await this.actionObj.enterCustomerAccount(customerAccount)
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
         await this.actionObj.saveRecord();
-        // expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};
     }
-
-    async createHigherPositionRequest(customerAccount: string) {
+ 
+    @step("create Higher Position Request ")
+    async createHigherPositionRequest(customerAccount: string):Promise<void>  {
         await this.actionObj.enterCustomerAccount(customerAccount)
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
         await this.centerlineAvailable.fill('20');
         await this.spaceAvailable.fill('20');
         await this.actionObj.saveRecord();
-        //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};
     }
-
-    async createSignalRepeatRequest(customerAccount: string, scopeOfWork: string) {
+ 
+    @step("create Signal Repeat Request ")
+    async createSignalRepeatRequest(customerAccount: string):Promise<void>  {
         await this.actionObj.enterCustomerAccount(customerAccount)
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
-       await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.actionObj.saveRecord();
-        //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};
     }
 
-    async createSSiteDecommissioningRequest(customerAccount: string, scopeOfWork: string) {
+    @step("create Site Decommissioning Request")
+    async createSSiteDecommissioningRequest(customerAccount: string, scopeOfWork: string):Promise<void> {
         await this.actionObj.enterCustomerAccount(customerAccount)
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
         await this.actionObj.enterScopeOfWork(scopeOfWork);
-        await this.page.pause();
         await this.enterSiteDecommissioningData();
         await this.actionObj.saveRecord();
-        //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};
-
     }
 
-    async createSiteOfferbyTowerCoRequest(customerAccount: string, scopeOfWork: string) {
+    @step("create Site Offer by Tower CoRequest ")
+    async createSiteOfferbyTowerCoRequest(customerAccount: string, scopeOfWork: string):Promise<void>  {
         await this.actionObj.enterCustomerAccount(customerAccount)
         await this.masterLeaseAgreement.click();
         await this.page.getByText('Yes').click();
         await this.actionObj.enterSiteConfig();
         await this.actionObj.saveRecord();
-        // expect(this.page.getByRole('alert')).toBeVisible(), {timeout:10000};
     }
 
-
-
-
+    @step("Submit the Request ")
+    async submitTheRequest():Promise<void>  {
+       await this.submitRequest.click();
+       await this.page.pause();
+       await this.submit.click();
+       await this.page.pause();
+       //await expect(this.page.locator('records-highlights-details-item').filter({ hasText: 'In ProgressRequest Status' }).locator('lightning-formatted-text')).toBeVisible({ timeout: 15000 });
+       await expect(this.page.locator('.toastMessage')).toContainText('Request has been submitted.', { timeout: 15000 });
+    }
 
 }

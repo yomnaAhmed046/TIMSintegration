@@ -58,14 +58,14 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
-        "id": "TIMSFULL",
-        "name": "TIMSFULL",
+        "id": "TIMSPARTIAL",
+        "name": "TIMSPARTIAL",
         "testDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
-        "timeout": 90000
+        "timeout": 150000
       }
     ],
     "shard": null,
@@ -76,74 +76,89 @@
   },
   "suites": [
     {
-      "title": "TIMS\\Lease.spec.ts",
-      "file": "TIMS/Lease.spec.ts",
+      "title": "TIMS\\Access.spec.ts",
+      "file": "TIMS/Access.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "DE Create new Projects",
-          "file": "TIMS/Lease.spec.ts",
+          "title": "DE Create new Site Access Request",
+          "file": "TIMS/Access.spec.ts",
           "line": 12,
           "column": 6,
           "specs": [
             {
-              "title": "@Regression-User can Create Lease-Out Anchor Tenant",
-              "ok": true,
+              "title": "@Regression-The User can create new Site Access Request successfully",
+              "ok": false,
               "tags": [
-                "Regression-User"
+                "Regression-The"
               ],
               "tests": [
                 {
-                  "timeout": 90000,
+                  "timeout": 150000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "TIMSFULL",
-                  "projectName": "TIMSFULL",
+                  "projectId": "TIMSPARTIAL",
+                  "projectName": "TIMSPARTIAL",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "status": "passed",
-                      "duration": 64903,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "###### Lease ID: ST-Lease-201171\n"
+                      "workerIndex": 4,
+                      "status": "failed",
+                      "duration": 72657,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('.toastMessage')\nExpected string: \u001b[32m\"was created.\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n  \u001b[2m- expect.toContainText with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.toastMessage')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('.toastMessage')\nExpected string: \u001b[32m\"was created.\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n  \u001b[2m- expect.toContainText with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.toastMessage')\u001b[22m\n\n    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts:37:53",
+                        "location": {
+                          "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts",
+                          "column": 53,
+                          "line": 37
                         },
+                        "snippet": "\u001b[0m \u001b[90m 35 |\u001b[39m         \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39menterTIMSSiteCode(\u001b[33mTIMSSiteCode\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m         \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39msaveRecord()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m         \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'.toastMessage'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'was created.'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 38 |\u001b[39m         \u001b[36mconst\u001b[39m siteContactID \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39mgetCodeValue()\u001b[33m;\u001b[39m\n \u001b[90m 39 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m\"###### Site Contact ID: \"\u001b[39m \u001b[33m+\u001b[39m siteContactID)\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m         \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39maddRecordtoExcel(siteContactID\u001b[33m,\u001b[39m \u001b[35m6\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
                         {
-                          "text": "Data written to Excel successfully\n"
+                          "location": {
+                            "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts",
+                            "column": 53,
+                            "line": 37
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nLocator: locator('.toastMessage')\nExpected string: \u001b[32m\"was created.\"\u001b[39m\nReceived: <element(s) not found>\nCall log:\n  \u001b[2m- expect.toContainText with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('.toastMessage')\u001b[22m\n\n\n\u001b[0m \u001b[90m 35 |\u001b[39m         \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39menterTIMSSiteCode(\u001b[33mTIMSSiteCode\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 36 |\u001b[39m         \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39msaveRecord()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m         \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'.toastMessage'\u001b[39m))\u001b[33m.\u001b[39mtoContainText(\u001b[32m'was created.'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m15000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 38 |\u001b[39m         \u001b[36mconst\u001b[39m siteContactID \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39mgetCodeValue()\u001b[33m;\u001b[39m\n \u001b[90m 39 |\u001b[39m         console\u001b[33m.\u001b[39mlog(\u001b[32m\"###### Site Contact ID: \"\u001b[39m \u001b[33m+\u001b[39m siteContactID)\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m         \u001b[36mawait\u001b[39m action\u001b[33m.\u001b[39maddRecordtoExcel(siteContactID\u001b[33m,\u001b[39m \u001b[35m6\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\n\u001b[2m    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts:37:53\u001b[22m"
                         }
                       ],
+                      "stdout": [],
                       "stderr": [],
                       "retry": 0,
                       "steps": [
                         {
-                          "title": "Get the Created Code Value",
-                          "duration": 19480
+                          "title": "Create New Object",
+                          "duration": 1341
                         },
                         {
-                          "title": "Add the Created Records to the Excel Sheet",
-                          "duration": 97,
-                          "steps": [
-                            {
-                              "title": "Test Write to Excel Sheet",
-                              "duration": 95
-                            }
-                          ]
+                          "title": "Enter TIMS Site Code",
+                          "duration": 4785
+                        },
+                        {
+                          "title": "Save The Record",
+                          "duration": 113
                         }
                       ],
-                      "startTime": "2024-09-27T11:42:45.926Z",
-                      "attachments": []
+                      "startTime": "2024-10-06T12:37:38.275Z",
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts",
+                        "column": 53,
+                        "line": 37
+                      }
                     }
                   ],
-                  "status": "expected"
+                  "status": "unexpected"
                 }
               ],
-              "id": "aebddef43e2186b7cfbb-746c28ee93fe2b77779b",
-              "file": "TIMS/Lease.spec.ts",
-              "line": 37,
-              "column": 10
+              "id": "c00060850bb691bae853-4f80db14dea4c052f2dc",
+              "file": "TIMS/Access.spec.ts",
+              "line": 29,
+              "column": 9
             }
           ]
         }
@@ -152,11 +167,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-09-27T11:42:43.930Z",
-    "duration": 68238.767,
-    "expected": 1,
+    "startTime": "2024-10-06T12:37:36.182Z",
+    "duration": 75882.84000000008,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }

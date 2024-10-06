@@ -22,7 +22,8 @@ export default class TIMSCandidatePage {
         this.otherOperatorsOption = page.getByRole('option', { name: 'No', exact: true }).locator('span').nth(1);
         this.country = page.getByRole('combobox', { name: 'Country' });
         this.countryOption = page.getByRole('option', { name: 'DE' }).locator('span').nth(1);
-        this.streetAddres = page.getByLabel('*Street Address', { exact: true })
+        this.streetAddres = page.getByLabel('Street Address', { exact: true });
+        //this.streetAddres = page.getByLabel('Street Address', { exact: true });
     }
 
     async openCandidatePage() {
@@ -33,7 +34,7 @@ export default class TIMSCandidatePage {
     async openNewCandidate() {
         await this.actionObj.createNewObject();
     }
-
+   
     async createCandidate() {
         await this.candidateName.fill('Auto test6');
         await this.otherOperators.click();
@@ -41,7 +42,7 @@ export default class TIMSCandidatePage {
         await this.country.click();
         await this.countryOption.click();
        // await this.page.getByRole('option', { name: 'DE' }).locator('span').nth(1).click();
-        await this.streetAddres.fill("test");
+        await this.streetAddres.fill("AutoCandidate");
         await this.actionObj.saveRecord();
         //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:90000};
     }
