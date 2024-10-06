@@ -29,18 +29,26 @@ test.describe("DE Create new Request", () => {
     });
 
     test('@Regression-The User can create new Remove Unused Equipment Request successfully', async ({ page }) => {
-        await action.searchOpenObject("Requests");
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        //await action.searchOpenObject("Requests");
+        await pm.requestTIMS().requestPage.click();
         await action.createNewObject();
         await pm.requestTIMS().selectRequestType('removeUnusedEquipment');
         await pm.requestTIMS().enterTIMSSiteCode(timsSiteData.timsSiteCode);
         await pm.requestTIMS().createRemoveUnusedEquipmentRequest(timsSiteData.customerAccount);
         const RequestID = await action.getCodeValue();
         console.log("###### Project ID: " + RequestID);
-        await action.addRecordtoExcel(RequestID, 2);
+        await action.addRecordtoExcel(RequestID, 3);
+        await pm.requestTIMS().submitTheRequest();
+
     })
 
     test('@Regression-The User can create new Equipment Relocation Request successfully', async ({ page }) => {
-        await action.searchOpenObject("Requests");
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        //await action.searchOpenObject("Requests");
+        await pm.requestTIMS().requestPage.click();
         await action.createNewObject();
         await pm.requestTIMS().selectRequestType('equipmentRelocation');
         await pm.requestTIMS().enterTIMSSiteCode(timsSiteData.timsSiteCode);
@@ -48,10 +56,14 @@ test.describe("DE Create new Request", () => {
         const RequestID = await action.getCodeValue();
         console.log("###### Request ID: " + RequestID);
         await action.addRecordtoExcel(RequestID, 3);
+        await pm.requestTIMS().submitTheRequest();
     })
 
     test('@Regression-The User can create new Higher Position Request successfully', async ({ page }) => {
-        await action.searchOpenObject("Requests");
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        //await action.searchOpenObject("Requests");
+        await pm.requestTIMS().requestPage.click();
         await action.createNewObject();
         await pm.requestTIMS().selectRequestType('higherPositiont');
         await pm.requestTIMS().enterTIMSSiteCode(timsSiteData.timsSiteCode);
@@ -59,21 +71,30 @@ test.describe("DE Create new Request", () => {
         const RequestID = await action.getCodeValue();
         console.log("###### Request ID: " + RequestID);
         await action.addRecordtoExcel(RequestID, 3);
+        await pm.requestTIMS().submitTheRequest();
     })
 
     test('@Regression-The User can create new Signal Repeat Request successfully', async ({ page }) => {
-        await action.searchOpenObject("Requests");
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        //await action.searchOpenObject("Requests");
+        await pm.requestTIMS().requestPage.click();
         await action.createNewObject();
         await pm.requestTIMS().selectRequestType('signalRepeat');
-        await pm.requestTIMS().enterTIMSSiteCode(timsSiteData.timsSiteCode);
-        await pm.requestTIMS().createSignalRepeatRequest(timsSiteData.customerAccount, timsSiteData.scopeOfWork);
+        await pm.requestTIMS().enterTIMSSiteCode(TIMSSiteCode);
+        await pm.requestTIMS().createSignalRepeatRequest(timsSiteData.customerAccount);
         const RequestID = await action.getCodeValue();
         console.log("###### Request ID: " + RequestID);
         await action.addRecordtoExcel(RequestID, 3);
+        await pm.requestTIMS().submitTheRequest();
     })
 
     test('@Regression-The User can create new Site Decommissioning Request successfully', async ({ page }) => {
-        await action.searchOpenObject("Requests");
+        // failed tcs
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        //await action.searchOpenObject("Requests");
+        await pm.requestTIMS().requestPage.click();
         await action.createNewObject();
         await pm.requestTIMS().selectRequestType('siteDecommissioning');
         await pm.requestTIMS().enterTIMSSiteCode(timsSiteData.timsSiteCode);
@@ -81,10 +102,14 @@ test.describe("DE Create new Request", () => {
         const RequestID = await action.getCodeValue();
         console.log("###### Request ID: " + RequestID);
         await action.addRecordtoExcel(RequestID, 3);
+        await pm.requestTIMS().submitTheRequest();
     })
 
     test('@Regression-The User can create new Site Offer by TowerCo Request successfully', async ({ page }) => {
-        await action.searchOpenObject("Requests");
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        //await action.searchOpenObject("Requests");
+        await pm.requestTIMS().requestPage.click();
         await action.createNewObject();
         await pm.requestTIMS().selectRequestType('siteOfferbyTowerCo');
         await pm.requestTIMS().enterTIMSSiteCode(timsSiteData.timsSiteCode);
@@ -92,5 +117,6 @@ test.describe("DE Create new Request", () => {
         const RequestID = await action.getCodeValue();
         console.log("###### Request ID: " + RequestID);
         await action.addRecordtoExcel(RequestID, 3);
+        await pm.requestTIMS().submitTheRequest();
     })
 })

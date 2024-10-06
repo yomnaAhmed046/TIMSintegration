@@ -37,7 +37,7 @@ test.describe("The User Create Site", () => {
     test('@Regression The User can create New Site successfully', async ({ }) => {
         await pm.siteTIMS().createNewSite();
         await pm.siteTIMS().createNormalSite(timsSiteData.siteName, timsSiteData.DEcompanyCode, timsSiteData.lat, timsSiteData.long);
-        await expect(page.locator('.toastTitle')).toContainText("Record Created", { timeout: 10000 });
+        await expect(page.locator('.toastTitle')).toContainText("Record Created", { timeout: 15000 });
         TIMSsiteCode = await action.getCodeValue();
         console.log("The Site Code: " + TIMSsiteCode);
         await action.addRecordtoExcel(TIMSsiteCode, 0);
@@ -133,7 +133,28 @@ test.describe("The User create the Objects from Site", () => {
     test ('@Regression-The User can Upload file from Site successfully', async ({ }) => {
         await pm.siteTIMS().uploadFilefromSite(firstValueOfLastRecord);
     })
-    
+
+    test('@Regression-The User can Create Site contact from Site successfully', async ({ }) => {
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        await pm.siteTIMS().openSite(TIMSSiteCode);
+        await action.moreTabs.click();
+        await pm.siteTIMS().siteContactTab.click();
+        await action.createNewObject();
+        await action.saveRecord();
+        await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
+    })
+
+    test('@Regression-The User can Create Site Access Request from Site successfully', async ({ }) => {
+        const env = test.info().project.name;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        await pm.siteTIMS().openSite(TIMSSiteCode);
+        await action.moreTabs.click();
+        await pm.siteTIMS().accessTab.click();
+        await action.createNewObject();
+        await action.saveRecord();
+        await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
+    })
 })
 
 

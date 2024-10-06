@@ -26,6 +26,12 @@ export default class TIMSsiteInfoPage {
   readonly select: Locator;
   readonly frame: FrameLocator;
   readonly createNewButton: Locator;
+  
+  //Locators for Site Contact
+  readonly siteContactTab: Locator;
+
+  //Locators for Site Access Request
+  readonly accessTab: Locator;
 
   //Update site elements
   readonly siteStatusEditBtn: Locator;
@@ -103,7 +109,10 @@ export default class TIMSsiteInfoPage {
     this.projectTab = page.getByRole('tab', { name: 'Projects' });
     this.candidateTab = page.getByRole('tab', { name: 'Candidates' });
     this.leaseTab = page.getByRole('tab', { name: 'Leases' });
-
+    this.requestTab = page.getByRole('tab', { name: 'Requests' });
+    this.siteContactTab = page.locator('a').filter({hasText: 'Site Contacts'});
+    this.accessTab = page.getByRole('tab', {name: 'Access'});
+    
     //Locators for Leases
     this.frame = page.frameLocator('//iframe[contains(@name,"vfFrameId")]').nth(2);
     this.select = this.frame.getByLabel('*Lease Type');
@@ -254,11 +263,9 @@ export default class TIMSsiteInfoPage {
     await this.saveBtn.click();
   }
   @step("Create DE Normal Site")
-  async createNormalSite(siteName: string, companyCode: string, lat: string, long: string): Promise<void> {
+  async createNormalSite(siteName: string, companyCode: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.action.enterDECompanyCode(companyCode);
-    await this.lat.fill(lat);
-    await this.long.fill(long);
     await this.action.saveRecord();
   }
 

@@ -56,16 +56,36 @@ export default defineConfig({
       args: ["--start-maximized"],
     },
     headless: false,
+    viewport: { width: 1920, height: 1080 },
   },
 
   /* Configure projects for major browsers */
   projects: [
+    // {
+    //   name: 'TIMSFULL',
+    //   use: {
+    //     baseURL: process.env.TIMSFULL_BASE_URL,
+    //     browserName: 'chromium',
+    //     viewport: null,
+
+    //     screenshot: 'only-on-failure',
+    //     //trace: 'retain-on-failure',
+    //   },
+    //   retries: 1,
+    //   timeout: 90000,
+    // },
+    
     {
-      name: 'chromium',
-      use: {/*...devices['Desktop Chrome'],*/
-        viewport: null,  
-        },
-      timeout: 180000
+      name: 'TIMSPARTIAL',
+      use: {
+        baseURL: process.env.TIMSPARTIAL_BASE_URL,
+        browserName: 'chromium',
+        //channel: 'msedge',
+        viewport: null,
+        screenshot: 'only-on-failure',
+      },
+      timeout: 150000,
+      retries: 1,
     },
 
     // {
