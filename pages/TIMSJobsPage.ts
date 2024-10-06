@@ -19,7 +19,7 @@ export default class TIMSJobsPage {
     }
 
     @step("Create Jobs in TIMS")
-    async createCandidate(jobName: string) {
+    async createJob(jobName: string) {
         await this.jobName.fill(jobName);
         await this.actionObj.saveRecord();
     }

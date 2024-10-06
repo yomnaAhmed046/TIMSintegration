@@ -33,6 +33,12 @@ export default class TIMSsiteInfoPage {
   //Locators for Site Access Request
   readonly accessTab: Locator;
 
+  //Locators for Requests
+  readonly requestTab: Locator;
+
+  //Locators for Jobs
+  readonly jobTab: Locator;
+
   //Update site elements
   readonly siteStatusEditBtn: Locator;
   readonly siteStatusList: Locator;
@@ -112,6 +118,7 @@ export default class TIMSsiteInfoPage {
     this.requestTab = page.getByRole('tab', { name: 'Requests' });
     this.siteContactTab = page.locator('a').filter({hasText: 'Site Contacts'});
     this.accessTab = page.getByRole('tab', {name: 'Access'});
+    this.jobTab = page.getByRole('tab', {name: 'Jobs'});
     
     //Locators for Leases
     this.frame = page.frameLocator('//iframe[contains(@name,"vfFrameId")]').nth(2);

@@ -28,7 +28,8 @@ test.describe("DE Create new Candidate", () => {
     });
 
     test('@Regression-The User can create new Candidate successfully', async ({ page }) => {
-        await pm.cadidateObj.openCandidatePage();
+       // await pm.cadidateObj.openCandidatePage();
+        await pm.cadidateObj.candidatePage.click();
         await pm.cadidateObj.openNewCandidate();
         await pm.cadidateObj.createCandidate();
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
