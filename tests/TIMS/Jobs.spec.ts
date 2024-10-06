@@ -32,11 +32,10 @@ test.describe("DE Create new Job ", () => {
         //await action.searchOpenObject("Jobs");
         await pm.jobsTIMS().jobPage.click();
         await action.createNewObject();
-        await pm.jobsTIMS().createCandidate("Auto Job");
+        await pm.jobsTIMS().createJob("Auto Job");
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
         const jobID = await action.getCodeValue();
         console.log("###### Site Contact ID: " + jobID);
         await action.addRecordtoExcel(jobID, 7);
     })
-
 })

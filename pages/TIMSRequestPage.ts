@@ -77,7 +77,6 @@ export default class TIMSRequestPage {
 
     @step("enter Site Decommissioning Data")
     async enterSiteDecommissioningData():Promise<void>  {
-        console.log("6");
         await this.forcedDecommissioning.click();
         await this.page.getByRole('option', { name: 'Yes' }).locator('span').nth(1).click();
         await this.detailsOfDecommission.fill("test");
@@ -87,7 +86,6 @@ export default class TIMSRequestPage {
  
     @step("Select Reques type")
     async selectRequestType(requestType: string):Promise<void>  {
-        console.log("8");
         switch (requestType) {
 
             case "removeUnusedEquipment":
@@ -187,9 +185,7 @@ export default class TIMSRequestPage {
     @step("Submit the Request ")
     async submitTheRequest():Promise<void>  {
        await this.submitRequest.click();
-       await this.page.pause();
        await this.submit.click();
-       await this.page.pause();
        //await expect(this.page.locator('records-highlights-details-item').filter({ hasText: 'In ProgressRequest Status' }).locator('lightning-formatted-text')).toBeVisible({ timeout: 15000 });
        await expect(this.page.locator('.toastMessage')).toContainText('Request has been submitted.', { timeout: 15000 });
     }

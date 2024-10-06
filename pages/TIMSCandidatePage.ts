@@ -6,6 +6,7 @@ import { step } from '../utils/StepDecorator';
 export default class TIMSCandidatePage {
     readonly page: Page;
     readonly actionObj: Actions;
+    readonly candidatePage: Locator;
     readonly candidateName: Locator;
     readonly otherOperators: Locator;
     readonly otherOperatorsOption: Locator;
@@ -16,6 +17,7 @@ export default class TIMSCandidatePage {
 
     constructor(page: Page) {
         this.actionObj = new Actions(page);
+        this.candidatePage = page.getByRole('link', { name: 'Candidates', exact: true});
         //this.candidateName = page.getByLabel('*Candidate Name', { exact: true });
         this.candidateName = page.getByLabel('*Candidate Name');
         this.otherOperators = page.getByRole('combobox', { name: 'Other Operators' });
@@ -36,7 +38,7 @@ export default class TIMSCandidatePage {
     }
    
     async createCandidate() {
-        await this.candidateName.fill('Auto test6');
+        await this.candidateName.fill('Auto test7');
         await this.otherOperators.click();
         await this.otherOperatorsOption.click();
         await this.country.click();
