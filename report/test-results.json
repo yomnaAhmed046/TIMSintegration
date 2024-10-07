@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\playwright.config.ts",
-    "rootDir": "C:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
+    "configFile": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\playwright.config.ts",
+    "rootDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -30,7 +30,7 @@
         }
       ],
       [
-        "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\node_modules\\allure-playwright\\dist\\index.js",
+        "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\node_modules\\allure-playwright\\dist\\index.js",
         {
           "detail": true,
           "outputFolder": "allure-results",
@@ -54,13 +54,13 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "C:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/test-results",
+        "outputDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/test-results",
         "repeatEach": 1,
-        "retries": 1,
+        "retries": 0,
         "metadata": {},
         "id": "TIMSPARTIAL",
         "name": "TIMSPARTIAL",
-        "testDir": "C:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
+        "testDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -75,754 +75,6 @@
     "webServer": null
   },
   "suites": [
-    {
-      "title": "TIMS\\Access.spec.ts",
-      "file": "TIMS/Access.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "DE Create new Site Access Request",
-          "file": "TIMS/Access.spec.ts",
-          "line": 12,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create new Site Access Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "status": "interrupted",
-                      "duration": 4799,
-                      "error": {
-                        "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n",
-                        "stack": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\n    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts:26:9",
-                        "location": {
-                          "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                          "column": 29,
-                          "line": 28
-                        },
-                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                            "column": 29,
-                            "line": 28
-                          },
-                          "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m\n\n\u001b[2m    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\u001b[22m\n\u001b[2m    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\u001b[22m\n\u001b[2m    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Access.spec.ts:26:9\u001b[22m"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:03.116Z",
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\test-results\\TIMS-Access-DE-Create-new--ad45f-Access-Request-successfully-TIMSPARTIAL\\test-failed-1.png"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                        "column": 29,
-                        "line": 28
-                      }
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "c00060850bb691bae853-4f80db14dea4c052f2dc",
-              "file": "TIMS/Access.spec.ts",
-              "line": 29,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TIMS\\Application.spec.ts",
-      "file": "TIMS/Application.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "Create Modify Existing Site Applications then Submit and Approve successfully",
-          "file": "TIMS/Application.spec.ts",
-          "line": 14,
-          "column": 15,
-          "specs": [
-            {
-              "title": "@Regression 01.Login to TIMS successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "status": "interrupted",
-                      "duration": 3956,
-                      "error": {
-                        "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m  -   waiting for element to be visible, enabled and stable\u001b[22m\n",
-                        "stack": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m  -   waiting for element to be visible, enabled and stable\u001b[22m\n\n    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Application.spec.ts:35:9",
-                        "location": {
-                          "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                          "column": 29,
-                          "line": 28
-                        },
-                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                            "column": 29,
-                            "line": 28
-                          },
-                          "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m  -   waiting for element to be visible, enabled and stable\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m\n\n\u001b[2m    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\u001b[22m\n\u001b[2m    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\u001b[22m\n\u001b[2m    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Application.spec.ts:35:9\u001b[22m"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Navigate to TIMS URL",
-                          "duration": 3392
-                        },
-                        {
-                          "title": "Login to TIMS",
-                          "duration": 599,
-                          "error": {
-                            "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m  -   waiting for element to be visible, enabled and stable\u001b[22m\n",
-                            "stack": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m  -   waiting for element to be visible, enabled and stable\u001b[22m\n\n    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Application.spec.ts:35:9",
-                            "location": {
-                              "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                              "column": 29,
-                              "line": 28
-                            },
-                            "snippet": "\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m"
-                          }
-                        }
-                      ],
-                      "startTime": "2024-10-06T18:17:03.132Z",
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\test-results\\TIMS-Application-Create-Mo-d5e1c--Login-to-TIMS-successfully-TIMSPARTIAL\\test-failed-1.png"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                        "column": 29,
-                        "line": 28
-                      }
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-5e3877d5968f93d7fc2d",
-              "file": "TIMS/Application.spec.ts",
-              "line": 23,
-              "column": 9
-            },
-            {
-              "title": "@Regression 02.The User can create Modify Existing Site Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:09.891Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-6cde3453842ee62a75d2",
-              "file": "TIMS/Application.spec.ts",
-              "line": 39,
-              "column": 9
-            },
-            {
-              "title": "@Regression 03.The User Submit the Modify Existing Site Application for Approval successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:09.894Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-bc42012024c1340511bc",
-              "file": "TIMS/Application.spec.ts",
-              "line": 53,
-              "column": 9
-            },
-            {
-              "title": "@Regression 04.The User Approve the Modify Existing Site Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:09.897Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-9ecc752bc623f358e514",
-              "file": "TIMS/Application.spec.ts",
-              "line": 57,
-              "column": 9
-            }
-          ]
-        },
-        {
-          "title": "Creat New BTS Application then Submit and Approve Successfully",
-          "file": "TIMS/Application.spec.ts",
-          "line": 64,
-          "column": 15,
-          "specs": [
-            {
-              "title": "@Regression 01.Login to TIMS successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": 2,
-                      "status": "interrupted",
-                      "duration": 4428,
-                      "error": {
-                        "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n",
-                        "stack": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\n    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Application.spec.ts:79:9",
-                        "location": {
-                          "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                          "column": 29,
-                          "line": 28
-                        },
-                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                            "column": 29,
-                            "line": 28
-                          },
-                          "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m\n\n\u001b[2m    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\u001b[22m\n\u001b[2m    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\u001b[22m\n\u001b[2m    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Application.spec.ts:79:9\u001b[22m"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "steps": [
-                        {
-                          "title": "Navigate to TIMS URL",
-                          "duration": 3670
-                        },
-                        {
-                          "title": "Login to TIMS",
-                          "duration": 765,
-                          "error": {
-                            "message": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n",
-                            "stack": "Error: locator.click: Test ended.\nCall log:\n  \u001b[2m- waiting for locator('#Login')\u001b[22m\n\u001b[2m  -   locator resolved to <input id=\"Login\" name=\"Login\" type=\"submit\" value=\"Bei Sandbox anmelden\" class=\"button r4 wide primary\"/>\u001b[22m\n\n    at TIMSloginPage.login (C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts:28:29)\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:16\n    at C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Application.spec.ts:79:9",
-                            "location": {
-                              "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                              "column": 29,
-                              "line": 28
-                            },
-                            "snippet": "\u001b[90m   at \u001b[39m..\\pages\\TIMS_loginPage.ts:28\n\n\u001b[0m \u001b[90m 26 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39musernameTxt\u001b[33m.\u001b[39mfill(timsUsername)\u001b[33m;\u001b[39m\n \u001b[90m 27 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpasswordTxt\u001b[33m.\u001b[39mfill(timsPassword)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloginBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcloseBtn\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m \n \u001b[90m 30 |\u001b[39m     }\n \u001b[90m 31 |\u001b[39m }\u001b[0m"
-                          }
-                        }
-                      ],
-                      "startTime": "2024-10-06T18:17:03.132Z",
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\test-results\\TIMS-Application-Creat-New-902fa--Login-to-TIMS-successfully-TIMSPARTIAL\\test-failed-1.png"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\pages\\TIMS_loginPage.ts",
-                        "column": 29,
-                        "line": 28
-                      }
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-7ffb45da6ddfd5723fdf",
-              "file": "TIMS/Application.spec.ts",
-              "line": 71,
-              "column": 9
-            },
-            {
-              "title": "@Regression 02.The User can create New BTS Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:09.760Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-e3b4c673a1c837f98c4c",
-              "file": "TIMS/Application.spec.ts",
-              "line": 82,
-              "column": 9
-            },
-            {
-              "title": "@Regression 03.The User Submit The New BTS Application for Approval successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:09.763Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-1b4537578c21ebb63ec2",
-              "file": "TIMS/Application.spec.ts",
-              "line": 92,
-              "column": 9
-            },
-            {
-              "title": "@Regression 04.The User Approve The New BTS Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [
-                    {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2024-10-06T18:17:09.767Z",
-                      "attachments": []
-                    }
-                  ],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-6efe5225e75eee4ef91d",
-              "file": "TIMS/Application.spec.ts",
-              "line": 96,
-              "column": 9
-            }
-          ]
-        },
-        {
-          "title": "Creat the New Co-location Site Application then Submit and Approve Successfully",
-          "file": "TIMS/Application.spec.ts",
-          "line": 102,
-          "column": 15,
-          "specs": [
-            {
-              "title": "@Regression-01.Login to TIMS successfully",
-              "ok": true,
-              "tags": [
-                "Regression-01.Login"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-99eab5730004aacdbc88",
-              "file": "TIMS/Application.spec.ts",
-              "line": 110,
-              "column": 9
-            },
-            {
-              "title": "@Regression-02.The User can create New Co-location Site Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression-02.The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-506a106a74c8cdd1758c",
-              "file": "TIMS/Application.spec.ts",
-              "line": 124,
-              "column": 9
-            },
-            {
-              "title": "@Regression-03.The User Submit the New Co-location Site Application for Approval successfully",
-              "ok": true,
-              "tags": [
-                "Regression-03.The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-932467c0959fc383c6d6",
-              "file": "TIMS/Application.spec.ts",
-              "line": 138,
-              "column": 9
-            },
-            {
-              "title": "@Regression-04.The User Approve the the New Co-location Site Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression-04.The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-dce29ee0e9889643d3fd",
-              "file": "TIMS/Application.spec.ts",
-              "line": 143,
-              "column": 9
-            }
-          ]
-        },
-        {
-          "title": "Creat Site Exit by Customer Application then Submit and Approve Successfully",
-          "file": "TIMS/Application.spec.ts",
-          "line": 150,
-          "column": 15,
-          "specs": [
-            {
-              "title": "@Regression-01.Login to TIMS successfully",
-              "ok": true,
-              "tags": [
-                "Regression-01.Login"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-918027803b76fd0953e6",
-              "file": "TIMS/Application.spec.ts",
-              "line": 157,
-              "column": 9
-            },
-            {
-              "title": "@Regression-02.The User can create Site Exit by Customer Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression-02.The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-86fcefe86e4b1f112363",
-              "file": "TIMS/Application.spec.ts",
-              "line": 170,
-              "column": 9
-            },
-            {
-              "title": "@Regression-03.The User Submit the Site Exit by Customer Application for Approval successfully",
-              "ok": true,
-              "tags": [
-                "Regression-03.The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-774fa53fe3d548bf4ce4",
-              "file": "TIMS/Application.spec.ts",
-              "line": 183,
-              "column": 9
-            },
-            {
-              "title": "@Regression-04.The User Approve The Site Exit by Customer Application successfully",
-              "ok": true,
-              "tags": [
-                "Regression-04.The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "808d16bc6a1b55ad004f-8490ef4b0309ce1827b2",
-              "file": "TIMS/Application.spec.ts",
-              "line": 187,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TIMS\\Candidate.spec.ts",
-      "file": "TIMS/Candidate.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "DE Create new Candidate",
-          "file": "TIMS/Candidate.spec.ts",
-          "line": 13,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create new Candidate successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "2702d3dbe1c26fe2bb72-1760b1073bc8841c37a7",
-              "file": "TIMS/Candidate.spec.ts",
-              "line": 30,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TIMS\\Jobs.spec.ts",
-      "file": "TIMS/Jobs.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "DE Create new Job ",
-          "file": "TIMS/Jobs.spec.ts",
-          "line": 12,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create new Site Access Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "26c515094dd0bf4b3841-3e820a1605530abf6ba5",
-              "file": "TIMS/Jobs.spec.ts",
-              "line": 29,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
     {
       "title": "TIMS\\Lease.spec.ts",
       "file": "TIMS/Lease.spec.ts",
@@ -849,8 +101,43 @@
                   "expectedStatus": "passed",
                   "projectId": "TIMSPARTIAL",
                   "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "status": "passed",
+                      "duration": 47254,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "###### Lease ID: ST-Lease-283379\n"
+                        },
+                        {
+                          "text": "Data written to Excel successfully\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get the Created Code Value",
+                          "duration": 9629
+                        },
+                        {
+                          "title": "Add the Created Records to the Excel Sheet",
+                          "duration": 48,
+                          "steps": [
+                            {
+                              "title": "Test Write to Excel Sheet",
+                              "duration": 46
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2024-10-07T10:52:02.728Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "aebddef43e2186b7cfbb-c5be2f134af1529d2643",
@@ -860,7 +147,7 @@
             },
             {
               "title": "@Regression-User can Create Lease-Out Anchor Tenant",
-              "ok": true,
+              "ok": false,
               "tags": [
                 "Regression-User"
               ],
@@ -871,8 +158,60 @@
                   "expectedStatus": "passed",
                   "projectId": "TIMSPARTIAL",
                   "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "status": "failed",
+                      "duration": 64800,
+                      "error": {
+                        "message": "Error: page.waitForSelector: Target page, context or browser has been closed\nCall log:\n  \u001b[2m- waiting for locator('lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]') to be visible\u001b[22m\n",
+                        "stack": "Error: page.waitForSelector: Target page, context or browser has been closed\nCall log:\n  \u001b[2m- waiting for locator('lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]') to be visible\u001b[22m\n\n    at Actions.call (c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts:228:25)\n    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:29\n    at Actions.getCodeValue (c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:7:19)\n    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Lease.spec.ts:40:40",
+                        "location": {
+                          "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts",
+                          "column": 25,
+                          "line": 228
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\utils\\Actions.ts:228\n\n\u001b[0m \u001b[90m 226 |\u001b[39m     \u001b[33m@\u001b[39mstep(\u001b[32m\"Get the Created Code Value\"\u001b[39m)\n \u001b[90m 227 |\u001b[39m     \u001b[36masync\u001b[39m getCodeValue()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[33mstring\u001b[39m \u001b[33m|\u001b[39m undefined\u001b[33m>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 228 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 229 |\u001b[39m         \u001b[36mconst\u001b[39m recordIDSelector \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39m$(\u001b[32m'lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 230 |\u001b[39m         \u001b[36mconst\u001b[39m recordID \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m recordIDSelector\u001b[33m?\u001b[39m\u001b[33m.\u001b[39minnerText()\u001b[33m;\u001b[39m\n \u001b[90m 231 |\u001b[39m         \u001b[36mreturn\u001b[39m recordID\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts",
+                            "column": 25,
+                            "line": 228
+                          },
+                          "message": "Error: page.waitForSelector: Target page, context or browser has been closed\nCall log:\n  \u001b[2m- waiting for locator('lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]') to be visible\u001b[22m\n\n\n\u001b[90m   at \u001b[39m..\\utils\\Actions.ts:228\n\n\u001b[0m \u001b[90m 226 |\u001b[39m     \u001b[33m@\u001b[39mstep(\u001b[32m\"Get the Created Code Value\"\u001b[39m)\n \u001b[90m 227 |\u001b[39m     \u001b[36masync\u001b[39m getCodeValue()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[33mstring\u001b[39m \u001b[33m|\u001b[39m undefined\u001b[33m>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 228 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 229 |\u001b[39m         \u001b[36mconst\u001b[39m recordIDSelector \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39m$(\u001b[32m'lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 230 |\u001b[39m         \u001b[36mconst\u001b[39m recordID \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m recordIDSelector\u001b[33m?\u001b[39m\u001b[33m.\u001b[39minnerText()\u001b[33m;\u001b[39m\n \u001b[90m 231 |\u001b[39m         \u001b[36mreturn\u001b[39m recordID\u001b[33m;\u001b[39m\u001b[0m\n\n\u001b[2m    at Actions.call (c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts:228:25)\u001b[22m\n\u001b[2m    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:29\u001b[22m\n\u001b[2m    at Actions.getCodeValue (c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:7:19)\u001b[22m\n\u001b[2m    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Lease.spec.ts:40:40\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get the Created Code Value",
+                          "duration": 29927,
+                          "error": {
+                            "message": "Error: page.waitForSelector: Target page, context or browser has been closed\nCall log:\n  \u001b[2m- waiting for locator('lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]') to be visible\u001b[22m\n",
+                            "stack": "Error: page.waitForSelector: Target page, context or browser has been closed\nCall log:\n  \u001b[2m- waiting for locator('lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]') to be visible\u001b[22m\n\n    at Actions.call (c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts:228:25)\n    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:8:29\n    at Actions.getCodeValue (c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\StepDecorator.ts:7:19)\n    at c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\tests\\TIMS\\Lease.spec.ts:40:40",
+                            "location": {
+                              "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts",
+                              "column": 25,
+                              "line": 228
+                            },
+                            "snippet": "\u001b[90m   at \u001b[39m..\\utils\\Actions.ts:228\n\n\u001b[0m \u001b[90m 226 |\u001b[39m     \u001b[33m@\u001b[39mstep(\u001b[32m\"Get the Created Code Value\"\u001b[39m)\n \u001b[90m 227 |\u001b[39m     \u001b[36masync\u001b[39m getCodeValue()\u001b[33m:\u001b[39m \u001b[33mPromise\u001b[39m\u001b[33m<\u001b[39m\u001b[33mstring\u001b[39m \u001b[33m|\u001b[39m undefined\u001b[33m>\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 228 |\u001b[39m         \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39mwaitForSelector(\u001b[32m'lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 229 |\u001b[39m         \u001b[36mconst\u001b[39m recordIDSelector \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mpage\u001b[33m.\u001b[39m$(\u001b[32m'lightning-formatted-text[slot=\"primaryField\"][lwc-f6gbo863ml-host]'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 230 |\u001b[39m         \u001b[36mconst\u001b[39m recordID \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m recordIDSelector\u001b[33m?\u001b[39m\u001b[33m.\u001b[39minnerText()\u001b[33m;\u001b[39m\n \u001b[90m 231 |\u001b[39m         \u001b[36mreturn\u001b[39m recordID\u001b[33m;\u001b[39m\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2024-10-07T10:52:02.671Z",
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\utils\\Actions.ts",
+                        "column": 25,
+                        "line": 228
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
                 }
               ],
               "id": "aebddef43e2186b7cfbb-0a8e642902c61f2925cb",
@@ -893,8 +232,43 @@
                   "expectedStatus": "passed",
                   "projectId": "TIMSPARTIAL",
                   "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "status": "passed",
+                      "duration": 43921,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "###### Lease ID: ST-Lease-283378\n"
+                        },
+                        {
+                          "text": "Data written to Excel successfully\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get the Created Code Value",
+                          "duration": 12197
+                        },
+                        {
+                          "title": "Add the Created Records to the Excel Sheet",
+                          "duration": 55,
+                          "steps": [
+                            {
+                              "title": "Test Write to Excel Sheet",
+                              "duration": 54
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2024-10-07T10:52:02.688Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "aebddef43e2186b7cfbb-1accf1ce9c7203424687",
@@ -915,8 +289,43 @@
                   "expectedStatus": "passed",
                   "projectId": "TIMSPARTIAL",
                   "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "status": "passed",
+                      "duration": 26221,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "###### Lease ID: ST-Lease-283380\n"
+                        },
+                        {
+                          "text": "Data written to Excel successfully\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get the Created Code Value",
+                          "duration": 9410
+                        },
+                        {
+                          "title": "Add the Created Records to the Excel Sheet",
+                          "duration": 26,
+                          "steps": [
+                            {
+                              "title": "Test Write to Excel Sheet",
+                              "duration": 25
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2024-10-07T10:52:47.241Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "aebddef43e2186b7cfbb-8595314fa29df9de02a5",
@@ -927,707 +336,15 @@
           ]
         }
       ]
-    },
-    {
-      "title": "TIMS\\Project.spec.ts",
-      "file": "TIMS/Project.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "DE Create new Projects",
-          "file": "TIMS/Project.spec.ts",
-          "line": 13,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create new Project successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "524f850f05846d9cbede-74c0b6fe4fd622ccfcfb",
-              "file": "TIMS/Project.spec.ts",
-              "line": 30,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TIMS\\Request.spec.ts",
-      "file": "TIMS/Request.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "DE Create new Request",
-          "file": "TIMS/Request.spec.ts",
-          "line": 13,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create new Remove Unused Equipment Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "a40fa6727555a6fe4240-4ff116bc419bdda9b3f8",
-              "file": "TIMS/Request.spec.ts",
-              "line": 31,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Equipment Relocation Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "a40fa6727555a6fe4240-e75b7353f330ebd03569",
-              "file": "TIMS/Request.spec.ts",
-              "line": 47,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Higher Position Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "a40fa6727555a6fe4240-e4c50e5acb61ab08b934",
-              "file": "TIMS/Request.spec.ts",
-              "line": 62,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Signal Repeat Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "a40fa6727555a6fe4240-d3ae691b8208999fafcb",
-              "file": "TIMS/Request.spec.ts",
-              "line": 77,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Site Decommissioning Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "a40fa6727555a6fe4240-f7edb59021fc673fced3",
-              "file": "TIMS/Request.spec.ts",
-              "line": 92,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Site Offer by TowerCo Request successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "a40fa6727555a6fe4240-c57e4fa12cbbe292380b",
-              "file": "TIMS/Request.spec.ts",
-              "line": 108,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TIMS\\Site.spec.ts",
-      "file": "TIMS/Site.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "The User Create Site",
-          "file": "TIMS/Site.spec.ts",
-          "line": 19,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression The User can create New Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-00e56e4d7aec339ec44e",
-              "file": "TIMS/Site.spec.ts",
-              "line": 37,
-              "column": 9
-            }
-          ]
-        },
-        {
-          "title": "The User create the Objects from Site",
-          "file": "TIMS/Site.spec.ts",
-          "line": 47,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create Modify Existing Site Application From Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-20b830d862cd5abc7383",
-              "file": "TIMS/Site.spec.ts",
-              "line": 72,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create Site Exit by Customer Application From Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-e0f04f5d0abc61d96fcb",
-              "file": "TIMS/Site.spec.ts",
-              "line": 83,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create New Co-location Site Application From Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-469c7f981dfba7210423",
-              "file": "TIMS/Site.spec.ts",
-              "line": 93,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create Project from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-b03c5fd961941b06a9fd",
-              "file": "TIMS/Site.spec.ts",
-              "line": 103,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create Candidate from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-d7df1eaa758982c76408",
-              "file": "TIMS/Site.spec.ts",
-              "line": 113,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create LeaseIn from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-98a92b86ac6571549d55",
-              "file": "TIMS/Site.spec.ts",
-              "line": 123,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create Lease-Out Anchor Tenant from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-6eddb195b61f6b2d9848",
-              "file": "TIMS/Site.spec.ts",
-              "line": 132,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create Lease-Out 3rd Party Tenant from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-9fe2470eb145a425e6bf",
-              "file": "TIMS/Site.spec.ts",
-              "line": 141,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create GLBO from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-3f4408589151c3e3aaaf",
-              "file": "TIMS/Site.spec.ts",
-              "line": 150,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Remove Unused Equipment Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-ae5d99c5084708a6a695",
-              "file": "TIMS/Site.spec.ts",
-              "line": 159,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Equipment Relocation Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-44c5b51081e8dcba6e0f",
-              "file": "TIMS/Site.spec.ts",
-              "line": 169,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Higher Position Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-f127562311f75f25dd0d",
-              "file": "TIMS/Site.spec.ts",
-              "line": 179,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Signal Repeat Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-11b8c85ffab07e21d7b1",
-              "file": "TIMS/Site.spec.ts",
-              "line": 189,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Site Decommissioning Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-dcad73ce2a3fa9488bee",
-              "file": "TIMS/Site.spec.ts",
-              "line": 199,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can create new Site Offer by TowerCo Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-805bda438619a6591a2a",
-              "file": "TIMS/Site.spec.ts",
-              "line": 209,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can Upload file from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-6fdd903b0f3e8d6d76b0",
-              "file": "TIMS/Site.spec.ts",
-              "line": 220,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can Create Site contact from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-ed55a3df51e6dfbf1a4b",
-              "file": "TIMS/Site.spec.ts",
-              "line": 226,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can Create Site Access Request from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-49b345cd44fb44c305e3",
-              "file": "TIMS/Site.spec.ts",
-              "line": 237,
-              "column": 9
-            },
-            {
-              "title": "@Regression-The User can Create Job from Site successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "7d1f4551afd502c54094-781a8b9dd15a0744123f",
-              "file": "TIMS/Site.spec.ts",
-              "line": 248,
-              "column": 9
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "TIMS\\SiteContact.spec.ts",
-      "file": "TIMS/SiteContact.spec.ts",
-      "column": 0,
-      "line": 0,
-      "specs": [],
-      "suites": [
-        {
-          "title": "DE Create new Site Contact",
-          "file": "TIMS/SiteContact.spec.ts",
-          "line": 12,
-          "column": 6,
-          "specs": [
-            {
-              "title": "@Regression-The User can create new Site Contact successfully",
-              "ok": true,
-              "tags": [
-                "Regression-The"
-              ],
-              "tests": [
-                {
-                  "timeout": 150000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "TIMSPARTIAL",
-                  "projectName": "TIMSPARTIAL",
-                  "results": [],
-                  "status": "skipped"
-                }
-              ],
-              "id": "82b2f58fc0cf92dc0169-353707e1c8b21f9d7986",
-              "file": "TIMS/SiteContact.spec.ts",
-              "line": 29,
-              "column": 9
-            }
-          ]
-        }
-      ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-10-06T18:17:01.089Z",
-    "duration": 8825.743,
-    "expected": 0,
-    "skipped": 51,
-    "unexpected": 0,
+    "startTime": "2024-10-07T10:52:00.450Z",
+    "duration": 73328.91000000015,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }
