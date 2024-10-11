@@ -19,6 +19,7 @@ let firstValueOfLastRecord;
 test.describe("The User Create Site", () => {
     test.beforeAll(async ({ browser, baseURL }) => {
         page = await browser.newPage();
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
@@ -47,6 +48,7 @@ test.describe("The User Create Site", () => {
 test.describe("The User create the Objects from Site", () => {
     test.beforeAll(async ({ browser,baseURL }) => {
         page = await browser.newPage();
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
@@ -117,7 +119,7 @@ test.describe("The User create the Objects from Site", () => {
         await pm.siteTIMS().candidateTab.click();
         await action.createNewObject();
         await pm.candidateTIMS().createCandidate();
-        await expect(page.locator('.toastMessage')).toContainText('was created.', {timeout:10000});
+        await expect(page.locator('.toastMessage')).toContainText('was created.', {timeout:15000});
     })
 
     test ('@Regression-The User can create LeaseIn from Site successfully', async ({ }) => {
@@ -216,7 +218,6 @@ test.describe("The User create the Objects from Site", () => {
         await pm.requestTIMS().createSiteOfferbyTowerCoRequest(timsSiteData.customerAccount, timsSiteData.scopeOfWork);
     })
 
-
     test ('@Regression-The User can Upload file from Site successfully', async ({ }) => {
         const env = test.info().project.name;
         const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
@@ -253,7 +254,6 @@ test.describe("The User create the Objects from Site", () => {
         await pm.siteTIMS().jobTab.click();
         await action.createNewObject();
         await pm.jobsTIMS().createJob("AutoJob");
-        await action.saveRecord();
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
     })
 })

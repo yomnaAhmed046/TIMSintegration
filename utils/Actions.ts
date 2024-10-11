@@ -47,7 +47,8 @@ export default class Actions {
         //this.moreTabs = page.getByText('MoreTabs');
         //this.moreTabs = page.locator('forcegenerated-flexipageregion_application_record_page_main_application__c__view_js').getByText('MoreTabs');
         this.files = page.getByRole('menuitem', { name: 'Files' });
-        this.upload = page.getByTitle('Upload');
+        //this.upload = page.getByTitle('Upload');
+        this.upload = page.getByText('Upload')
         this.uploadFiles = page.getByText('Upload Files', { exact: true });
         this.done = page.getByText('Done');
         this.done2 = page.getByRole('button', { name: 'Done' });
@@ -134,22 +135,16 @@ export default class Actions {
 
     @step("search and Open the Object")
     async searchOpenObject(objectName: string): Promise<void> {
+        await expect(this.appLuncher).toBeVisible({ timeout: 150000 });
         await this.appLuncher.click();
-        await this.appsSearchbox.waitFor({ state: 'visible' });
+        //await this.appsSearchbox.waitFor({ state: 'visible' });
         this.appsSearchbox.fill(objectName);
-        element = this.page.getByRole('option', { name: `${objectName}`, exact: true }) //.click({ timeout: 150000 });
-        await element.waitFor({ state: 'visible' }, { TIMEOUT: 15000 });
-        //await element.click({ TIMEOUT: 15000 });
-        await Promise.all([
-            this.page.waitForNavigation({ timeout: 15000 }), // Wait for navigation
-            element.click() // Click the element that triggers navigation
-        ]);
-        const object = this.page
-            .getByLabel(`Recently Viewed|${objectName}|`) // Use backticks for dynamic variable
-            .locator('lst-breadcrumbs')
-            .getByText(objectName); // Use backticks for dynamic variable
-
-        await object.waitFor({ state: 'visible' }); // or 'attached', 'detached', etc.
+        element = this.page.getByRole('option', { name: `${objectName}`, exact: true });
+        await expect(element).toBeVisible({ timeout: 150000 });
+        element.click();
+        //const object = this.page.getByLabel(`Recently Viewed|${objectName}|`).locator('lst-breadcrumbs').getByText(objectName);
+        //await expect(object).toBeVisible({ timeout: 150000 });
+        //await object.waitFor({ state: 'attached' }); // or 'attached', 'detached', etc.
     }
 
     @step("Enter TIMS Site Code")

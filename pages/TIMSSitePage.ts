@@ -116,7 +116,8 @@ export default class TIMSsiteInfoPage {
     this.candidateTab = page.getByRole('tab', { name: 'Candidates' });
     this.leaseTab = page.getByRole('tab', { name: 'Leases' });
     this.requestTab = page.getByRole('tab', { name: 'Requests' });
-    this.siteContactTab = page.locator('a').filter({hasText: 'Site Contacts'});
+    //this.siteContactTab = page.locator('a').filter({hasText: 'Site Contacts'});
+    this.siteContactTab = page.getByRole('menuitem', { name: 'Site Contacts' });
     this.accessTab = page.getByRole('tab', {name: 'Access'});
     this.jobTab = page.getByRole('tab', {name: 'Jobs'});
     

@@ -6,6 +6,7 @@ let pm;
 
 test.describe("Login in TIMS", () => {
     test.beforeEach(async ({ page }) => {
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
     });
 

@@ -2,6 +2,7 @@ import { Page, Locator} from 'playwright';
 import { expect } from '@playwright/test'
 import Actions from '../utils/Actions';
 import { step } from '../utils/StepDecorator';
+import { TIMEOUT } from 'dns';
 
 export default class TIMSRequestPage {
     readonly page: Page;
@@ -33,6 +34,7 @@ export default class TIMSRequestPage {
         this.actionObj = new Actions(page);
         this.requestPage = page.getByRole('link', { name: 'Requests', exact: true});
         this.submitRequest = page.getByText('Submit Request');
+        //this.submitRequest= page.getByRole('button', { name: 'Submit Request' })
         this.submit = page.getByRole('button', { name: 'Submit' });
         this.removeUnusedEquipment = page.locator('label').filter({ hasText: 'Remove Unused Equipment' }).locator('span').first();
         this.equipmentRelocation = page.locator('label').filter({ hasText: 'Equipment Relocation (PIM)' }).locator('span').first();
@@ -80,8 +82,8 @@ export default class TIMSRequestPage {
         await this.forcedDecommissioning.click();
         await this.page.getByRole('option', { name: 'Yes' }).locator('span').nth(1).click();
         await this.detailsOfDecommission.fill("test");
-        await this.removalDateActiveEquipment.fill("28.05.2024");
-        await this.removalDatePassiveEquipment.fill("28.05.2024");
+        await this.removalDateActiveEquipment.fill("09/15/2024");
+        await this.removalDatePassiveEquipment.fill("09/15/2024");
     }
  
     @step("Select Reques type")
@@ -134,7 +136,7 @@ export default class TIMSRequestPage {
         await this.page.getByRole('option', { name: 'Yes' }).locator('span').nth(1).click()
         await this.removalDate.click();
         await this.page.getByRole('button', { name: '23' }).click();
-        // this.actionObj.saveRecord();
+        this.actionObj.saveRecord();
     }
 
     @step("create Equipment Relocation Request ")
@@ -184,10 +186,11 @@ export default class TIMSRequestPage {
 
     @step("Submit the Request ")
     async submitTheRequest():Promise<void>  {
-       await this.submitRequest.click();
-       await this.submit.click();
+       await this.submitRequest.click( { timeout: 15000 });
+       await expect(this.page.getByRole('button', { name: 'Cancel' })).toBeVisible();
+       await this.submit.click( { timeout: 15000 });
+       await expect(this.page.locator('.toastMessage')).toContainText('Request has been submitted.', { timeout: 20000 });
        //await expect(this.page.locator('records-highlights-details-item').filter({ hasText: 'In ProgressRequest Status' }).locator('lightning-formatted-text')).toBeVisible({ timeout: 15000 });
-       await expect(this.page.locator('.toastMessage')).toContainText('Request has been submitted.', { timeout: 15000 });
     }
 
 }

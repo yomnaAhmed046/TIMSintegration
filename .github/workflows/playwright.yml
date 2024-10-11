@@ -21,13 +21,12 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    # Install Playwright Browsers
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+    # Install only Chrome browser
+    - name: Install Chrome Browser
+      run: npx playwright install chromium --with-deps
 
-    - name: Run Playwright tests
-      run: npx playwright test Lease.spec.ts
-      continue-on-error: true  # Optional
+    - name: Run Playwright tests in Chrome
+      run: npx playwright test Lease.spec.ts --browser=chromium --channel=chrome
 
     - name: Generate Allure Results
       run: npx allure generate allure-results --clean -o allure-report
@@ -39,4 +38,4 @@ jobs:
         path: allure-report
     
     - name: List Allure Results Directory
-      run: ls -la allure-results
+      run: ls -la allure-results        

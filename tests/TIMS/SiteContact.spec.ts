@@ -12,6 +12,7 @@ let action;
 test.describe("DE Create new Site Contact", () => {
     test.beforeEach(async ({ page, baseURL }) => {
         pm = new PageManager(page);
+        ['--window-size=1920,1080'];
         action = new Action(page);
         const env = test.info().project.name;
         const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
