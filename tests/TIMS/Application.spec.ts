@@ -21,6 +21,7 @@ test.describe.serial("Create Modify Existing Site Applications then Submit and A
     })
 
     test("@Regression 01.Login to TIMS successfully", async ({ baseURL }) => {
+        ['--window-size=1920,1080'];
         const env = test.info().project.name;
         const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
         const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
@@ -69,6 +70,7 @@ test.describe.serial("Creat New BTS Application then Submit and Approve Successf
     })
 
     test("@Regression 01.Login to TIMS successfully", async ({ baseURL }) => {
+        ['--window-size=1920,1080'];
         const env = test.info().project.name;
         const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
         const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
@@ -104,12 +106,12 @@ test.describe.serial("Creat the New Co-location Site Application then Submit and
         page = await browser.newPage();
         pm = new PageManager(page);
         action = new Action(page);
-        page.context().clearCookies()
     })
 
     test("@Regression-01.Login to TIMS successfully", async ({ baseURL }) => {
         // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
         // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
+        ['--window-size=1920,1080'];
         const env = test.info().project.name;
         const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
         const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
@@ -118,7 +120,6 @@ test.describe.serial("Creat the New Co-location Site Application then Submit and
         }
         await pm.loginTIMS().navigateToURL(`${baseURL}`);
         await pm.loginTIMS().login(username, password);
-        page.context().clearCookies();
     });
 
     test('@Regression-02.The User can create New Co-location Site Application successfully', async ({ }) => {
@@ -132,18 +133,15 @@ test.describe.serial("Creat the New Co-location Site Application then Submit and
         const appID = await action.getCodeValue();
         console.log("the New Co-location Site Application ID: " + appID);
         await action.addRecordtoExcel(appID, 1);
-        page.context().clearCookies();
     })
 
     test('@Regression-03.The User Submit the New Co-location Site Application for Approval successfully', async ({ }) => {
         await pm.appTIMS().submitForApproval();
-        page.context().clearCookies();
     })
 
     test('@Regression-04.The User Approve the the New Co-location Site Application successfully', async ({ }) => {
         await pm.appTIMS().openWorkflowTab();
         await pm.appTIMS().approveApplication();
-        page.context().clearCookies();
     })
 })
 
@@ -155,6 +153,7 @@ test.describe.serial("Creat Site Exit by Customer Application then Submit and Ap
     })
 
     test("@Regression-01.Login to TIMS successfully", async ({ baseURL }) => {
+        ['--window-size=1920,1080'];
         // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
         // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         const env = test.info().project.name;

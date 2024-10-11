@@ -11,6 +11,7 @@ let action;
 
 test.describe("DE Create new Site Access Request", () => {
     test.beforeEach(async ({ page, baseURL }) => {
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
@@ -35,9 +36,9 @@ test.describe("DE Create new Site Access Request", () => {
         await action.enterTIMSSiteCode(TIMSSiteCode);
         await action.saveRecord();
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
-        const siteContactID = await action.getCodeValue();
-        console.log("###### Site Contact ID: " + siteContactID);
-        await action.addRecordtoExcel(siteContactID, 6);
+        const siteAccess = await action.getCodeValue();
+        console.log("###### Site Contact ID: " + siteAccess);
+        await action.addRecordtoExcel(siteAccess, 8);
     })
 
 })

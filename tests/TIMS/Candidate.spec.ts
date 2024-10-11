@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test'
 import { PageManager } from '../../pages/PageManager';
-import * as timsLoginData from '../../TestData/TIMS/userLogin.json'
-import * as timsProjectData from '../../TestData/TIMS/projectData.json'
 import Action from '../../utils/Actions'
 import * as dotenv from 'dotenv';
 
@@ -12,6 +10,7 @@ let action;
 
 test.describe("DE Create new Candidate", () => {
     test.beforeEach(async ({ page, baseURL }) => {
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;

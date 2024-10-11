@@ -11,6 +11,7 @@ let action;
 
 test.describe("DE Create new Job ", () => {
     test.beforeEach(async ({ page, baseURL }) => {
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
@@ -26,7 +27,7 @@ test.describe("DE Create new Job ", () => {
         await pm.loginTIMS().login(username, password);
     });
 
-    test('@Regression-The User can create new Site Access Request successfully', async ({ page }) => {
+    test('@Regression-The User can create new Job successfully', async ({ page }) => {
         const env = test.info().project.name;
         const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
         //await action.searchOpenObject("Jobs");

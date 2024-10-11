@@ -12,6 +12,7 @@ let action;
 
 test.describe("DE Create new Projects", () => {
     test.beforeEach(async ({ page, baseURL }) => {
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
