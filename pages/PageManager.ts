@@ -7,6 +7,9 @@ import TIMSProjectPage from '../pages/TIMSProjectPage.ts';
 import TIMSRequestPage from '../pages/TIMSRequestPage.ts';
 import TIMSLeasePage from '../pages/TIMSLeasePage.ts';
 import TIMSCandidatePage  from "../pages/TIMSCandidatePage.ts";
+import TIMSSiteContactsPage from "./TIMSSiteContactsPage.ts";
+import TIMSAccessPage from "./TIMSAccessPage.ts";
+import TIMSJobsPage from "./TIMSJobsPage.ts";
 
 //Integration Imports
 import CommanderLoginPage from '../pages/Commander-loginPage';
@@ -16,6 +19,7 @@ import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
 
 import V5LandingPage from '../pages/V5-landingPage.ts'
 import V5SiteInfoPage from "./V5-SiteInfoPage.ts";
+
 
 export class PageManager {
 
@@ -28,6 +32,9 @@ export class PageManager {
     private readonly requestObj: TIMSRequestPage;
     private readonly leaseObj: TIMSLeasePage;
     private readonly cadidateObj: TIMSCandidatePage;
+    private readonly siteContactObj: TIMSSiteContactsPage;
+    private readonly accessObj: TIMSAccessPage;
+    private readonly jobObj: TIMSJobsPage;
 
     private readonly commanderLoginObj: CommanderLoginPage;
     private readonly commaderQuickAccObj: CommanderQuickAccessPage;
@@ -49,6 +56,9 @@ export class PageManager {
         this.requestObj = new TIMSRequestPage(this.page);
         this.leaseObj = new TIMSLeasePage(this.page);
         this.cadidateObj = new TIMSCandidatePage(this.page);
+        this.siteContactObj = new TIMSSiteContactsPage(this.page);
+        this.accessObj = new TIMSAccessPage(this.page);
+        this.jobObj = new TIMSJobsPage(this.page);
 
         this.commanderLoginObj = new CommanderLoginPage(this.page);
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
@@ -89,6 +99,18 @@ export class PageManager {
 
     candidateTIMS() {
         return this.cadidateObj;
+    }
+
+    siteContactTIMS() {
+        return this.siteContactObj;
+    }
+
+    accessTIMS() {
+        return this.accessObj;
+    }
+
+    jobsTIMS() {
+        return this.jobObj;
     }
 
     loginCommander() {

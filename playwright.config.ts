@@ -10,16 +10,49 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+//dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+
+
+
 export default defineConfig({
+<<<<<<< HEAD
+=======
+  workers: 3,
+  grep: testPlanFilter(),
+  //reporter: [["line"], ["allure-playwright"]],
+  reporter: [
+    ["line"],
+    ['dot'],
+    ['json', { outputFile: 'report/test-results.json' }],
+    [
+      "allure-playwright",
+      {
+        detail: true,
+        outputFolder: "allure-results",
+        suiteTitle: true,
+        categories: [
+          {
+            name: "Outdated tests",
+            messageRegex: ".*FileNotFound.*",
+          },
+        ],
+        environmentInfo: {
+          framework: "playwright",
+        },
+      },
+    ],
+  ],
+>>>>>>> master
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  //retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : 1,
+  //workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html'],
@@ -31,7 +64,8 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    locale: 'de-DE',              // Set the locale to German
+    timezoneId: 'Europe/Berlin',
     launchOptions: {
       args: ["--start-maximized"],
     },
@@ -39,25 +73,49 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
+
   projects: [
+    // {
+    //   name: 'TIMSFULL',
+    //   use: {
+    //     baseURL: process.env.TIMSFULL_BASE_URL,
+    //     browserName: 'chromium',
+    //     viewport: null,
+
+    //     screenshot: 'only-on-failure',
+    //     //trace: 'retain-on-failure',
+    //   },
+    //   retries: 1,
+    //   timeout: 90000,
+    // },
+    
     {
-      name: 'chromium',
-      use: {/*...devices['Desktop Chrome'],*/
-        viewport: null,  
-        },
-      timeout: 180000
+      name: 'TIMSPARTIAL',
+      use: {
+        baseURL: process.env.TIMSPARTIAL_BASE_URL,
+        browserName: 'chromium',
+        //channel: 'msedge',
+        viewport: null,
+        screenshot: 'only-on-failure',
+      },
+      timeout: 150000,
+      retries: 1,
     },
 
     // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
+    //   name: 'PREPROD',
+    //   use: {
+    //     baseURL: process.env.PREPROD_BASE_URL,
+    //     browserName: 'firefox',
+    //devices['Desktop Firefox'],
+    //     channel: undefined, // Ensure this is undefined or simply remove it
+    //     viewport: null,
+    //     screenshot: 'only-on-failure',
+    //     trace: 'retain-on-failure'
+    //   },
+    //   timeout: 90000
+    //   // retries: 1,
+    // }
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',

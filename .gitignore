@@ -24,3 +24,4 @@ allure-report/
 /allure-results/
 /allure-report/
 .env
+playwright.config.ts
