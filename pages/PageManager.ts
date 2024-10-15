@@ -18,6 +18,7 @@ import CommanderHomePage from '../pages/Commander_homePage';
 import CommanderEntityMNGPage from '../pages/Commander-entityMNGpage';
 
 import V5LandingPage from '../pages/V5-landingPage.ts'
+import V5SiteInfoPage from "./V5-SiteInfoPage.ts";
 
 
 export class PageManager {
@@ -41,6 +42,8 @@ export class PageManager {
     private readonly commanderEntityObj: CommanderEntityMNGPage;
 
     private readonly v5LandingObj: V5LandingPage;
+    private readonly v5siteInfoObj: V5SiteInfoPage;
+
 
 
     constructor(page: Page) {
@@ -62,6 +65,8 @@ export class PageManager {
         this.commanderHomeObj = new CommanderHomePage(this.page);
         this.commanderEntityObj = new CommanderEntityMNGPage(this.page);
         this.v5LandingObj = new V5LandingPage(this.page);
+        this.v5siteInfoObj = new V5SiteInfoPage(this.page);
+
     }
 
     // actionsTIMS(){
@@ -126,5 +131,9 @@ export class PageManager {
 
     v5LandingPage(){
         return this.v5LandingObj;
+    }
+
+    v5SiteInfoPage(){
+        return this.v5siteInfoObj;
     }
 }

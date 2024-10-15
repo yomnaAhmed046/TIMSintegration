@@ -2,6 +2,8 @@ import { expect } from '@playwright/test';
 import { Page, Locator, FrameLocator } from 'playwright';
 import Actions from '../utils/Actions';
 import { step } from '../utils/StepDecorator';
+import { SelfHealingLocator } from '../utils/SelfHealingLocator';
+
 
 export default class TIMSsiteInfoPage {
   readonly page: Page;
@@ -43,6 +45,7 @@ export default class TIMSsiteInfoPage {
   readonly siteStatusEditBtn: Locator;
   readonly siteStatusList: Locator;
   readonly siteStatusOption: Locator;
+  readonly submittedSiteStatus: Locator;
   readonly criticalSiteList: Locator;
   readonly criticalSiteYes: Locator;
   readonly windZoneList: Locator;
@@ -70,7 +73,7 @@ export default class TIMSsiteInfoPage {
   readonly ESmarketOption: Locator;
   readonly ESRegion: Locator;
   readonly ESCountry: Locator;
-  readonly ESwindZoneOption: Locator;
+  readonly ESwindZoneOption: SelfHealingLocator; //wind zone uses self healing mechanism
 
   //IE
   readonly IEmarketOption: Locator;
@@ -85,25 +88,25 @@ export default class TIMSsiteInfoPage {
   readonly HUCountry: Locator;
   readonly HUwindZoneOption: Locator;
 
-    //PT
-    readonly PTmarketOption: Locator;
-    readonly PTRegion: Locator;
-    readonly PTCountry: Locator;
-    readonly PTwindZoneOption: Locator;
- 
+  //PT
+  readonly PTmarketOption: Locator;
+  readonly PTRegion: Locator;
+  readonly PTCountry: Locator;
+  readonly PTwindZoneOption: Locator;
+
 
   constructor(page: Page) {
     this.page = page;
     this.action = new Actions(page);
     this.sitesTab = page.getByRole('button', { name: 'Sites List' });
     this.newSiteButton = page.getByRole('menuitem', { name: 'New Site' });
-   this.siteStatusEditBtn = page.locator('div:nth-child(5) > .slds-grid > button').first();
+    this.siteStatusEditBtn = page.locator('div:nth-child(5) > .slds-grid > button').first();
     this.siteStatusList = page.locator('[name="sitetracker__Site_Status__c"]');
     this.siteStatusOption = page.locator('span').filter({ hasText: 'Pipeline' }).first();
+    this.submittedSiteStatus = page.locator('lightning-output-field').filter({ hasText: 'Site Status (TDb)Site Status' }).locator('lightning-formatted-text');
     this.criticalSiteList = page.locator('[name="Critical_Site__c"]');
     this.criticalSiteYes = page.locator('span').filter({ hasText: 'Yes' }).first();
-    //this.windZoneList = page.getByText('*Wind Zone', { exact: true });
-    this.windZoneList=page.locator('xpath=//*[@name="Wind_Zone__c"]');
+    this.windZoneList = page.locator('xpath=//*[@name="Wind_Zone__c"]');
     this.saveBtn_Details = page.locator('form').filter({ hasText: 'VF Customer Sharing MarketVF' }).locator('button[name="update"]');
     this.saveBtn_Address = page.locator('form').filter({ hasText: 'AddressAddressCountryCountry' }).locator('button[name="update"]');
     //need to pass it as variable to be dynamic record
@@ -136,9 +139,9 @@ export default class TIMSsiteInfoPage {
     this.saveBtn = page.locator('.slds-button.slds-button_brand');
     //DE
     this.DEmarketOption = page.getByRole('option', { name: 'DE', exact: true }).locator('span').nth(1);
-   // this.DEwindZoneOption = page.locator('span').filter({ hasText: '1' }).nth(1);
-   this.DEwindZoneComboBox= page.locator('xpath=//button[@name="Wind_Zone__c"]');
-   this.DEwindZoneOption = page.getByTitle('0', { exact: true });
+    // this.DEwindZoneOption = page.locator('span').filter({ hasText: '1' }).nth(1);
+    this.DEwindZoneComboBox = page.locator('xpath=//button[@name="Wind_Zone__c"]');
+    this.DEwindZoneOption = page.getByTitle('0', { exact: true });
     this.territoryField = page.locator('lightning-output-field').filter({ hasText: 'Territory (TDb)Territory (TDb' }).locator('lightning-formatted-lookup');
     this.territorySearch = page.getByPlaceholder('Search Territories...');
     this.territoryOption = page.locator('span').filter({ hasText: 'New Test' }).nth(4);
@@ -147,7 +150,11 @@ export default class TIMSsiteInfoPage {
     this.ESmarketOption = page.getByRole('option', { name: 'ES', exact: true }).locator('span').nth(1);
     this.ESCountry = page.getByRole('option', { name: 'ES', exact: true }).locator('span').nth(1);
     this.ESRegion = page.getByRole('option', { name: 'R1' }).locator('span').nth(1);
-    this.ESwindZoneOption = page.getByTitle('A', { exact: true });
+    // self healing locator mechanism for wind zone
+    this.ESwindZoneOption = new SelfHealingLocator(page, [
+      () => page.getByTitle('A', { exact: true }),
+      () => page.getByTitle('B', { exact: true })
+    ]);
 
 
     //IE
@@ -163,11 +170,11 @@ export default class TIMSsiteInfoPage {
     this.HURegion = page.locator('xpath=//span[@title="Pest"]');
     this.HUwindZoneOption = page.getByTitle('N/A', { exact: true });
 
-   //PT
-   this.PTCountry = page.getByRole('option', { name: 'PT', exact: true }).locator('span').nth(1);
-   this.PTmarketOption = page.locator('xpath=//*[@aria-label="Market"]//span[@title="PT"]');
-   this.PTRegion = page.locator('xpath=//span[@title="NORTE"]');
-  this.PTwindZoneOption = page.getByTitle('0', { exact: true });
+    //PT
+    this.PTCountry = page.getByRole('option', { name: 'PT', exact: true }).locator('span').nth(1);
+    this.PTmarketOption = page.locator('xpath=//*[@aria-label="Market"]//span[@title="PT"]');
+    this.PTRegion = page.locator('xpath=//span[@title="NORTE"]');
+    this.PTwindZoneOption = page.getByTitle('0', { exact: true });
   }
 
   //Function to get the tims code
@@ -175,6 +182,13 @@ export default class TIMSsiteInfoPage {
   async getTIMSCode(): Promise<string> {
     const timsCode = await this.TIMSsiteCode.innerText();
     return timsCode;
+  }
+
+  //Get tims site status
+  @step("Store TIMS site status")
+  async getTimsSiteStaus(){
+    const timsSiteStatus = await this.submittedSiteStatus.innerText();
+    return timsSiteStatus;
   }
 
   @step("Create new site")
@@ -203,7 +217,7 @@ export default class TIMSsiteInfoPage {
   }
 
   @step("Create Smart ES site in TIMS")
-  async createSmartESSite(siteName: string, EScompanyCode:string, lat: string, long: string): Promise<void> {
+  async createSmartESSite(siteName: string, EScompanyCode: string, lat: string, long: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.ESmarketOption.click();
@@ -237,7 +251,7 @@ export default class TIMSsiteInfoPage {
     await this.saveBtn.click();
   }
   @step("Create Smart HU site in TIMS")
-  async createSmartHUSite(siteName: string, HUCompanyCode: string,  lat: string, long: string) :Promise<void>{
+  async createSmartHUSite(siteName: string, HUCompanyCode: string, lat: string, long: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.HUmarketOption.click();
@@ -247,14 +261,14 @@ export default class TIMSsiteInfoPage {
     await this.HUCountry.click();
     await this.Region.click();
     await this.HURegion.click();
-   await this.action.enterHUCompanyCode(HUCompanyCode);
+    await this.action.enterHUCompanyCode(HUCompanyCode);
     await this.lat.fill(lat);
     await this.long.fill(long);
     await this.saveBtn.click();
   }
 
   @step("Create Smart PT site in TIMS")
-  async createSmartPTSite(siteName: string, PTCompanyCode: string,  lat: string, long: string) :Promise<void>{
+  async createSmartPTSite(siteName: string, PTCompanyCode: string, lat: string, long: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.marketList.click();
     await this.PTmarketOption.click();
@@ -264,7 +278,7 @@ export default class TIMSsiteInfoPage {
     await this.PTCountry.click();
     await this.Region.click();
     await this.PTRegion.click();
-   await this.action.enterPTCompanyCode(PTCompanyCode);
+    await this.action.enterPTCompanyCode(PTCompanyCode);
     await this.lat.fill(lat);
     await this.long.fill(long);
     await this.saveBtn.click();
@@ -283,17 +297,11 @@ export default class TIMSsiteInfoPage {
     await this.siteStatusOption.click();
     await this.criticalSiteList.click();
     await this.criticalSiteYes.click();
-    console.log("critical site done");
     await this.windZoneList.dblclick();
-    console.log("wind list selected");
     await this.DEwindZoneComboBox.click();
-    console.log("wind list 2 selected");
     await this.DEwindZoneOption.click();
-    console.log("wind option selected");
     await this.saveBtn_Details.click();
-    console.log("save btn 1 done");
     await this.territoryField.dblclick();
-    console.log("territory btn selected");
     await this.territorySearch.fill(territory);
     await this.territorySearch.click();
     await expect(this.territoryOption).toBeVisible();
@@ -310,7 +318,11 @@ export default class TIMSsiteInfoPage {
     await this.criticalSiteList.click();
     await this.criticalSiteYes.click();
     await this.windZoneList.click();
-    await this.ESwindZoneOption.click();
+    // await this.ESwindZoneOption.click();
+    //wind zone self healing mechanism
+    const ESwindZoneSelection = await this.ESwindZoneOption.getLocator();
+    await ESwindZoneSelection.click();
+
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
   }
@@ -333,7 +345,7 @@ export default class TIMSsiteInfoPage {
     console.log("update function started");
     await expect(this.siteStatusEditBtn).toBeVisible();
     console.log("visible");
-   await this.siteStatusEditBtn.click();
+    await this.siteStatusEditBtn.click();
     await this.siteStatusEditBtn.click();
     console.log("site edit");
     await this.siteStatusList.click();
@@ -361,7 +373,7 @@ export default class TIMSsiteInfoPage {
     console.log("critical site done");
     await this.windZoneList.click();
     await this.PTwindZoneOption.click();
-    console.log("critical site done");
+    console.log("wind zone done");
     await this.saveBtn_Details.click();
     await expect(this.saveBtn_Details).not.toBeVisible();
   }

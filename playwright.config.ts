@@ -1,8 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-import { testPlanFilter } from "allure-playwright/dist/testplan";
-import * as dotenv from 'dotenv';
-
-dotenv.config(); // Load environment variables from .env file
 
 /**
  * Read environment variables from file.
@@ -20,6 +16,8 @@ dotenv.config(); // Load environment variables from .env file
 
 
 export default defineConfig({
+<<<<<<< HEAD
+=======
   workers: 3,
   grep: testPlanFilter(),
   //reporter: [["line"], ["allure-playwright"]],
@@ -45,6 +43,7 @@ export default defineConfig({
       },
     ],
   ],
+>>>>>>> master
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -55,7 +54,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   //workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  //reporter: 'html',
+  reporter: [
+    ['html'],
+    ['allure-playwright']
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
