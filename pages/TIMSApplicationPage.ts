@@ -1,5 +1,7 @@
-import { Page, Locator } from 'playwright';
-import Actions from './Actions';
+import { Page, Locator} from 'playwright';
+import { expect } from '@playwright/test'
+import Actions from '../utils/Actions';
+import {step} from '../utils/StepDecorator'
 
 export default class TIMSApplicationPage {
     readonly page: Page;
@@ -25,7 +27,14 @@ export default class TIMSApplicationPage {
     //Loctors for submit Application
     readonly searchBoxforApp: Locator;
     readonly appRecord: Locator;
+    readonly comments:Locator;
 
+    //Locators for Submit for Approval
+    readonly submitForApprovalBtn: Locator;
+    readonly submitBtn: Locator;
+    readonly workflowTab: Locator;
+    readonly externalApproveBtn: Locator;
+    readonly internalApproveBtn: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -50,17 +59,25 @@ export default class TIMSApplicationPage {
         this.removalDate = page.getByLabel('*Removal date');
 
         // Locators for Submit the Application
-        this.searchBoxforApp = page.locator(`[name='Application-search-input']`);
-        this.appRecord = page.getByRole('link', { name: 'A153454' });
-
+        //this.searchBoxforApp = page.locator(`[name='Application-search-input']`);
+        this.submitForApprovalBtn = page.getByText('Submit for Approval');
+        this.submitBtn = page.getByRole('button', { name: 'Submit', exact: true });
+        this.comments = page.getByText('Comments');
+        
+        this.workflowTab = page.locator('a').filter({ hasText: 'Workflow' });
+        this.externalApproveBtn = page.locator('a').filter({ hasText: /^Approve$/ })
+        this.internalApproveBtn = page.getByLabel('Approve Application').getByRole('button', { name: 'Approve' });
+        
     }
-
-    async openApplicationPage() {
+    
+    @step("Open Appliaction Page")
+    async openApplicationPage() :Promise<void>{
         await this.applicationTab.click();
         this.actionObj.createNewObject();
     }
-
-    async selectAppType(appType: string) {
+    
+    @step("Select Application tybe to be created")
+    async selectAppType(appType: string) :Promise<void>{
         switch (appType) {
             case "modifyExistingSite":
                 await this.modifyExistingSite.click();
@@ -85,14 +102,16 @@ export default class TIMSApplicationPage {
                 console.log("Unknown Application Selection.");
         }
     }
-
-    async createModifyExistingSiteApp(customer: string, scopeOfWork: string) {
+    
+    @step("Create Modify Existing Site Application")
+    async createModifyExistingSiteApp(customer: string, scopeOfWork: string):Promise<void> {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.actionObj.saveRecord();
     }
-
-    async createNewBTSApp(customer: string, scopeOfWork: string, lat: string, long: string, radius: string) {
+    
+    @step("Create New BTS Application")
+    async createNewBTSApp(customer: string, scopeOfWork: string, lat: string, long: string, radius: string) :Promise<void>{
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.BTSCommitmentSite.click();
@@ -103,14 +122,16 @@ export default class TIMSApplicationPage {
         await this.actionObj.saveRecord();
     }
 
-    async createNewColocationSiteApp(customer: string, scopeOfWork: string) {
+    @step("Create New Colocation Application")
+    async createNewColocationSiteApp(customer: string, scopeOfWork: string):Promise<void> {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.actionObj.enterSiteConfig();
         await this.actionObj.saveRecord();
     }
-
-    async createSiteExitbyCustomerApp(customer: string, scopeOfWork: string, removalDate: string) {
+    
+    @step("Create Site Exit by Customer Application")
+    async createSiteExitbyCustomerApp(customer: string, scopeOfWork: string, removalDate: string):Promise<void> {
         await this.actionObj.enterCustomerAccount(customer);
         await this.actionObj.enterScopeOfWork(scopeOfWork);
         await this.removalDate.click();
@@ -118,8 +139,27 @@ export default class TIMSApplicationPage {
         await this.actionObj.saveRecord();
     }
 
+    @step("Submit the Application for Approval")
+    async submitForApproval():Promise<void> {
+        await this.submitForApprovalBtn.click();
+        await expect(this.page.getByText('Comments')).toBeVisible({ timeout: 60000 });
+        await this.comments.fill("Submit Application");
+        await this.submitBtn.click();
+    }
 
+    @step("Open the Workflow Tab")
+    async openWorkflowTab():Promise<void> {
+        await this.workflowTab.click();
+    }
 
+    @step("Approve the Application")
+    async approveApplication() :Promise<void>{
+        await this.externalApproveBtn.click();
+        await this.internalApproveBtn.click();
+    }
 
-
+    @step("Expect that the application created successfull")
+    async verfiySuccessMessage() :Promise<void>{
+        await expect(this.page.locator('.toastMessage')).toContainText('was created.', { timeout: 90000 });
+    }
 }

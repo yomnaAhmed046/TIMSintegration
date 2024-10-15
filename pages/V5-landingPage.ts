@@ -12,8 +12,6 @@ export default class V5LandingPage {
     readonly activeState: Locator;
     readonly openSite: Locator;
 
-
-
     constructor(page: Page) {
         this.page = page
         this.timsSearchBox = page.getByPlaceholder('Enter TIMS code');
@@ -27,7 +25,6 @@ export default class V5LandingPage {
 
     @step("Search for the smart site in V5 site configurator")
     async searchForSmartSite(timsSiteCode: string): Promise<void> {
-
         await expect(this.timsSearchBox).toBeVisible({ timeout: 10000 })
         await this.timsSearchBox.fill(timsSiteCode);
         await this.page.keyboard.press('Enter');
@@ -42,11 +39,11 @@ export default class V5LandingPage {
             }
         });
         console.log(`Found Smart Site in V5: ${timsSiteCode}`);
-
         await SiteCode.click();
         await this.ellipsisMenu.click();
         await this.approveSite.click();
-        await expect(this.activeState).toHaveText('Active', {timeout:30000});
+        await this.activeState.waitFor({ state: 'visible', timeout: 40000 });
+        await expect(this.activeState).toHaveText('Active', { timeout: 40000 }); 
         await this.openSite.click();
     }
 }

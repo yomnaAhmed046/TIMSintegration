@@ -1,0 +1,162 @@
+{
+  "config": {
+    "configFile": "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\playwright.config.ts",
+    "rootDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "line",
+        null
+      ],
+      [
+        "dot",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "report/test-results.json"
+        }
+      ],
+      [
+        "c:\\Users\\AbdoN2\\Downloads\\Playwright Repo\\TIMSintegration\\node_modules\\allure-playwright\\dist\\index.js",
+        {
+          "detail": true,
+          "outputFolder": "allure-results",
+          "suiteTitle": true,
+          "categories": [
+            {
+              "name": "Outdated tests",
+              "messageRegex": ".*FileNotFound.*"
+            }
+          ],
+          "environmentInfo": {
+            "framework": "playwright"
+          }
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 15000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "TIMSFULL",
+        "name": "TIMSFULL",
+        "testDir": "c:/Users/AbdoN2/Downloads/Playwright Repo/TIMSintegration/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "version": "1.46.0",
+    "workers": 3,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "TIMS\\Lease.spec.ts",
+      "file": "TIMS/Lease.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "DE Create new Projects",
+          "file": "TIMS/Lease.spec.ts",
+          "line": 12,
+          "column": 6,
+          "specs": [
+            {
+              "title": "@Regression-User can Create Lease-Out Anchor Tenant",
+              "ok": true,
+              "tags": [
+                "Regression-User"
+              ],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "TIMSFULL",
+                  "projectName": "TIMSFULL",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "status": "passed",
+                      "duration": 64903,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "###### Lease ID: ST-Lease-201171\n"
+                        },
+                        {
+                          "text": "Data written to Excel successfully\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Get the Created Code Value",
+                          "duration": 19480
+                        },
+                        {
+                          "title": "Add the Created Records to the Excel Sheet",
+                          "duration": 97,
+                          "steps": [
+                            {
+                              "title": "Test Write to Excel Sheet",
+                              "duration": 95
+                            }
+                          ]
+                        }
+                      ],
+                      "startTime": "2024-09-27T11:42:45.926Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "aebddef43e2186b7cfbb-746c28ee93fe2b77779b",
+              "file": "TIMS/Lease.spec.ts",
+              "line": 37,
+              "column": 10
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2024-09-27T11:42:43.930Z",
+    "duration": 68238.767,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
