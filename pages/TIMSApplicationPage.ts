@@ -1,5 +1,5 @@
 import { Page, Locator } from 'playwright';
-import Actions from './Actions';
+import Actions from '../utils/Actions';
 
 export default class TIMSApplicationPage {
     readonly page: Page;

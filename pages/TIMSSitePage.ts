@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { Page, Locator } from 'playwright';
-import  Actions from '../pages/Actions';
+import  Actions from '../utils/Actions';
 import { step } from '../utils/StepDecorator';
 
 export default class TIMSsiteInfoPage {
