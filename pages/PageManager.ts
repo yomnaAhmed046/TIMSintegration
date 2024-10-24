@@ -11,6 +11,7 @@ import TIMSSiteContactsPage from "./TIMSSiteContactsPage.ts";
 import TIMSAccessPage from "./TIMSAccessPage.ts";
 import TIMSJobsPage from "./TIMSJobsPage.ts";
 
+import TIMSExternalIDPage from '../pages/TIMSExternalIDPage.ts'
 //Integration Imports
 import CommanderLoginPage from '../pages/Commander-loginPage';
 import CommanderQuickAccessPage from '../pages/Commander_QuickAccessPage';
@@ -21,7 +22,7 @@ import V5LandingPage from '../pages/V5-landingPage.ts'
 import V5SiteInfoPage from "./V5-SiteInfoPage.ts";
 
 
-export class PageManager {
+export class PageManager  {
 
     private readonly page: Page;
     private readonly loginObj: TIMSloginPage;
@@ -35,6 +36,7 @@ export class PageManager {
     private readonly siteContactObj: TIMSSiteContactsPage;
     private readonly accessObj: TIMSAccessPage;
     private readonly jobObj: TIMSJobsPage;
+    private readonly externalIDtObj: TIMSExternalIDPage;
 
     private readonly commanderLoginObj: CommanderLoginPage;
     private readonly commaderQuickAccObj: CommanderQuickAccessPage;
@@ -59,6 +61,7 @@ export class PageManager {
         this.siteContactObj = new TIMSSiteContactsPage(this.page);
         this.accessObj = new TIMSAccessPage(this.page);
         this.jobObj = new TIMSJobsPage(this.page);
+        this.externalIDtObj = new TIMSExternalIDPage(this.page);
 
         this.commanderLoginObj = new CommanderLoginPage(this.page);
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
@@ -69,9 +72,9 @@ export class PageManager {
 
     }
 
-    // actionsTIMS(){
-    //     return this.actionobj;
-    // }
+    actionsTIMS(){
+        return this.actionobj;
+    }
 
     appTIMS() {
         return this.appObj;
@@ -87,6 +90,9 @@ export class PageManager {
 
     projectTIMS() {
         return this.projectObj;
+    }
+    externalIDTIMS() {
+        return this.externalIDtObj;
     }
 
     requestTIMS() {
@@ -118,18 +124,22 @@ export class PageManager {
     }
 
     quickAccessCommander() {
+
+    quickAccessCommander() {
         return this.commaderQuickAccObj;
     }
 
+    homePageCommander() {
     homePageCommander() {
         return this.commanderHomeObj;
     }
 
     entityMNGCommander() {
+    entityMNGCommander() {
         return this.commanderEntityObj;
     }
 
-    v5LandingPage(){
+    v5LandingPage() {
         return this.v5LandingObj;
     }
 
