@@ -14,25 +14,32 @@ test.describe("DE Create new Candidate", () => {
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
-        const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
-        const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
+        const username = env == 'TIMSFULL'
+               ? process.env.TIMSFULL_USERNAME
+               : env == 'TIMSPARTIAL'
+                    ? process.env.TIMSPARTIAL_BASE_URL
+                    : process.env.PREPROD_USERNAME;
 
+          const password = env == 'TIMSFULL'
+               ? process.env.TIMSFULL_PASSWORD
+               : env == 'TIMSPARTIAL'
+                    ? process.env.TIMSPARTIAL_PASSWORD
+                    : process.env.PREPROD_PASSWORD;
         if (!username || !password) {
             throw new Error('Credentials are not defined for the current environment');
         }
-        // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         await pm.loginTIMS().navigateToURL(`${baseURL}`);
         await pm.loginTIMS().login(username, password);
     });
 
-    test('@Regression-The User can create new Candidate successfully', async ({ page }) => {
+    test('@LWC @Regression-The User can create new Candidate successfully', async ({ page }) => {
        // await pm.cadidateObj.openCandidatePage();
-        await pm.cadidateObj.candidatePage.click();
+        await action.searchOpenObject("Candidates");
+        //await pm.cadidateObj.candidatePage.click();
         await pm.cadidateObj.openNewCandidate();
         await pm.cadidateObj.createCandidate();
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
-        const candidateID = await action.getCodeValue();
+        const candidateID = await action.getCodeValue("Auto test");
         console.log("###### Candidate ID: " + candidateID);
         await action.addRecordtoExcel(candidateID, 5);
     })

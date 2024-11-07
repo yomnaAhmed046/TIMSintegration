@@ -14,7 +14,7 @@ export default class TIMSloginPage{
         this.usernameTxt = page.locator("#username").filter();
         this.passwordTxt = page.locator("#password");
         this.loginBtn = page.locator("#Login");
-        this.closeBtn = page.getByRole('button', { name: 'Close' })
+        this.closeBtn = page.getByRole('button', { name: 'Close' });
     }
     @step("Navigate to TIMS URL")
     async navigateToURL(timsFullURL: string): Promise<void> {

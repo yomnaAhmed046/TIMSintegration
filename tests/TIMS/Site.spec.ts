@@ -22,11 +22,19 @@ test.describe("The User Create Site", () => {
         ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
-        // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
+        
         const env = test.info().project.name;
-        const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
-        const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
+        const username = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_USERNAME
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_BASE_URL
+                : process.env.PREPROD_USERNAME;
+
+        const password = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_PASSWORD
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_PASSWORD
+                : process.env.PREPROD_PASSWORD;
         if (!username || !password) {
             throw new Error('Credentials are not defined for the current environment');
         }
@@ -35,11 +43,11 @@ test.describe("The User Create Site", () => {
 
     });
 
-    test('@Regression The User can create New Site successfully', async ({ }) => {
+    test('@LWC @Regression The User can create New Site successfully', async ({ }) => {
         await pm.siteTIMS().createNewSite();
         await pm.siteTIMS().createNormalSite(timsSiteData.siteName, timsSiteData.DEcompanyCode, timsSiteData.lat, timsSiteData.long);
         await expect(page.locator('.toastTitle')).toContainText("Record Created", { timeout: 15000 });
-        TIMSsiteCode = await action.getCodeValue();
+        TIMSsiteCode = await action.getCodeValue("DE-TIMS-");
         console.log("The Site Code: " + TIMSsiteCode);
         await action.addRecordtoExcel(TIMSsiteCode, 0);
     })
@@ -51,11 +59,18 @@ test.describe("The User create the Objects from Site", () => {
         ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
-        // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         const env = test.info().project.name;
-        const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
-        const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
+        const username = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_USERNAME
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_BASE_URL
+                : process.env.PREPROD_USERNAME;
+
+        const password = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_PASSWORD
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_PASSWORD
+                : process.env.PREPROD_PASSWORD;
         if (!username || !password) {
             throw new Error('Credentials are not defined for the current environment');
         }
@@ -73,7 +88,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create Modify Existing Site Application From Site successfully', async ({  }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         console.log("last record inside the test" + TIMSSiteCode);
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().createnewAppButton.click();
@@ -84,7 +99,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create Site Exit by Customer Application From Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().createnewAppButton.click();
         await pm.appTIMS().selectAppType(timsAppData.SiteExitbyCustomerApp);
@@ -94,7 +109,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test('@Regression-The User can create New Co-location Site Application From Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().createnewAppButton.click();
         await pm.appTIMS().selectAppType(timsAppData.newCoLocatioApp);
@@ -104,7 +119,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create Project from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().projectTab.click();
         await action.createNewObject();
@@ -114,7 +129,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create Candidate from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().candidateTab.click();
         await action.createNewObject();
@@ -124,7 +139,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create LeaseIn from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().leaseTab.click();
         await action.createNewObject();
@@ -133,7 +148,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create Lease-Out Anchor Tenant from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().leaseTab.click();
         await action.createNewObject();
@@ -142,7 +157,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create Lease-Out 3rd Party Tenant from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().leaseTab.click();
         await action.createNewObject();
@@ -151,7 +166,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create GLBO from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().leaseTab.click();
         await action.createNewObject();
@@ -160,7 +175,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create new Remove Unused Equipment Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().requestTab.click();
         await action.createNewObject();
@@ -170,7 +185,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create new Equipment Relocation Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().requestTab.click();
         await action.createNewObject();
@@ -180,7 +195,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create new Higher Position Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().requestTab.click();
         await action.createNewObject();
@@ -190,7 +205,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create new Signal Repeat Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().requestTab.click();
         await action.createNewObject();
@@ -200,7 +215,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create new Site Decommissioning Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().requestTab.click();
         await action.createNewObject();
@@ -210,7 +225,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can create new Site Offer by TowerCo Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await pm.siteTIMS().requestTab.click();
         await action.createNewObject();
@@ -220,13 +235,13 @@ test.describe("The User create the Objects from Site", () => {
 
     test ('@Regression-The User can Upload file from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().uploadFilefromSite(TIMSSiteCode);
     })
 
     test('@Regression-The User can Create Site contact from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await action.moreTabs.click();
         await pm.siteTIMS().siteContactTab.click();
@@ -237,7 +252,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test('@Regression-The User can Create Site Access Request from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         await action.moreTabs.click();
         await pm.siteTIMS().accessTab.click();
@@ -248,7 +263,7 @@ test.describe("The User create the Objects from Site", () => {
 
     test('@Regression-The User can Create Job from Site successfully', async ({ }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : env == 'TIMSPARTIAL' ? process.env.TIMSPARTIAL_SITE_CODE : process.env.PREPROD_SITE_CODE;
         await pm.siteTIMS().openSite(TIMSSiteCode);
         //await action.moreTabs.click();
         await pm.siteTIMS().jobTab.click();

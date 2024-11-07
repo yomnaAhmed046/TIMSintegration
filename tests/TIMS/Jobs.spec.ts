@@ -15,27 +15,32 @@ test.describe("DE Create new Job ", () => {
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
-        const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
-        const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
+        const username = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_USERNAME
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_BASE_URL
+                : process.env.PREPROD_USERNAME;
 
+        const password = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_PASSWORD
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_PASSWORD
+                : process.env.PREPROD_PASSWORD;
         if (!username || !password) {
             throw new Error('Credentials are not defined for the current environment');
         }
-        // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         await pm.loginTIMS().navigateToURL(`${baseURL}`);
         await pm.loginTIMS().login(username, password);
     });
 
     test('@Regression-The User can create new Job successfully', async ({ page }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
-        //await action.searchOpenObject("Jobs");
-        await pm.jobsTIMS().jobPage.click();
+        await action.searchOpenObject("Jobs");
+        //await pm.jobsTIMS().jobPage.click();
         await action.createNewObject();
         await pm.jobsTIMS().createJob("Auto Job");
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
-        const jobID = await action.getCodeValue();
+        const jobID = await action.getCodeValue("Auto Job");
         console.log("###### Site Contact ID: " + jobID);
         await action.addRecordtoExcel(jobID, 7);
     })

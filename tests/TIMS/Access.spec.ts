@@ -15,28 +15,35 @@ test.describe("DE Create new Site Access Request", () => {
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
-        const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
-        const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
+        const username = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_USERNAME
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_BASE_URL
+                : process.env.PREPROD_USERNAME;
+
+        const password = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_PASSWORD
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_PASSWORD
+                : process.env.PREPROD_PASSWORD;
 
         if (!username || !password) {
             throw new Error('Credentials are not defined for the current environment');
         }
-        // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         await pm.loginTIMS().navigateToURL(`${baseURL}`);
         await pm.loginTIMS().login(username, password);
     });
 
     test('@Regression-The User can create new Site Access Request successfully', async ({ page }) => {
         const env = test.info().project.name;
-        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE : process.env.TIMSPARTIAL_SITE_CODE;
-        //await action.searchOpenObject("Site Access Requests");
-        await pm.accessTIMS().accessPage.click();
+        const TIMSSiteCode = env == 'TIMSFULL' ? process.env.TIMSFULL_SITE_CODE: env == 'TIMSPARTIAL' ?  process.env.TIMSPARTIAL_SITE_CODE: process.env.PREPROD_SITE_CODE;
+        await action.searchOpenObject("Site Access Requests");
+        //await pm.accessTIMS().accessPage.click();
         await action.createNewObject();
         await action.enterTIMSSiteCode(TIMSSiteCode);
         await action.saveRecord();
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 15000 });
-        const siteAccess = await action.getCodeValue();
+        const siteAccess = await action.getCodeValue("REQ");
         console.log("###### Site Contact ID: " + siteAccess);
         await action.addRecordtoExcel(siteAccess, 8);
     })
