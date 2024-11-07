@@ -3,9 +3,9 @@ import { PageManager } from '../../pages/PageManager';
 import * as timsLoginData from '../../TestData/TIMS/userLogin.json'
 import * as timsApplicationData from '../../TestData/TIMS/applicationDate.json'
 import Action from '../../utils/Actions'
-import * as dotenv from 'dotenv';
+// import * as dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
 let pm;
 let action;

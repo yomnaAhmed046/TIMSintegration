@@ -17,8 +17,8 @@ export default class TIMSloginPage{
         this.closeBtn = page.getByRole('button', { name: 'Close' });
     }
     @step("Navigate to TIMS URL")
-    async navigateToURL(timsFullURL: string): Promise<void> {
-        await this.page.goto(timsFullURL);
+    async navigateToURL(timsURL: string): Promise<void> {
+        await this.page.goto(timsURL);
     }
 
     @step("Login to TIMS")
