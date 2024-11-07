@@ -41,6 +41,10 @@ export default class TIMSsiteInfoPage {
   //Locators for Jobs
   readonly jobTab: Locator;
 
+  //Locators for Rental Objects
+  readonly rentalObjectBtn: Locator;
+  readonly rentalObjectTab: Locator;
+
   //Update site elements
   readonly siteStatusEditBtn: Locator;
   readonly siteStatusList: Locator;
@@ -119,14 +123,18 @@ export default class TIMSsiteInfoPage {
     this.candidateTab = page.getByRole('tab', { name: 'Candidates' });
     this.leaseTab = page.getByRole('tab', { name: 'Leases' });
     this.requestTab = page.getByRole('tab', { name: 'Requests' });
-    this.siteContactTab = page.locator('a').filter({hasText: 'Site Contacts'});
+    //this.siteContactTab = page.locator('a').filter({hasText: 'Site Contacts'});
+    this.siteContactTab = page.getByRole('menuitem', { name: 'Site Contacts' });
     this.accessTab = page.getByRole('tab', {name: 'Access'});
     this.jobTab = page.getByRole('tab', {name: 'Jobs'});
     
-    //Locators for Leases
+    //Locators for Leases & Rental Object 
     this.frame = page.frameLocator('//iframe[contains(@name,"vfFrameId")]').nth(2);
     this.select = this.frame.getByLabel('*Lease Type');
     this.createNewButton = this.frame.getByRole('button', { name: 'Create New' });
+    this.rentalObjectBtn = page.getByRole('button', { name: 'Create Rental Object' });
+    this.rentalObjectTab = page.getByRole('tab', { name: 'Rental Object' });
+
     //------------------------------------------------
     this.siteNameTxt = page.locator('[name="Site_Name__c"]');
     this.marketList = page.getByRole('combobox', { name: 'Market' });
@@ -283,10 +291,20 @@ export default class TIMSsiteInfoPage {
     await this.long.fill(long);
     await this.saveBtn.click();
   }
+
   @step("Create DE Normal Site")
   async createNormalSite(siteName: string, companyCode: string): Promise<void> {
     await this.siteNameTxt.fill(siteName);
     await this.action.enterDECompanyCode(companyCode);
+    await this.action.saveRecord();
+  }
+
+  @step("Create CZ Normal Site")
+  async createCZSite(siteName: string, companyCode: string, lat: string ,  long: string): Promise<void> {
+    await this.siteNameTxt.fill(siteName);
+    await this.action.enterCZCompanyCode(companyCode);
+    await this.lat.fill(lat);
+    await this.long.fill(long);
     await this.action.saveRecord();
   }
 
@@ -382,6 +400,7 @@ export default class TIMSsiteInfoPage {
   async createNewLeaseInfromSite(): Promise<void> {
     await this.select.selectOption('Lease_In');
     await this.createNewButton.click();
+    await this.page.getByRole('button', { name: 'Create Amendment' }).waitFor({ state: 'visible' });
   }
 
   @step("Create New Lease Out Anchor Tenant from Site")

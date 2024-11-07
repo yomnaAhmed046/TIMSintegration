@@ -5,8 +5,8 @@ import { step } from '../utils/StepDecorator'
 import { expect } from 'playwright/test';
 import { TIMEOUT } from 'dns';
 
-let element;
-let element1;
+let element: Locator;
+let objName: Locator;
 
 export default class Actions {
     readonly page: Page;
@@ -36,6 +36,8 @@ export default class Actions {
     readonly HUcompanyCodeOption: Locator;
     readonly PTcompanyCodeOption: Locator;
     readonly TIMSCode: Locator;
+    readonly CZCompanyCodeOption: Locator;
+    readonly landPage: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -47,7 +49,8 @@ export default class Actions {
         //this.moreTabs = page.getByText('MoreTabs');
         //this.moreTabs = page.locator('forcegenerated-flexipageregion_application_record_page_main_application__c__view_js').getByText('MoreTabs');
         this.files = page.getByRole('menuitem', { name: 'Files' });
-        this.upload = page.getByTitle('Upload');
+        //this.upload = page.getByTitle('Upload');
+        this.upload = page.getByText('Upload')
         this.uploadFiles = page.getByText('Upload Files', { exact: true });
         this.done = page.getByText('Done');
         this.done2 = page.getByRole('button', { name: 'Done' });
@@ -58,6 +61,7 @@ export default class Actions {
         this.searchSite = page.getByRole('combobox', { name: 'TIMS Site Code' })
         this.customerAccount = page.getByLabel('*Customer Account');
         this.customerValue = page.getByRole('option', { name: 'Vodafone - DE', exact: true });
+        this.landPage = page.getByRole('button', { name: 'Sort TIMS Site Code' });
 
         //this.customerValue = page.getByText('Vodafone - DE', { exact: true });
         //this.customerValue = page.getByRole('option', { name: 'Vodafone - DE' });
@@ -70,14 +74,13 @@ export default class Actions {
         //this.siteConfigRequiredValue = page.getByRole('option', { name: 'Standard', exact: true }).locator('span').nth(1)
         this.companyCodeTXT = page.getByPlaceholder('Search Company Code...');
         //this.DECompanyCodeOption = page.getByRole('option', { name: 'DE91 DE91' }).locator('span').nth(2);
-        this.DECompanyCodeOption = page.getByText('DE91', { exact: true });
+        //this.DECompanyCodeOption = page.getByText('DE91', { exact: true });
+        this.DECompanyCodeOption = page.getByText('DE91').nth(2);
         this.EScompanyCodeOption = page.getByRole('option', { name: 'ES91 ES91' }).locator('span').nth(2);
         this.IEcompanyCodeOption = page.getByRole('option', { name: 'IE91 IE91' }).locator('span').nth(2);
         this.HUcompanyCodeOption = page.getByRole('option', { name: 'HU91 HU91' }).locator('span').nth(2);
         this.PTcompanyCodeOption = page.getByRole('option', { name: 'PT91 PT91' }).locator('span').nth(2);
-
-
-
+        this.CZCompanyCodeOption = page.getByRole('option', { name: 'CZ91 CZ91' }).locator('span').nth(2);
     }
 
     @step("Get the Created Code")
@@ -97,6 +100,13 @@ export default class Actions {
         await this.DECompanyCodeOption.click();
     }
 
+    @step("Enter CZ Company Code")
+    async enterCZCompanyCode(CZcompanyCode: string): Promise<void> {
+        await this.companyCodeTXT.click();
+        await this.companyCodeTXT.fill(CZcompanyCode);
+        await this.CZCompanyCodeOption.click();
+    }
+
     @step("Enter ES Company Code")
     async enterESCompanyCode(EScompanyCode: string): Promise<void> {
         await this.companyCodeTXT.click();
@@ -110,17 +120,20 @@ export default class Actions {
         await this.companyCodeTXT.fill(IEcompanyCode);
         await this.IEcompanyCodeOption.click();
     }
+
+    @step("Enter HU Company Code")
     async enterHUCompanyCode(HUcompanyCode: string) {
         await this.companyCodeTXT.click();
         await this.companyCodeTXT.fill(HUcompanyCode);
         await this.HUcompanyCodeOption.click();
     }
+
+    @step("Enter PT Company Code")
     async enterPTCompanyCode(PTcompanyCode: string) {
         await this.companyCodeTXT.click();
         await this.companyCodeTXT.fill(PTcompanyCode);
         await this.PTcompanyCodeOption.click();
     }
-
 
     @step("Save The Record")
     async saveRecord(): Promise<void> {
@@ -134,22 +147,14 @@ export default class Actions {
 
     @step("search and Open the Object")
     async searchOpenObject(objectName: string): Promise<void> {
+        element = this.page.getByRole('option', { name: `${objectName}`, exact: true });
+        objName = this.page.locator('lst-breadcrumbs').getByText(`${objectName}`)
+        await this.landPage.waitFor({ state: 'visible' });
         await this.appLuncher.click();
-        await this.appsSearchbox.waitFor({ state: 'visible' });
-        this.appsSearchbox.fill(objectName);
-        element = this.page.getByRole('option', { name: `${objectName}`, exact: true }) //.click({ timeout: 150000 });
-        await element.waitFor({ state: 'visible' }, { TIMEOUT: 15000 });
-        //await element.click({ TIMEOUT: 15000 });
-        await Promise.all([
-            this.page.waitForNavigation({ timeout: 15000 }), // Wait for navigation
-            element.click() // Click the element that triggers navigation
-        ]);
-        const object = this.page
-            .getByLabel(`Recently Viewed|${objectName}|`) // Use backticks for dynamic variable
-            .locator('lst-breadcrumbs')
-            .getByText(objectName); // Use backticks for dynamic variable
-
-        await object.waitFor({ state: 'visible' }); // or 'attached', 'detached', etc.
+        await this.appsSearchbox.fill(objectName);
+        await element.waitFor({ state: 'visible' });
+        await element.click();
+        await objName.waitFor({ state: 'visible' });
     }
 
     @step("Enter TIMS Site Code")
@@ -224,10 +229,11 @@ export default class Actions {
     }
 
     @step("Get the Created Code Value")
-    async getCodeValue(): Promise<string | undefined> {
+    async getCodeValue(assertValue: string): Promise<string | undefined> {
         await this.page.waitForSelector('lightning-formatted-text[slot="primaryField"][lwc-f6gbo863ml-host]');
         const recordIDSelector = await this.page.$('lightning-formatted-text[slot="primaryField"][lwc-f6gbo863ml-host]');
         const recordID = await recordIDSelector?.innerText();
+        await expect(recordID).toContain(`${assertValue}`);
         return recordID;
     }
 

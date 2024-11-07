@@ -67,9 +67,11 @@ export default defineConfig({
     locale: 'de-DE',              // Set the locale to German
     timezoneId: 'Europe/Berlin',
     launchOptions: {
-      args: ["--start-maximized"],
+      //args: ["--start-maximized"],
+      args: ['--window-size=1920,1080'], 
     },
-    headless: false,
+    headless: true,
+    viewport: { width: 1920, height: 1080 },
   },
 
   /* Configure projects for major browsers */

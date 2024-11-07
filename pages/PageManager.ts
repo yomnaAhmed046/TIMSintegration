@@ -10,6 +10,7 @@ import TIMSCandidatePage  from "../pages/TIMSCandidatePage.ts";
 import TIMSSiteContactsPage from "./TIMSSiteContactsPage.ts";
 import TIMSAccessPage from "./TIMSAccessPage.ts";
 import TIMSJobsPage from "./TIMSJobsPage.ts";
+import TIMSRentalObjectPage from "./TIMSRentalObjectPage.ts";
 
 import TIMSExternalIDPage from '../pages/TIMSExternalIDPage.ts'
 //Integration Imports
@@ -36,6 +37,7 @@ export class PageManager  {
     private readonly siteContactObj: TIMSSiteContactsPage;
     private readonly accessObj: TIMSAccessPage;
     private readonly jobObj: TIMSJobsPage;
+    private readonly rentalObjectObj: TIMSRentalObjectPage;
     private readonly externalIDtObj: TIMSExternalIDPage;
 
     private readonly commanderLoginObj: CommanderLoginPage;
@@ -61,6 +63,7 @@ export class PageManager  {
         this.siteContactObj = new TIMSSiteContactsPage(this.page);
         this.accessObj = new TIMSAccessPage(this.page);
         this.jobObj = new TIMSJobsPage(this.page);
+        this.rentalObjectObj = new TIMSRentalObjectPage(this.page);
         this.externalIDtObj = new TIMSExternalIDPage(this.page);
 
         this.commanderLoginObj = new CommanderLoginPage(this.page);
@@ -70,10 +73,6 @@ export class PageManager  {
         this.v5LandingObj = new V5LandingPage(this.page);
         this.v5siteInfoObj = new V5SiteInfoPage(this.page);
 
-    }
-
-    actionsTIMS(){
-        return this.actionobj;
     }
 
     appTIMS() {
@@ -119,22 +118,23 @@ export class PageManager  {
         return this.jobObj;
     }
 
+    rentalObjectTIMS() {
+        return this.rentalObjectObj;
+    }
+
+
     loginCommander() {
         return this.commanderLoginObj;
     }
-
-    quickAccessCommander() {
 
     quickAccessCommander() {
         return this.commaderQuickAccObj;
     }
 
     homePageCommander() {
-    homePageCommander() {
         return this.commanderHomeObj;
     }
 
-    entityMNGCommander() {
     entityMNGCommander() {
         return this.commanderEntityObj;
     }

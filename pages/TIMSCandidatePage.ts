@@ -3,6 +3,7 @@ import { expect } from '@playwright/test';
 import Actions from '../utils/Actions';
 import { step } from '../utils/StepDecorator';
 
+let randomInRange;
 export default class TIMSCandidatePage {
     readonly page: Page;
     readonly actionObj: Actions;
@@ -38,14 +39,13 @@ export default class TIMSCandidatePage {
     }
    
     async createCandidate() {
-        await this.candidateName.fill('Auto test7');
+        randomInRange = Math.floor(Math.random() * 100);
+        await this.candidateName.fill('Auto test'+randomInRange);
         await this.otherOperators.click();
         await this.otherOperatorsOption.click();
         await this.country.click();
         await this.countryOption.click();
-       // await this.page.getByRole('option', { name: 'DE' }).locator('span').nth(1).click();
-        await this.streetAddres.fill("AutoCandidate");
+        //await this.streetAddres.fill("AutoCandidate");
         await this.actionObj.saveRecord();
-        //await expect(this.page.getByRole('alert')).toBeVisible(), {timeout:90000};
     }
 }

@@ -12,17 +12,25 @@ let action;
 
 test.describe("DE Create new Projects", () => {
     test.beforeEach(async ({ page, baseURL }) => {
+        ['--window-size=1920,1080'];
         pm = new PageManager(page);
         action = new Action(page);
         const env = test.info().project.name;
-        const username = env == 'TIMSFULL' ? process.env.TIMSFULL_USERNAME : process.env.TIMSPartial_USERNAME;
-        const password = env == 'TIMSFULL' ? process.env.TIMSFULL_PASSWORD : process.env.TIMSPartial_PASSWORD;
+        const username = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_USERNAME
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_BASE_URL
+                : process.env.PREPROD_USERNAME;
+
+        const password = env == 'TIMSFULL'
+            ? process.env.TIMSFULL_PASSWORD
+            : env == 'TIMSPARTIAL'
+                ? process.env.TIMSPARTIAL_PASSWORD
+                : process.env.PREPROD_PASSWORD;
 
         if (!username || !password) {
             throw new Error('Credentials are not defined for the current environment');
         }
-        // await pm.loginTIMS().navigateToURL(timsLoginData.timsFullURL);
-        // await pm.loginTIMS().login(timsLoginData.timsUsername, timsLoginData.timsPassword);
         await pm.loginTIMS().navigateToURL(`${baseURL}`);
         await pm.loginTIMS().login(username, password);
     });
@@ -31,7 +39,7 @@ test.describe("DE Create new Projects", () => {
         await pm.projectTIMS().openProjectPage();
         await pm.projectTIMS().createProject(timsProjectData.projectTamplate);
         await expect(page.locator('.toastMessage')).toContainText('was created.', { timeout: 90000 });
-        const projectID = await action.getCodeValue();
+        const projectID = await action.getCodeValue("P-");
         console.log("###### Project ID: " + projectID);
         await action.addRecordtoExcel(projectID, 2);
     })
