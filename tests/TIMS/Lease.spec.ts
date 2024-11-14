@@ -10,7 +10,7 @@ dotenv.config(); // Load environment variables from .env file
 let pm;
 let action;
 
-test.describe("DE Create new Projects", () => {
+test.describe("DE Create new Leases", () => {
      test.beforeEach(async ({ page, baseURL }) => {
           ['--window-size=1920,1080'];
           pm = new PageManager(page);
@@ -42,7 +42,7 @@ test.describe("DE Create new Projects", () => {
           //await expect(LeaseID).toContainText('ST-Lease-');
           console.log("###### Lease ID: " + LeaseID);
           await action.addRecordtoExcel(LeaseID, 4);
-          await pm.leaseTIMS().vervifyAutoCreatedProect("Lease-in New Contract");
+          await pm.leaseTIMS().vervifyAutoCreatedProject("Lease-in New Contract");
      });
 
      test('@LWC @Regression-User can Create Lease-Out Anchor Tenant', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe("DE Create new Projects", () => {
           const LeaseID = await action.getCodeValue("ST-Lease-");
           console.log("###### Lease ID: " + LeaseID);
           await action.addRecordtoExcel(LeaseID, 4);
-          await pm.leaseTIMS().vervifyAutoCreatedProect("Lease-out MVP");
+          await pm.leaseTIMS().vervifyAutoCreatedProject("Lease-out MVP");
      });
 
      test('@LWC @Regression-User can Create Lease-Out 3rd Party Tenant', async ({ page }) => {
@@ -60,7 +60,7 @@ test.describe("DE Create new Projects", () => {
           const LeaseID = await action.getCodeValue("ST-Lease-");
           console.log("###### Lease ID: " + LeaseID);
           await action.addRecordtoExcel(LeaseID, 4);
-          await pm.leaseTIMS().vervifyAutoCreatedProect("Lease-out MVP");
+          await pm.leaseTIMS().vervifyAutoCreatedProject("Lease-out MVP");
      });
 
      test('@LWC @Regression-User can Create GLBO', async ({ page }) => {
@@ -69,7 +69,7 @@ test.describe("DE Create new Projects", () => {
           const LeaseID = await action.getCodeValue("ST-Lease-");
           console.log("###### Lease ID: " + LeaseID);
           await action.addRecordtoExcel(LeaseID, 4);
-          await pm.leaseTIMS().vervifyAutoCreatedProect("GLBO");
+          await pm.leaseTIMS().vervifyAutoCreatedProject("GLBO");
      });
 
      test('@LWC @Regression- User can Create New Project from Lease', async ({ page }) => {

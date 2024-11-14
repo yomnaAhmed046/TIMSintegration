@@ -26,7 +26,7 @@ export default class TIMSCandidatePage {
         this.country = page.getByRole('combobox', { name: 'Country' });
         this.countryOption = page.getByRole('option', { name: 'DE' }).locator('span').nth(1);
         this.streetAddres = page.getByLabel('Street Address', { exact: true });
-        //this.streetAddres = page.getByLabel('Street Address', { exact: true });
+        this.streetAddres = page.getByLabel('*Street Address', { exact: true });
     }
 
     async openCandidatePage() {
@@ -45,7 +45,7 @@ export default class TIMSCandidatePage {
         await this.otherOperatorsOption.click();
         await this.country.click();
         await this.countryOption.click();
-        //await this.streetAddres.fill("AutoCandidate");
+        await this.streetAddres.fill("Auto Address");
         await this.actionObj.saveRecord();
     }
 }

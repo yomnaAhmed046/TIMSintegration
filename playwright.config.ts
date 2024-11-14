@@ -1,4 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
+import { testPlanFilter } from "allure-playwright/dist/testplan";
+import * as dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
 
 /**
  * Read environment variables from file.
@@ -13,12 +17,9 @@ import { defineConfig, devices } from '@playwright/test';
 
 //dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
-
-
 export default defineConfig({
-<<<<<<< HEAD
-=======
-  workers: 3,
+  timeout: 200000,
+  workers: 4,
   grep: testPlanFilter(),
   //reporter: [["line"], ["allure-playwright"]],
   reporter: [
@@ -43,7 +44,6 @@ export default defineConfig({
       },
     ],
   ],
->>>>>>> master
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -54,10 +54,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   //workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ['html'],
-    ['allure-playwright']
-  ],
+  //reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -68,7 +65,7 @@ export default defineConfig({
     timezoneId: 'Europe/Berlin',
     launchOptions: {
       //args: ["--start-maximized"],
-      args: ['--window-size=1920,1080'], 
+      args: ['--window-size=1920,1080'],
     },
     headless: true,
     viewport: { width: 1920, height: 1080 },
@@ -77,32 +74,37 @@ export default defineConfig({
   /* Configure projects for major browsers */
 
   projects: [
-    // {
-    //   name: 'TIMSFULL',
-    //   use: {
-    //     baseURL: process.env.TIMSFULL_BASE_URL,
-    //     browserName: 'chromium',
-    //     viewport: null,
-
-    //     screenshot: 'only-on-failure',
-    //     //trace: 'retain-on-failure',
-    //   },
-    //   retries: 1,
-    //   timeout: 90000,
-    // },
-    
+    //{ name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
-      name: 'TIMSPARTIAL',
+      name: 'TIMSFULL',
       use: {
-        baseURL: process.env.TIMSPARTIAL_BASE_URL,
+        baseURL: process.env.TIMSFULL_URL,
         browserName: 'chromium',
-        //channel: 'msedge',
         viewport: null,
+
         screenshot: 'only-on-failure',
+        //trace: 'retain-on-failure',
+        //storageState: 'playwright/.auth/user.json',
       },
-      timeout: 150000,
       retries: 1,
+      //workers: 2,
+      //dependencies: ['setup'],
     },
+
+    // {
+    //   name: 'PREPROD',
+    //   use: {
+    //     baseURL: process.env.PREPROD_BASE_URL,
+    //     browserName: 'chromium',
+    //     channel: 'msedge',
+    //     viewport: null,
+    //     screenshot: 'only-on-failure',
+    //   },
+    //   //workers: 2,
+    //   timeout: 150000,
+    //   retries: 1,
+    // },
+
 
     // {
     //   name: 'PREPROD',
@@ -118,6 +120,7 @@ export default defineConfig({
     //   timeout: 90000
     //   // retries: 1,
     // }
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
