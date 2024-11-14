@@ -28,6 +28,7 @@ export default class TIMSRequestPage {
     readonly detailsOfDecommission: Locator;
     readonly removalDateActiveEquipment: Locator;
     readonly removalDatePassiveEquipment: Locator;
+    readonly cancel: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -53,6 +54,7 @@ export default class TIMSRequestPage {
         this.detailsOfDecommission = this.page.getByLabel('*Details of Decommission');
         this.removalDateActiveEquipment = page.getByLabel('*Removal Date Active Equipment');
         this.removalDatePassiveEquipment = page.getByLabel('*Removal Date Passive');
+        this.cancel = page.getByRole('button', { name: 'Cancel' });
 
     }
 
@@ -82,8 +84,8 @@ export default class TIMSRequestPage {
         await this.forcedDecommissioning.click();
         await this.page.getByRole('option', { name: 'Yes' }).locator('span').nth(1).click();
         await this.detailsOfDecommission.fill("test");
-        await this.removalDateActiveEquipment.fill("09/15/2024");
-        await this.removalDatePassiveEquipment.fill("09/15/2024");
+        await this.removalDateActiveEquipment.fill("11/08/2024");
+        await this.removalDatePassiveEquipment.fill("11/08/2024");
     }
  
     @step("Select Reques type")
@@ -187,6 +189,7 @@ export default class TIMSRequestPage {
     @step("Submit the Request ")
     async submitTheRequest():Promise<void>  {
        await this.submitRequest.click( { timeout: 15000 });
+       await this.cancel.waitFor({ state: 'visible' });
        await expect(this.page.getByRole('button', { name: 'Cancel' })).toBeVisible();
        await this.submit.click( { timeout: 15000 });
        await expect(this.page.locator('.toastMessage')).toContainText('Request has been submitted.', { timeout: 20000 });

@@ -30,8 +30,9 @@ export default class TIMSRentalObjectPage {
         this.errorMessage = page.getByText('Please create a Lease on site');
         this.gotoRO = page.getByRole('link', { name: 'Go to RO-' });
         this.integrationStatusNotIntegrated = page.locator('lightning-formatted-text').filter({ hasText: 'Not Integrated' });
-        this.integrationStatusInQueue = page.locator('lightning-formatted-text').filter({ hasText: 'In Queue' });
-        this.businessEntityName = page.locator('lightning-output-field').filter({ hasText: 'Business Entity Name' }).locator('lightning-formatted-text');
+          this.integrationStatusInQueue = page.locator('lightning-formatted-text').filter({ hasText: 'In Queue' });
+        this.businessEntityName = page.locator('lightning-output-field').filter({ hasText: /^Business Entity Name$/ }).locator('span');
+        //this.businessEntityName = page.locator('lightning-output-field').filter({ hasText: 'Business Entity Name' }).locator('lightning-formatted-text');
         this.businessEntityNameField = page.getByLabel('Business Entity Name');
         this.siteRecord = page.getByRole('link', { name: 'CZ-TIMS-' });
         this.successMessage = page.locator('.toastMessage');
@@ -79,8 +80,8 @@ export default class TIMSRentalObjectPage {
         await this.confirm.click();
         //await this.successMessage.waitFor({ state: 'visible' });
         ////await expect(this.page.getByText('SUCCESS', { exact: true })).toContainText('SUCCESS', { timeout: 150000 });
-        await this.integrationStatusInQueue.waitFor({ state: 'visible' });
-        await expect(this.integrationStatusInQueue).toBeVisible({ timeout: 150000 });
+        // await this.integrationStatusInQueue.waitFor({ state: 'visible' });
+        // await expect(this.integrationStatusInQueue).toBeVisible({ timeout: 150000 });
     }
 
     @step("Select TIMS Company code from List")

@@ -38,6 +38,7 @@ export default class Actions {
     readonly TIMSCode: Locator;
     readonly CZCompanyCodeOption: Locator;
     readonly landPage: Locator;
+    readonly childSearchBox: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -62,6 +63,7 @@ export default class Actions {
         this.customerAccount = page.getByLabel('*Customer Account');
         this.customerValue = page.getByRole('option', { name: 'Vodafone - DE', exact: true });
         this.landPage = page.getByRole('button', { name: 'Sort TIMS Site Code' });
+        this.childSearchBox = page.getByPlaceholder('Search this list...');
 
         //this.customerValue = page.getByText('Vodafone - DE', { exact: true });
         //this.customerValue = page.getByRole('option', { name: 'Vodafone - DE' });
@@ -88,9 +90,16 @@ export default class Actions {
         return await this.page.innerText(text);
     }
 
+    @step("Search and open the record")
+    async openRecord(recordID: string): Promise<void> {
+        await this.childSearchBox.fill(recordID);
+        await this.childSearchBox.press('Enter');
+        await this.page.getByRole('link', { name: recordID }).click();
+    }
+    
     @step("Create New Object")
     async createNewObject(): Promise<void> {
-        await this.newButton.click();
+        await this.newButton.click({timeout:15000});
     }
 
     @step("Enter DE Company Code")
@@ -137,7 +146,7 @@ export default class Actions {
 
     @step("Save The Record")
     async saveRecord(): Promise<void> {
-        await this.saveButton.click();
+        await this.saveButton.click({timeout:15000});
     }
 
     @step("Go to the Next")

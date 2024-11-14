@@ -19,9 +19,9 @@ test.describe("DE Create new External ID", () => {
         await action.createNewObject();
         await pm.externalIDTIMS().createExternalID(timsExternalIDData.externalID,timsExternalIDData.customerAccount);
         await expect(page.locator('.toastMessage')).toContainText('was created.', {timeout:15000});
-        const externalID = await pm.actionsTIMS().getCodeValue();
+        const externalID = await action.getCodeValue("EID-");
         console.log("###### External ID: " + externalID);
-        await pm.actionsTIMS().addRecordtoExcel(externalID, 3);
+        await action.addRecordtoExcel(externalID, 10);
     })
 
 })

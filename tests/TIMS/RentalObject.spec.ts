@@ -17,12 +17,12 @@ let leaseID;
 
 test.describe("CZ Create new Rental Object ", () => {
     test.beforeEach(async ({ page, baseURL }) => {
-        // ['--window-size=1920,1080'];
-        // pm = new PageManager(page);
-        // action = new Action(page);
-        // const env = test.info().project.name;
-        // await pm.loginTIMS().navigateToURL(process.env.TIMSFULL_BASE_URL);
-        // await pm.loginTIMS().login(process.env.TIMSFULL_USERNAME_CZ, process.env.TIMSFULL_PASSWORD_CZ);
+        ['--window-size=1920,1080'];
+        pm = new PageManager(page);
+        action = new Action(page);
+        const env = test.info().project.name;
+        await pm.loginTIMS().navigateToURL(process.env.TIMSFULL_URL);
+        await pm.loginTIMS().login(process.env.TIMSFULL_USERNAME_CZ, process.env.TIMSFULL_PASSWORD_CZ);
     });
 
     test('@Regression-The User can create new Rental Object successfully', async ({ page }) => {
@@ -64,7 +64,7 @@ test.describe("CZ Create new Rental Object ", () => {
 
         //Send the Rental Object to EVO
         await pm.rentalObjectTIMS().sendROtoEVO();
-        const ROID = await action.getCodeValue();
+        const ROID = await action.getCodeValue("RO-");
         console.log("###### Rental Object ID: " + ROID);
         await action.addRecordtoExcel(ROID, 9);
     })

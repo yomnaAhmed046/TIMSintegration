@@ -24,7 +24,6 @@ export default class TIMSLeasePage {
   readonly searchBoxforLease: Locator;
   //readonly createNewNButton: Locator;
 
-
   constructor(page: Page) {
     this.page = page;
     this.actionObj = new Actions(this.page);

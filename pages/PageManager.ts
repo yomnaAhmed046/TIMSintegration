@@ -11,8 +11,9 @@ import TIMSSiteContactsPage from "./TIMSSiteContactsPage.ts";
 import TIMSAccessPage from "./TIMSAccessPage.ts";
 import TIMSJobsPage from "./TIMSJobsPage.ts";
 import TIMSRentalObjectPage from "./TIMSRentalObjectPage.ts";
+import TIMSExternalIDPage from '../pages/TIMSExternalIDPage.ts';
+import TIMSStructureEquipment  from "./TIMSStructureEquipment.ts";
 
-import TIMSExternalIDPage from '../pages/TIMSExternalIDPage.ts'
 //Integration Imports
 import CommanderLoginPage from '../pages/Commander-loginPage';
 import CommanderQuickAccessPage from '../pages/Commander_QuickAccessPage';
@@ -39,6 +40,7 @@ export class PageManager  {
     private readonly jobObj: TIMSJobsPage;
     private readonly rentalObjectObj: TIMSRentalObjectPage;
     private readonly externalIDtObj: TIMSExternalIDPage;
+    private readonly structureEquipmentObj: TIMSStructureEquipment;
 
     private readonly commanderLoginObj: CommanderLoginPage;
     private readonly commaderQuickAccObj: CommanderQuickAccessPage;
@@ -65,6 +67,7 @@ export class PageManager  {
         this.jobObj = new TIMSJobsPage(this.page);
         this.rentalObjectObj = new TIMSRentalObjectPage(this.page);
         this.externalIDtObj = new TIMSExternalIDPage(this.page);
+        this.structureEquipmentObj = new TIMSStructureEquipment(this.page);
 
         this.commanderLoginObj = new CommanderLoginPage(this.page);
         this.commaderQuickAccObj = new CommanderQuickAccessPage(this.page);
@@ -121,6 +124,11 @@ export class PageManager  {
     rentalObjectTIMS() {
         return this.rentalObjectObj;
     }
+
+    strucureEquipmenttTIMS() {
+        return this.structureEquipmentObj;
+    }
+
 
 
     loginCommander() {

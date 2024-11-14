@@ -32,7 +32,7 @@ test.describe("DE Create new Candidate", () => {
         await pm.loginTIMS().login(username, password);
     });
 
-    test('@LWC @Regression-The User can create new Candidate successfully', async ({ page }) => {
+    test('@LWC @Regression-The User can Create new Candidate successfully', async ({ page }) => {
        // await pm.cadidateObj.openCandidatePage();
         await action.searchOpenObject("Candidates");
         //await pm.cadidateObj.candidatePage.click();
