@@ -67,7 +67,7 @@ export default defineConfig({
       //args: ["--start-maximized"],
       args: ['--window-size=1920,1080'],
     },
-    headless: true,
+    headless: false,
     viewport: { width: 1920, height: 1080 },
   },
 
@@ -75,36 +75,35 @@ export default defineConfig({
 
   projects: [
     //{ name: 'setup', testMatch: /.*\.setup\.ts/ },
-    {
-      name: 'TIMSFULL',
-      use: {
-        baseURL: process.env.TIMSFULL_URL,
-        browserName: 'chromium',
-        viewport: null,
-
-        screenshot: 'only-on-failure',
-        //trace: 'retain-on-failure',
-        //storageState: 'playwright/.auth/user.json',
-      },
-      retries: 1,
-      //workers: 2,
-      //dependencies: ['setup'],
-    },
-
     // {
-    //   name: 'PREPROD',
+    //   name: 'TIMSFULL',
     //   use: {
-    //     baseURL: process.env.PREPROD_BASE_URL,
+    //     baseURL: process.env.TIMSFULL_URL,
     //     browserName: 'chromium',
-    //     channel: 'msedge',
     //     viewport: null,
+
     //     screenshot: 'only-on-failure',
+    //     //trace: 'retain-on-failure',
+    //     //storageState: 'playwright/.auth/user.json',
     //   },
-    //   //workers: 2,
-    //   timeout: 150000,
     //   retries: 1,
+    //   //workers: 2,
+    //   //dependencies: ['setup'],
     // },
 
+    {
+      name: 'TIMSPARTIAL',
+      use: {
+        baseURL: process.env.TIMSPARTIAL_URL,
+        browserName: 'chromium',
+        //channel: 'msedge',
+        viewport: null,
+        screenshot: 'only-on-failure',
+      },
+      //workers: 2,
+      timeout: 150000,
+      retries: 1,
+    },
 
     // {
     //   name: 'PREPROD',
